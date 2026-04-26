@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisa's NeuralVerse</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;--surface:#111118;--border:rgba(255,255,255,0.08);
+  --text-primary:#f0ede8;--text-secondary:#8a8794;
+  --accent:#7eb8d4;--accent2:#c9b6e0;--accent3:#89d4b8;--nav-h:68px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;font-weight:400;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;padding:0 44px;
+  background:rgba(10,10,15,0.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;
+  letter-spacing:.02em;color:var(--text-primary);cursor:pointer;user-select:none;}
+.nav-logo span{color:var(--accent);}
+.nav-right{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:2px;}
+.nav-link{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--text-secondary);
+  padding:7px 13px;border-radius:5px;transition:all .2s;cursor:pointer;border:none;background:none;}
+.nav-link:hover{color:var(--text-primary);background:rgba(255,255,255,0.07);}
+.lang-toggle{display:flex;gap:1px;margin-left:14px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.lang-btn{padding:5px 12px;font-size:11px;font-weight:600;letter-spacing:.09em;
+  background:none;border:none;cursor:pointer;color:var(--text-secondary);transition:all .2s;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:var(--accent);color:#000;}
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+#page-home.active{display:flex;}
+/* ── HOME: full-canvas hero ── */
+#page-home{
+  position:relative;height:100vh;min-height:unset;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 50%,#030b1a 0%,#000508 60%,#000 100%);
+}
+#brain-wrap{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+#brainCanvas{display:block;width:100%;height:100%;}
+/* overlay text */
+.home-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  pointer-events:none;
+  padding-top:var(--nav-h);
+  text-align:center;
+}
+.home-eyebrow{
+  font-family:Georgia,serif;
+  font-size:13px;letter-spacing:6px;
+  color:rgba(80,200,255,0.55);
+  text-transform:uppercase;margin-bottom:12px;
+  animation:nvFadeIn 3s ease forwards;
+}
+.home-title{
+  font-family:Georgia,serif;
+  font-size:42px;font-weight:300;
+  color:rgba(255,255,255,0.92);
+  letter-spacing:2px;
+  animation:nvFadeIn 3s ease 0.5s both;
+  margin-bottom:0;
+}
+.home-title em{color:rgba(80,200,255,0.9);font-style:normal;}
+.home-sub{
+  font-family:'Courier New',monospace;
+  font-size:11px;letter-spacing:4px;
+  color:rgba(80,200,255,0.4);
+  margin-top:14px;text-transform:uppercase;
+  animation:nvFadeIn 3s ease 1s both;
+  font-weight:400;
+}
+.home-tags{display:none;}/* 오버레이에서 태그 숨김 */
+@keyframes nvFadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.home-footer{
+  position:absolute;bottom:0;left:0;right:0;padding:14px 44px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,0.06);
+  pointer-events:auto;
+}
+.home-footer p{font-size:11.5px;color:rgba(80,200,255,0.35);font-family:'Courier New',monospace;}
+.admin-btn{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  color:var(--text-secondary);background:none;border:1px solid var(--border);
+  padding:6px 14px;border-radius:5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.admin-btn:hover{color:var(--accent);border-color:var(--accent);}
+.subpage-hero{padding-top:var(--nav-h);width:100%;height:300px;position:relative;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.subpage-hero-svg{position:absolute;inset:0;width:100%;height:100%;}
+.subpage-hero-title{position:relative;font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,6vw,76px);font-weight:500;color:var(--text-primary);letter-spacing:.04em;}
+.subpage-content{max-width:1120px;margin:0 auto;padding:52px 40px 90px;}
+.section-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:700;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,50px);
+  font-weight:500;line-height:1.1;color:var(--text-primary);}
+.section-div{width:44px;height:1px;background:var(--accent);margin:20px 0;}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-top:44px;}
+.news-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:transform .25s,border-color .25s;cursor:pointer;}
+.news-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+.news-card-img{width:100%;height:170px;background:#1a1a24;overflow:hidden;}
+.news-card-img svg{width:100%;height:100%;}
+.news-card-body{padding:18px;}
+.news-card-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:9px;font-weight:700;}
+.news-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;
+  line-height:1.3;color:var(--text-primary);margin-bottom:9px;}
+.news-card-body p{font-size:13.5px;color:var(--text-secondary);line-height:1.65;font-weight:400;}
+.news-card-date{font-size:10.5px;color:var(--text-secondary);margin-top:13px;font-family:'Space Mono',monospace;}
+.read-more{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--accent);font-family:'Space Mono',monospace;font-weight:700;}
+.page-footer{border-top:1px solid var(--border);padding:28px 44px;
+  display:flex;justify-content:space-between;align-items:center;}
+.page-footer p{font-size:11.5px;color:var(--text-secondary);}
+.back-home{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);cursor:pointer;background:none;border:none;font-family:'Space Mono',monospace;}
+#page-article.active{display:block;}
+.article-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;
+  font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
+  cursor:pointer;font-family:'Space Mono',monospace;background:none;border:none;padding:0;font-weight:700;}
+.article-back:hover{opacity:.7;}
+
+.article-wrap{max-width:780px;margin:0 auto;padding:52px 40px 90px;}
+.article-tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:700;}
+.article-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,58px);
+  font-weight:500;line-height:1.05;margin-bottom:14px;}
+.article-date{font-size:11px;color:var(--text-secondary);font-family:'Space Mono',monospace;margin-bottom:28px;}
+.article-hero-img{width:100%;height:260px;border-radius:12px;overflow:hidden;margin-bottom:36px;}
+.article-hero-img svg{width:100%;height:100%;}
+.article-body{font-size:15.5px;line-height:1.85;color:rgba(240,237,232,0.92);font-weight:400;}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;
+  color:var(--text-primary);margin:36px 0 14px;}
+.article-body p{margin-bottom:18px;}
+.article-body .highlight{border-left:2px solid var(--accent);padding:14px 20px;
+  margin:24px 0;color:var(--accent2);font-style:italic;font-size:16px;}
+.life-content{max-width:760px;margin:0 auto;padding:52px 40px 90px;}
+.life-chapter{margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.life-chapter:last-child{border-bottom:none;}
+.life-chapter-num{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--accent2);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;font-weight:700;}
+.life-chapter-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:6px;}
+.life-chapter-sub{font-size:13px;color:var(--accent);font-style:italic;margin-bottom:18px;font-weight:500;}
+.life-episode{margin-bottom:26px;}
+.life-episode-title{font-size:14.5px;font-weight:600;margin-bottom:7px;color:var(--text-primary);}
+.life-episode-body{font-size:14px;color:var(--text-secondary);line-height:1.78;font-weight:400;}
+#activities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin-top:44px;}
+.act-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.act-card-img{width:100%;height:150px;background:#1a1a24;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.act-card-img img{width:100%;height:100%;object-fit:cover;}
+.act-card-body{padding:18px;}
+.act-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;margin-bottom:5px;}
+.act-card-date{font-size:10.5px;color:var(--accent);font-family:'Space Mono',monospace;margin-bottom:9px;font-weight:700;}
+.act-card-body p{font-size:13.5px;color:var(--text-secondary);line-height:1.65;font-weight:400;}
+.upload-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:34px;margin-top:44px;}
+.upload-box h3,.news-add-form h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:24px;}
+.news-add-form{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:34px;margin-top:44px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:7px;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-secondary);font-weight:600;}
+.form-input,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:7px;padding:11px 14px;color:var(--text-primary);font-size:14px;
+  font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;font-weight:400;}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent);}
+.form-textarea{min-height:110px;resize:vertical;}
+.file-drop{border:1px dashed var(--border);border-radius:7px;padding:28px;text-align:center;
+  cursor:pointer;transition:border-color .2s;position:relative;}
+.file-drop:hover{border-color:var(--accent);}
+.file-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-drop-text{font-size:13px;color:var(--text-secondary);font-weight:500;}
+#file-preview{display:none;margin-top:10px;}
+#preview-img{max-height:110px;border-radius:7px;}
+.btn-primary{background:var(--accent);color:#000;border:none;padding:13px 32px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;cursor:pointer;margin-top:18px;transition:opacity .2s;}
+.btn-primary:hover{opacity:.82;}
+.upload-lock{display:flex;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.upload-lock input[type=password]{flex:1;min-width:160px;background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);border-radius:7px;padding:11px 14px;color:var(--text-primary);
+  font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.upload-lock input[type=password]:focus{border-color:var(--accent);}
+.upload-lock-btn{background:var(--accent);color:#000;border:none;padding:11px 24px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+.upload-lock-btn:hover{opacity:.82;}
+.upload-lock-err{font-size:12.5px;color:#f08080;width:100%;font-weight:500;}
+.connect-wrap{max-width:680px;margin:0 auto;padding:52px 40px 90px;}
+.connect-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px;margin-top:36px;}
+.connect-item{display:flex;align-items:flex-start;gap:18px;padding:18px 0;border-bottom:1px solid var(--border);}
+.connect-item:last-child{border-bottom:none;}
+.connect-icon{width:42px;height:42px;border-radius:9px;background:rgba(126,184,212,0.1);
+  display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.connect-info{flex:1;}
+.connect-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:5px;font-weight:600;}
+.connect-value{font-size:14.5px;color:var(--text-primary);font-weight:400;}
+.connect-value a{color:var(--accent);text-decoration:none;}
+.connect-value a:hover{text-decoration:underline;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:500;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:40px;width:420px;max-width:90vw;}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-bottom:22px;}
+.modal-desc{font-size:13.5px;color:var(--text-secondary);margin-bottom:20px;line-height:1.7;font-weight:400;}
+.modal-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:8px;padding:12px 16px;color:var(--text-primary);font-size:14px;
+  font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;margin-bottom:14px;font-weight:400;}
+.modal-input:focus{border-color:var(--accent);}
+.modal-btns{display:flex;gap:10px;margin-top:6px;}
+.modal-btn{flex:1;padding:12px;border-radius:8px;font-size:13px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.modal-btn-primary{background:var(--accent);color:#000;border:none;}
+.modal-btn-primary:hover{opacity:.82;}
+.modal-btn-secondary{background:none;color:var(--text-secondary);border:1px solid var(--border);}
+.modal-btn-secondary:hover{border-color:var(--accent2);color:var(--text-primary);}
+.modal-err{font-size:12.5px;color:#f08080;margin-top:8px;display:none;}
+.modal-ok{font-size:12.5px;color:var(--accent3);margin-top:8px;display:none;}
+.modal-link{font-size:12px;color:var(--accent);cursor:pointer;text-decoration:underline;
+  background:none;border:none;margin-top:10px;display:block;text-align:center;font-weight:600;}
+#page-admin.active{display:block;}
+.admin-header{background:var(--surface);border-bottom:1px solid var(--border);}
+.admin-header-inner{max-width:1100px;margin:0 auto;padding:28px 40px;display:flex;
+  align-items:center;justify-content:space-between;padding-top:calc(var(--nav-h) + 28px);}
+.admin-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;}
+.admin-logout{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  color:var(--text-secondary);background:none;border:1px solid var(--border);padding:8px 16px;
+  border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.admin-logout:hover{color:var(--accent);border-color:var(--accent);}
+.admin-body{max-width:1100px;margin:0 auto;padding:40px 40px 80px;}
+.admin-tabs{display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid var(--border);padding-bottom:0;}
+.admin-tab{padding:10px 20px;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;
+  cursor:pointer;background:none;border:none;color:var(--text-secondary);
+  font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
+.admin-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.admin-panel{display:none;}
+.admin-panel.active{display:block;}
+.admin-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;}
+.admin-section-title{font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-secondary);margin-bottom:18px;font-weight:700;}
+.admin-field{margin-bottom:16px;}
+.admin-field label{font-size:11.5px;color:var(--text-secondary);letter-spacing:.07em;
+  text-transform:uppercase;display:block;margin-bottom:6px;font-weight:600;}
+.admin-field input,.admin-field textarea{width:100%;background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);border-radius:7px;padding:10px 14px;
+  color:var(--text-primary);font-size:13.5px;font-family:'DM Sans',sans-serif;outline:none;
+  transition:border-color .2s;font-weight:400;}
+.admin-field input:focus,.admin-field textarea:focus{border-color:var(--accent);}
+.admin-field textarea{min-height:90px;resize:vertical;}
+.btn-save{background:var(--accent);color:#000;border:none;padding:11px 28px;
+  border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:opacity .2s;}
+.btn-save:hover{opacity:.82;}
+.admin-news-item{border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:14px;}
+.admin-news-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.admin-news-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);font-weight:700;}
+.btn-del{background:none;border:1px solid rgba(240,128,128,.3);color:#f08080;
+  padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;}
+.btn-del:hover{background:rgba(240,128,128,.1);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+/* ══ MOBILE NAV HAMBURGER ══ */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:8px;z-index:300;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-secondary);
+  border-radius:2px;transition:all .25s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+/* mobile nav drawer */
+.mobile-drawer{position:fixed;top:var(--nav-h);left:0;right:0;
+  background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);
+  z-index:190;padding:16px 0 24px;
+  border-bottom:1px solid var(--border);
+  display:none;flex-direction:column;align-items:stretch;}
+.mobile-drawer.open{display:flex;}
+.mobile-drawer .nav-link{font-size:15px;padding:14px 24px;text-align:left;
+  border-radius:0;letter-spacing:.06em;}
+.mobile-drawer .lang-row{display:flex;gap:8px;padding:14px 24px 4px;}
+.mobile-drawer .lang-btn-m{flex:1;padding:10px;border-radius:7px;font-size:13px;font-weight:600;
+  border:1px solid var(--border);background:none;color:var(--text-secondary);cursor:pointer;
+  font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.08em;transition:all .2s;}
+.mobile-drawer .lang-btn-m.active{background:var(--accent);color:#000;border-color:var(--accent);}
+
+@media(max-width:768px){
+  :root{--nav-h:60px;}
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  /* lang-toggle 모바일에서도 항상 표시 */
+  .hamburger{display:flex;}
+
+  /* HOME */
+  .home-overlay{padding-top:var(--nav-h);padding-left:16px;padding-right:16px;}
+  .home-eyebrow{font-size:10px;letter-spacing:3px;margin-bottom:10px;}
+  .home-title{font-size:28px;letter-spacing:1px;}
+  .home-sub{font-size:9px;letter-spacing:2px;margin-top:10px;}
+  .home-footer{padding:10px 16px;}
+  .home-footer p{font-size:10px;}
+
+  /* SUBPAGES */
+  .subpage-hero{height:200px;}
+  .subpage-hero-title{font-size:clamp(28px,7vw,48px);}
+  .subpage-content{padding:28px 16px 60px;}
+  .life-content{padding:28px 16px 60px;}
+  .connect-wrap{padding:28px 16px 60px;}
+
+  /* NEWS GRID */
+  .news-grid{grid-template-columns:1fr;gap:16px;margin-top:28px;}
+
+  /* ACTIVITIES GRID */
+  #activities-grid{grid-template-columns:1fr;gap:16px;margin-top:28px;}
+
+  /* UPLOAD FORMS */
+  .upload-box,.news-add-form{padding:20px 16px;}
+  .form-row{grid-template-columns:1fr;}
+  .upload-lock{flex-direction:column;align-items:stretch;}
+  .upload-lock input[type=password]{min-width:unset;}
+
+  /* ARTICLE */
+  .article-wrap{padding:28px 16px 60px;}
+  .article-title{font-size:clamp(24px,6vw,40px);}
+  .article-body{font-size:14px;}
+
+  /* CONNECT */
+  .connect-card{padding:20px 16px;}
+  .connect-item{gap:12px;}
+
+  /* MODAL */
+  .modal-box{padding:24px 18px;width:95vw;}
+  .modal-btns{flex-direction:column;}
+
+  /* ADMIN */
+  .admin-body{padding:24px 16px 60px;}
+  .admin-header-inner{padding:16px;padding-top:calc(var(--nav-h) + 16px);}
+  .admin-tabs{flex-wrap:wrap;gap:6px;border-bottom:none;padding-bottom:12px;}
+  .admin-tab{padding:8px 14px;font-size:11px;border:1px solid var(--border);border-radius:6px;
+    border-bottom:2px solid transparent;}
+  .admin-news-hd{flex-wrap:wrap;gap:8px;}
+  .admin-news-hd>div{flex-wrap:wrap;gap:6px;}
+  .page-footer{padding:16px;flex-direction:column;gap:10px;text-align:center;}
+  .section-title{font-size:clamp(24px,6vw,40px);}
+  .admin-add-form{padding:16px;}
+  .admin-section{padding:16px;}
+}
+@media(max-width:380px){
+  .home-title{font-size:24px;}
+  .home-eyebrow{font-size:9px;letter-spacing:2px;}
+}
+
+.nv-scan{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(80,200,255,0.3),transparent);animation:nvscan 6s ease-in-out infinite;pointer-events:none;z-index:2;}
+@keyframes nvscan{0%,100%{top:0;opacity:0;}10%{opacity:1;}90%{opacity:1;}50%{top:100%;}}
+
+/* ── 뉴스 카드 이미지 (업로드 이미지 지원) ── */
+.news-card-img img{width:100%;height:100%;object-fit:cover;}
+/* ── 관리자: 이미지 미리보기 썸네일 ── */
+.admin-img-thumb{width:80px;height:56px;object-fit:cover;border-radius:6px;
+  border:1px solid var(--border);margin-top:8px;display:block;}
+/* ── 편집 모달 ── */
+.edit-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:600;
+  display:none;align-items:flex-start;justify-content:center;
+  padding:60px 16px 16px;overflow-y:auto;backdrop-filter:blur(6px);}
+.edit-modal-overlay.open{display:flex;}
+.edit-modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:36px;width:100%;max-width:680px;position:relative;}
+.edit-modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;
+  margin-bottom:24px;color:var(--text-primary);}
+.edit-modal-close{position:absolute;top:16px;right:20px;background:none;border:none;
+  color:var(--text-secondary);font-size:22px;cursor:pointer;line-height:1;}
+.edit-modal-close:hover{color:var(--text-primary);}
+.edit-modal-btns{display:flex;gap:10px;margin-top:20px;}
+/* ── 관리자 활동 목록 ── */
+.admin-act-list{margin-top:8px;}
+.admin-add-form{
+  background:rgba(126,184,212,0.04);
+  border:1px solid rgba(126,184,212,0.2);
+  border-radius:12px;padding:24px;margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home');closeMobileDrawer()">Lisa's <span>NeuralVerse</span></div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <button class="nav-link" onclick="showPage('nursing')"    data-ko="간호학"     data-en="Nursing">간호학</button>
+      <button class="nav-link" onclick="showPage('neuro')"      data-ko="뇌신경학"   data-en="Neurology">뇌신경학</button>
+      <button class="nav-link" onclick="showPage('activities')" data-ko="나의 활동"  data-en="My Activities">나의 활동</button>
+      <button class="nav-link" onclick="showPage('life')"       data-ko="나의 삶"    data-en="My Life">나의 삶</button>
+      <button class="nav-link" onclick="showPage('connect')"    data-ko="Connect"   data-en="Connect">Connect</button>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('ko')">KO</button>
+      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+    </div>
+    <!-- 햄버거 (모바일) -->
+    <button class="hamburger" id="hamburger-btn" onclick="toggleMobileDrawer()" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- 모바일 드로어 -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <button class="nav-link" onclick="showPage('nursing');closeMobileDrawer()"    data-ko="간호학"     data-en="Nursing">간호학</button>
+  <button class="nav-link" onclick="showPage('neuro');closeMobileDrawer()"      data-ko="뇌신경학"   data-en="Neurology">뇌신경학</button>
+  <button class="nav-link" onclick="showPage('activities');closeMobileDrawer()" data-ko="나의 활동"  data-en="My Activities">나의 활동</button>
+  <button class="nav-link" onclick="showPage('life');closeMobileDrawer()"       data-ko="나의 삶"    data-en="My Life">나의 삶</button>
+  <button class="nav-link" onclick="showPage('connect');closeMobileDrawer()"    data-ko="Connect"   data-en="Connect">Connect</button>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <!-- full-canvas brain -->
+  <div id="brain-wrap">
+    <canvas id="brainCanvas"></canvas>
+    <div class="nv-scan"></div>
+  </div>
+  <!-- overlay text -->
+  <div class="home-overlay">
+    <div id="home-eyebrow-el" class="home-eyebrow"
+         data-ko="간호학 &middot; 뇌신경학 &middot; 성장의 여정"
+         data-en="Nursing &middot; Neurology &middot; A Journey of Growth">
+      간호학 &middot; 뇌신경학 &middot; 성장의 여정
+    </div>
+    <h1 class="home-title">Lisa's <em>NeuralVerse</em></h1>
+    <p id="home-sub-el" class="home-sub"
+       data-ko="돌봄의 과학과 뇌의 신비 사이에서, 나 김율하의 이야기가 펼쳐집니다."
+       data-en="Between the science of care and the mysteries of the brain — Lisa Yulha Kim.">
+      Exploring the frontiers of intelligence
+    </p>
+  </div>
+  <div class="home-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="admin-btn" onclick="openAdminModal()" data-ko="관리자" data-en="Admin">관리자</button>
+  </div>
+</div>
+
+<!-- NEURO PAGE -->
+<div id="page-neuro" class="page">
+  <div class="subpage-hero">
+    <svg class="subpage-hero-svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ng1" cx="25%" cy="50%"><stop offset="0%" stop-color="#7eb8d4" stop-opacity=".32"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="ng2" cx="75%" cy="50%"><stop offset="0%" stop-color="#c9b6e0" stop-opacity=".22"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <rect width="1200" height="300" fill="#0a0a0f"/>
+      <rect width="1200" height="300" fill="url(#ng1)"/><rect width="1200" height="300" fill="url(#ng2)"/>
+      <g stroke="#7eb8d4" stroke-opacity=".14" fill="none"><path d="M100,150 Q300,70 500,150 Q700,230 900,120 Q1100,10 1200,150"/><path d="M0,180 Q200,100 400,180 Q600,260 800,140 Q1000,20 1200,180"/></g>
+      <g fill="#7eb8d4" fill-opacity=".55"><circle cx="200" cy="130" r="3"/><circle cx="500" cy="150" r="3"/><circle cx="800" cy="140" r="3"/><circle cx="1050" cy="110" r="2.5"/></g>
+    </svg>
+    <h1 class="subpage-hero-title" data-ko="뇌신경학" data-en="Neurology">뇌신경학</h1>
+  </div>
+  <div class="subpage-content">
+    <div class="section-label" data-ko="학계 · 대학 · 최신 연구" data-en="Academia · Universities · Latest Research">학계 · 대학 · 최신 연구</div>
+    <h2 class="section-title" data-ko="고등학생을 위한 뇌신경학 이야기" data-en="Neurology Stories for High Schoolers">고등학생을 위한 뇌신경학 이야기</h2>
+    <div class="section-div"></div>
+    <div class="news-grid" id="neuro-grid"></div>
+  </div>
+  <div class="subpage-content" style="padding-top:0;">
+    <div class="news-add-form">
+      <h3 data-ko="✦ 새 소식 추가 (뇌신경학)" data-en="✦ Add New Article (Neurology)">✦ 새 소식 추가 (뇌신경학)</h3>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">태그 (KO)</label><input class="form-input" id="nn-tag" placeholder="예: 하버드 · 2025"></div>
+        <div class="form-group"><label class="form-label">Tag (EN)</label><input class="form-input" id="nn-tag-en" placeholder="e.g. Harvard · 2025"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">제목 (KO)</label><input class="form-input" id="nn-title" placeholder="뉴스 제목"></div>
+        <div class="form-group"><label class="form-label">Title (EN)</label><input class="form-input" id="nn-title-en" placeholder="Article title"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">요약 (KO)</label><textarea class="form-textarea" id="nn-body" placeholder="카드에 표시될 짧은 요약"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Summary (EN)</label><textarea class="form-textarea" id="nn-body-en" placeholder="Short summary shown on card"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">상세내용 (KO)</label><textarea class="form-textarea" id="nn-detail" placeholder="상세 페이지 내용" style="min-height:120px;"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Detail (EN)</label><textarea class="form-textarea" id="nn-detail-en" placeholder="Detail page content" style="min-height:120px;"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" id="nn-date" placeholder="2025.06"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label">대표 이미지 (선택)</label>
+          <div class="file-drop" onclick="document.getElementById('nn-photo').click()">
+            <input type="file" id="nn-photo" accept="image/*" onchange="previewNewsFile('nn',this)">
+            <div style="font-size:20px;margin-bottom:4px;">&#128247;</div>
+            <div class="file-drop-text">클릭하여 이미지 선택 (선택사항)</div>
+          </div>
+          <div id="nn-photo-preview" style="display:none;margin-top:8px;">
+            <img id="nn-photo-img" src="" style="max-height:100px;border-radius:6px;">
+          </div>
+        </div>
+      </div>
+      <div class="upload-lock">
+        <input type="password" id="nn-pw" placeholder="관리자 비밀번호">
+        <button class="upload-lock-btn" onclick="addNewsItem('neuro')" data-ko="업로드" data-en="Upload">업로드</button>
+        <span class="upload-lock-err" id="nn-err"></span>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- NURSING PAGE -->
+<div id="page-nursing" class="page">
+  <div class="subpage-hero">
+    <svg class="subpage-hero-svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="nsg1" cx="40%" cy="45%"><stop offset="0%" stop-color="#89d4b8" stop-opacity=".35"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+      <rect width="1200" height="300" fill="#0a0a0f"/><rect width="1200" height="300" fill="url(#nsg1)"/>
+      <g stroke="#89d4b8" stroke-opacity=".12" fill="none" stroke-width="1.5"><path d="M0,150 Q200,80 400,150 Q600,220 800,100 Q1000,0 1200,150"/><path d="M0,180 Q200,110 400,180 Q600,250 800,130 Q1000,30 1200,180"/></g>
+      <g fill="#89d4b8" fill-opacity=".18"><rect x="574" y="120" width="52" height="60" rx="4"/><rect x="554" y="140" width="92" height="20" rx="4"/></g>
+    </svg>
+    <h1 class="subpage-hero-title" data-ko="간호학" data-en="Nursing">간호학</h1>
+  </div>
+  <div class="subpage-content">
+    <div class="section-label" data-ko="학계 · 대학 · 최신 연구" data-en="Academia · Universities · Latest Research">학계 · 대학 · 최신 연구</div>
+    <h2 class="section-title" data-ko="고등학생을 위한 간호학 이야기" data-en="Nursing Stories for High Schoolers">고등학생을 위한 간호학 이야기</h2>
+    <div class="section-div"></div>
+    <div class="news-grid" id="nursing-grid"></div>
+  </div>
+  <div class="subpage-content" style="padding-top:0;">
+    <div class="news-add-form">
+      <h3 data-ko="✦ 새 소식 추가 (간호학)" data-en="✦ Add New Article (Nursing)">✦ 새 소식 추가 (간호학)</h3>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">태그 (KO)</label><input class="form-input" id="ns-tag" placeholder="예: 러트거스 · 2025"></div>
+        <div class="form-group"><label class="form-label">Tag (EN)</label><input class="form-input" id="ns-tag-en" placeholder="e.g. Rutgers · 2025"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">제목 (KO)</label><input class="form-input" id="ns-title" placeholder="뉴스 제목"></div>
+        <div class="form-group"><label class="form-label">Title (EN)</label><input class="form-input" id="ns-title-en" placeholder="Article title"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">요약 (KO)</label><textarea class="form-textarea" id="ns-body" placeholder="카드에 표시될 짧은 요약"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Summary (EN)</label><textarea class="form-textarea" id="ns-body-en" placeholder="Short summary shown on card"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">상세내용 (KO)</label><textarea class="form-textarea" id="ns-detail" placeholder="상세 페이지 내용" style="min-height:120px;"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Detail (EN)</label><textarea class="form-textarea" id="ns-detail-en" placeholder="Detail page content" style="min-height:120px;"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" id="ns-date" placeholder="2025.06"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label">대표 이미지 (선택)</label>
+          <div class="file-drop" onclick="document.getElementById('ns-photo').click()">
+            <input type="file" id="ns-photo" accept="image/*" onchange="previewNewsFile('ns',this)">
+            <div style="font-size:20px;margin-bottom:4px;">&#128247;</div>
+            <div class="file-drop-text">클릭하여 이미지 선택 (선택사항)</div>
+          </div>
+          <div id="ns-photo-preview" style="display:none;margin-top:8px;">
+            <img id="ns-photo-img" src="" style="max-height:100px;border-radius:6px;">
+          </div>
+        </div>
+      </div>
+      <div class="upload-lock">
+        <input type="password" id="ns-pw" placeholder="관리자 비밀번호">
+        <button class="upload-lock-btn" onclick="addNewsItem('nursing')" data-ko="업로드" data-en="Upload">업로드</button>
+        <span class="upload-lock-err" id="ns-err"></span>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- ARTICLE DETAIL -->
+<div id="page-article" class="page">
+  <div style="padding-top:var(--nav-h);">
+    <div class="article-wrap">
+      <button class="article-back" id="art-back-btn">&#8592; <span data-ko="목록으로 돌아가기" data-en="Back to list">목록으로 돌아가기</span></button>
+      <div id="article-content"></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div id="page-activities" class="page">
+  <div class="subpage-hero">
+    <svg class="subpage-hero-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="300" fill="#0a0a0f"/>
+      <defs><radialGradient id="ag1" cx="50%" cy="50%"><stop offset="0%" stop-color="#c9b6e0" stop-opacity=".25"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+      <rect width="1200" height="300" fill="url(#ag1)"/>
+      <g stroke="#c9b6e0" stroke-opacity=".1" fill="none"><circle cx="600" cy="150" r="70"/><circle cx="600" cy="150" r="120"/><circle cx="600" cy="150" r="170"/></g>
+    </svg>
+    <h1 class="subpage-hero-title" data-ko="나의 활동" data-en="My Activities">나의 활동</h1>
+  </div>
+  <div class="subpage-content">
+    <div class="section-label" data-ko="기록 · 성장 · 도전" data-en="Records · Growth · Challenges">기록 · 성장 · 도전</div>
+    <h2 class="section-title" data-ko="나의 활동 아카이브" data-en="My Activity Archive">나의 활동 아카이브</h2>
+    <div class="section-div"></div>
+    <div id="activities-grid"></div>
+    <div class="upload-box">
+      <h3 data-ko="✦ 새 활동 추가" data-en="✦ Add New Activity">✦ 새 활동 추가</h3>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" data-ko="제목" data-en="Title">제목</label><input class="form-input" id="act-title" type="text" placeholder="활동 제목"></div>
+        <div class="form-group"><label class="form-label" data-ko="날짜" data-en="Date">날짜</label><input class="form-input" id="act-date" type="date"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label" data-ko="내용" data-en="Content">내용</label><textarea class="form-textarea" id="act-content" placeholder="활동 내용..."></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label" data-ko="사진 업로드" data-en="Photo Upload">사진 업로드</label>
+          <div class="file-drop">
+            <input type="file" id="act-photo" accept="image/*" onchange="previewFile(this)">
+            <div style="font-size:24px;margin-bottom:6px;">&#128247;</div>
+            <div class="file-drop-text" data-ko="클릭하여 사진 선택" data-en="Click to select photo">클릭하여 사진 선택</div>
+          </div>
+          <div id="file-preview"><img id="preview-img" src="" alt="preview"></div>
+        </div>
+      </div>
+      <div class="upload-lock">
+        <input type="password" id="act-pw" placeholder="관리자 비밀번호">
+        <button class="upload-lock-btn" onclick="addActivity()" data-ko="활동 업로드" data-en="Upload Activity">활동 업로드</button>
+        <span class="upload-lock-err" id="act-err"></span>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- MY LIFE -->
+<div id="page-life" class="page">
+  <div class="subpage-hero">
+    <svg class="subpage-hero-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="300" fill="#0a0a0f"/>
+      <defs>
+        <radialGradient id="lg1" cx="30%" cy="60%"><stop offset="0%" stop-color="#c9b6e0" stop-opacity=".3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="lg2" cx="72%" cy="38%"><stop offset="0%" stop-color="#7eb8d4" stop-opacity=".2"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <rect width="1200" height="300" fill="url(#lg1)"/><rect width="1200" height="300" fill="url(#lg2)"/>
+      <text x="70" y="230" font-family="serif" font-size="200" fill="white" fill-opacity=".025" font-weight="bold">&#25104;&#38263;</text>
+    </svg>
+    <h1 class="subpage-hero-title" data-ko="나의 삶" data-en="My Life">나의 삶</h1>
+  </div>
+  <div class="life-content" id="life-area"></div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- CONNECT -->
+<div id="page-connect" class="page">
+  <div class="subpage-hero">
+    <svg class="subpage-hero-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="300" fill="#0a0a0f"/>
+      <defs><radialGradient id="cg1" cx="50%" cy="50%"><stop offset="0%" stop-color="#7eb8d4" stop-opacity=".2"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+      <rect width="1200" height="300" fill="url(#cg1)"/>
+      <g stroke="#7eb8d4" stroke-opacity=".07" fill="none"><line x1="0" y1="150" x2="1200" y2="150"/><line x1="600" y1="0" x2="600" y2="300"/><circle cx="600" cy="150" r="55"/><circle cx="600" cy="150" r="110"/></g>
+    </svg>
+    <h1 class="subpage-hero-title">Connect</h1>
+  </div>
+  <div class="connect-wrap">
+    <div class="section-label" data-ko="연락처 · 학교" data-en="Contact · School">연락처 · 학교</div>
+    <h2 class="section-title" data-ko="연락하기" data-en="Get in Touch">연락하기</h2>
+    <div class="section-div"></div>
+    <div class="connect-card">
+      <div class="connect-item">
+        <div class="connect-icon">&#9993;&#65039;</div>
+        <div class="connect-info">
+          <div class="connect-label" data-ko="이메일" data-en="Email">이메일</div>
+          <div class="connect-value" id="con-disp-email"><a href="mailto:lisayulha@gmail.com">lisayulha@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="connect-item">
+        <div class="connect-icon">&#127979;</div>
+        <div class="connect-info">
+          <div class="connect-label" data-ko="재학 중인 학교" data-en="Current School">재학 중인 학교</div>
+          <div class="connect-value" id="con-disp-school"><strong>The Harvey School</strong><br><span style="color:var(--text-secondary);font-size:13px;">260 Jay Street, Katonah, NY 10536, USA</span></div>
+        </div>
+      </div>
+      <div class="connect-item">
+        <div class="connect-icon">&#127758;</div>
+        <div class="connect-info">
+          <div class="connect-label" data-ko="학교 웹사이트" data-en="School Website">학교 웹사이트</div>
+          <div class="connect-value" id="con-disp-url"><a href="https://www.harveyschool.org" target="_blank">www.harveyschool.org</a></div>
+        </div>
+      </div>
+      <div class="connect-item">
+        <div class="connect-icon">&#127919;</div>
+        <div class="connect-info">
+          <div class="connect-label" data-ko="목표 전공" data-en="Target Major">목표 전공</div>
+          <div class="connect-value" id="con-disp-major" data-ko="뇌신경과학 · 간호학 (마취과 간호사 CRNA)" data-en="Neuroscience · Nursing (CRNA)">뇌신경과학 · 간호학 (마취과 간호사 CRNA)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p>© 2026 Lisa Yulha Kim</p>
+    <button class="back-home" onclick="showPage('home')" data-ko="← 홈으로" data-en="← Home">← 홈으로</button>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="page-admin" class="page">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-title" data-ko="관리자 패널" data-en="Admin Panel">관리자 패널</div>
+      <button class="admin-logout" onclick="adminLogout()" data-ko="로그아웃" data-en="Logout">로그아웃</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('general',this)" data-ko="기본 설정" data-en="General">기본 설정</button>
+      <button class="admin-tab" onclick="switchAdminTab('neuro-admin',this)" data-ko="뇌신경학 뉴스" data-en="Neuro News">뇌신경학 뉴스</button>
+      <button class="admin-tab" onclick="switchAdminTab('nursing-admin',this)" data-ko="간호학 뉴스" data-en="Nursing News">간호학 뉴스</button>
+      <button class="admin-tab" onclick="switchAdminTab('life-admin',this)" data-ko="나의 삶" data-en="My Life">나의 삶</button>
+      <button class="admin-tab" onclick="switchAdminTab('act-admin',this)" data-ko="나의 활동" data-en="Activities">나의 활동</button>
+      <button class="admin-tab" onclick="switchAdminTab('connect-admin',this)" data-ko="Connect" data-en="Connect">Connect</button>
+      <button class="admin-tab" onclick="switchAdminTab('pw-admin',this)" data-ko="비밀번호 변경" data-en="Change Password">비밀번호 변경</button>
+    </div>
+    <div id="tab-general" class="admin-panel active">
+      <div class="admin-section">
+        <div class="admin-section-title" data-ko="홈 화면 텍스트" data-en="Home Text">홈 화면 텍스트</div>
+        <div class="admin-field"><label>상단 부제목 (KO) — 뇌신경학·간호학 줄</label><input id="ad-eyebrow-ko" value="뇌신경학 · 간호학 · 성장의 여정" placeholder="예: 뇌신경학 · 간호학 · 성장의 여정"></div>
+        <div class="admin-field"><label>상단 부제목 (EN)</label><input id="ad-eyebrow-en" value="Neurology · Nursing · A Journey of Growth" placeholder="e.g. Neurology · Nursing · A Journey of Growth"></div>
+        <div class="admin-field"><label>하단 소개 문구 (KO) — Exploring... 줄</label><input id="ad-sub-ko" value="Exploring the frontiers of intelligence" placeholder="예: Exploring the frontiers of intelligence"></div>
+        <div class="admin-field"><label>하단 소개 문구 (EN)</label><input id="ad-sub-en" value="Exploring the frontiers of intelligence" placeholder="e.g. Exploring the frontiers of intelligence"></div>
+        <button class="btn-save" onclick="saveGeneral()">저장</button>
+      </div>
+    </div>
+    <div id="tab-neuro-admin" class="admin-panel">
+      <div id="neuro-admin-list"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-save" onclick="saveNewsAdmin('neuro')">모두 저장</button>
+        <button class="btn-save" style="background:var(--accent3);" onclick="toggleAdminAddForm('neuro-add-form')">+ 새 뇌신경학 소식 작성</button>
+      </div>
+      <div id="neuro-add-form" class="admin-add-form" style="display:none;">
+        <div class="admin-section-title" style="margin-bottom:16px;">✦ 새 소식 작성 (뇌신경학)</div>
+        <div class="admin-field"><label>태그 (KO)</label><input id="adn-tag" placeholder="예: 하버드 · 2025"></div>
+        <div class="admin-field"><label>Tag (EN)</label><input id="adn-tag-en" placeholder="e.g. Harvard · 2025"></div>
+        <div class="admin-field"><label>제목 (KO)</label><input id="adn-title" placeholder="뉴스 제목"></div>
+        <div class="admin-field"><label>Title (EN)</label><input id="adn-title-en" placeholder="Article title"></div>
+        <div class="admin-field"><label>요약 (KO)</label><textarea id="adn-body" placeholder="카드에 표시될 짧은 요약"></textarea></div>
+        <div class="admin-field"><label>Summary (EN)</label><textarea id="adn-body-en" placeholder="Short summary shown on card"></textarea></div>
+        <div class="admin-field"><label>상세내용 (KO)</label><textarea id="adn-detail" placeholder="상세 페이지 내용" style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>Detail (EN)</label><textarea id="adn-detail-en" placeholder="Detail page content" style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>날짜</label><input id="adn-date" placeholder="2025.06"></div>
+        <div class="admin-field"><label>대표 이미지 (선택)</label>
+          <input type="file" id="adn-photo" accept="image/*" onchange="adminPreviewPhoto('adn',this)" style="font-size:13px;color:var(--text-secondary);">
+          <div id="adn-photo-preview" style="display:none;margin-top:8px;"><img id="adn-photo-img" src="" class="admin-img-thumb"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn-save" onclick="adminAddNews('neuro')">등록</button>
+          <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);" onclick="toggleAdminAddForm('neuro-add-form')">취소</button>
+        </div>
+      </div>
+    </div>
+    <div id="tab-nursing-admin" class="admin-panel">
+      <div id="nursing-admin-list"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-save" onclick="saveNewsAdmin('nursing')">모두 저장</button>
+        <button class="btn-save" style="background:var(--accent3);" onclick="toggleAdminAddForm('nursing-add-form')">+ 새 간호학 소식 작성</button>
+      </div>
+      <div id="nursing-add-form" class="admin-add-form" style="display:none;">
+        <div class="admin-section-title" style="margin-bottom:16px;">✦ 새 소식 작성 (간호학)</div>
+        <div class="admin-field"><label>태그 (KO)</label><input id="adns-tag" placeholder="예: 러트거스 · 2025"></div>
+        <div class="admin-field"><label>Tag (EN)</label><input id="adns-tag-en" placeholder="e.g. Rutgers · 2025"></div>
+        <div class="admin-field"><label>제목 (KO)</label><input id="adns-title" placeholder="뉴스 제목"></div>
+        <div class="admin-field"><label>Title (EN)</label><input id="adns-title-en" placeholder="Article title"></div>
+        <div class="admin-field"><label>요약 (KO)</label><textarea id="adns-body" placeholder="카드에 표시될 짧은 요약"></textarea></div>
+        <div class="admin-field"><label>Summary (EN)</label><textarea id="adns-body-en" placeholder="Short summary shown on card"></textarea></div>
+        <div class="admin-field"><label>상세내용 (KO)</label><textarea id="adns-detail" placeholder="상세 페이지 내용" style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>Detail (EN)</label><textarea id="adns-detail-en" placeholder="Detail page content" style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>날짜</label><input id="adns-date" placeholder="2025.06"></div>
+        <div class="admin-field"><label>대표 이미지 (선택)</label>
+          <input type="file" id="adns-photo" accept="image/*" onchange="adminPreviewPhoto('adns',this)" style="font-size:13px;color:var(--text-secondary);">
+          <div id="adns-photo-preview" style="display:none;margin-top:8px;"><img id="adns-photo-img" src="" class="admin-img-thumb"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn-save" onclick="adminAddNews('nursing')">등록</button>
+          <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);" onclick="toggleAdminAddForm('nursing-add-form')">취소</button>
+        </div>
+      </div>
+    </div>
+    <div id="tab-life-admin" class="admin-panel">
+      <div id="life-admin-list"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-save" onclick="saveLifeAdmin()">모두 저장</button>
+        <button class="btn-save" style="background:var(--accent3);" onclick="toggleAdminAddForm('life-add-form')">+ 새 에피소드 작성</button>
+      </div>
+      <div id="life-add-form" class="admin-add-form" style="display:none;">
+        <div class="admin-section-title" style="margin-bottom:16px;">✦ 새 에피소드 작성</div>
+        <div class="admin-field"><label>챕터 선택</label>
+          <select id="adlife-chapter" class="form-input" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:7px;padding:10px 14px;color:var(--text-primary);font-size:13.5px;outline:none;">
+          </select>
+        </div>
+        <div class="admin-field"><label>에피소드 제목 (KO)</label><input id="adlife-title" placeholder="에피소드 제목"></div>
+        <div class="admin-field"><label>에피소드 제목 (EN)</label><input id="adlife-title-en" placeholder="Episode title"></div>
+        <div class="admin-field"><label>내용 (KO)</label><textarea id="adlife-body" placeholder="에피소드 내용..." style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>Content (EN)</label><textarea id="adlife-body-en" placeholder="Episode content..." style="min-height:120px;"></textarea></div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn-save" onclick="adminAddLifeEp()">등록</button>
+          <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);" onclick="toggleAdminAddForm('life-add-form')">취소</button>
+        </div>
+      </div>
+    </div>
+    <div id="tab-act-admin" class="admin-panel">
+      <div id="act-admin-list"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-save" onclick="saveActAdmin()">모두 저장</button>
+        <button class="btn-save" style="background:var(--accent3);" onclick="toggleAdminAddForm('act-add-form')">+ 새 활동 작성</button>
+      </div>
+      <div id="act-add-form" class="admin-add-form" style="display:none;">
+        <div class="admin-section-title" style="margin-bottom:16px;">✦ 새 활동 작성</div>
+        <div class="admin-field"><label>제목</label><input id="adact-title" placeholder="활동 제목"></div>
+        <div class="admin-field"><label>날짜</label><input id="adact-date" type="date"></div>
+        <div class="admin-field"><label>내용</label><textarea id="adact-content" placeholder="활동 내용..." style="min-height:120px;"></textarea></div>
+        <div class="admin-field"><label>사진 (선택)</label>
+          <input type="file" id="adact-photo" accept="image/*" onchange="adminPreviewPhoto('adact',this)" style="font-size:13px;color:var(--text-secondary);">
+          <div id="adact-photo-preview" style="display:none;margin-top:8px;"><img id="adact-photo-img" src="" class="admin-img-thumb"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn-save" onclick="adminAddActivity()">등록</button>
+          <button class="btn-save" style="background:rgba(255,255,255,0.08);color:var(--text-secondary);" onclick="toggleAdminAddForm('act-add-form')">취소</button>
+        </div>
+      </div>
+    </div>
+    <div id="tab-connect-admin" class="admin-panel">
+      <div class="admin-section">
+        <div class="admin-section-title">Connect 페이지 수정</div>
+
+        <div class="admin-field">
+          <label>이메일 주소</label>
+          <input id="con-email" value="lisayulha@gmail.com">
+        </div>
+        <div class="admin-field">
+          <label>학교명</label>
+          <input id="con-school" value="The Harvey School">
+        </div>
+        <div class="admin-field">
+          <label>학교 주소</label>
+          <input id="con-addr" value="260 Jay Street, Katonah, NY 10536, USA">
+        </div>
+        <div class="admin-field">
+          <label>학교 웹사이트 URL</label>
+          <input id="con-url" value="https://www.harveyschool.org">
+        </div>
+        <div class="admin-field">
+          <label>목표 전공 (KO)</label>
+          <input id="con-major-ko" value="뇌신경과학 · 간호학 (마취과 간호사 CRNA)">
+        </div>
+        <div class="admin-field">
+          <label>Target Major (EN)</label>
+          <input id="con-major-en" value="Neuroscience · Nursing (CRNA)">
+        </div>
+        <button class="btn-save" onclick="saveConnectAdmin()" style="margin-top:8px;">저장 및 적용</button>
+        <div id="con-msg" style="margin-top:10px;font-size:13px;"></div>
+      </div>
+    </div>
+    <div id="tab-pw-admin" class="admin-panel">
+      <div class="admin-section">
+        <div class="admin-section-title">비밀번호 변경</div>
+        <div class="admin-field"><label>현재 비밀번호</label><input id="pw-cur" type="password"></div>
+        <div class="admin-field"><label>새 비밀번호</label><input id="pw-new" type="password"></div>
+        <div class="admin-field"><label>새 비밀번호 확인</label><input id="pw-confirm" type="password"></div>
+        <button class="btn-save" onclick="changePw()">변경</button>
+        <div id="pw-msg" style="margin-top:10px;font-size:13px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal-box" id="modal-inner"></div>
+</div>
+
+<script>
+
+/* ── DATA ── */
+let neuroNews=[
+  {id:'n1',tag:'MIT · 2024',tagEn:'MIT · 2024',title:'뇌의 기억은 어떻게 만들어질까?',titleEn:'How Does the Brain Create Memories?',
+   body:'MIT 피코워 학습&기억 연구소가 밝혀낸 해마의 역할. 기억은 뇌세포(뉴런)들이 서로 연결되는 \'시냅스\'에서 만들어집니다. 강한 경험일수록 연결이 강해져요.',
+   bodyEn:'MIT\'s Picower Institute revealed the hippocampus\'s role in memory formation. Memories are created at synapses where neurons connect—the stronger the experience, the stronger the connection.',
+   detail:`<h3>기억의 메커니즘 — 해마와 시냅스</h3><p>MIT 피코워 학습&기억 연구소의 최신 연구에 따르면, 우리가 무언가를 기억할 때 뇌는 단순히 파일을 저장하는 것이 아닙니다. 뇌세포(뉴런)들이 서로 새롭게 연결되거나 기존 연결이 강화되는 물리적인 변화가 일어납니다.</p><div class="highlight">시냅스(Synapse)는 뉴런과 뉴런 사이의 연결 지점입니다. 강렬한 경험을 할수록 더 많은 시냅스가 형성되고, 그 연결이 더 두터워집니다.</div><h3>장기 기억 vs 단기 기억</h3><p>뇌는 두 가지 종류의 기억을 다르게 처리합니다. 단기 기억은 주로 전전두엽(이마 뒤쪽)에서 일시적으로 처리되며, 수 초에서 수 분간 유지됩니다. 반면, 중요한 경험이나 반복 학습된 내용은 해마(Hippocampus)를 통해 장기 기억으로 전환됩니다.</p><h3>고등학생에게 주는 시사점</h3><p>이 연구 결과는 공부법에 직접적인 시사점을 제공합니다. 한 번에 모든 것을 외우려는 '벼락치기'보다 반복 학습(Spaced Repetition)이 더 강한 시냅스 연결을 만들어 낸다는 것이 과학적으로 증명되었습니다. 또한 수면 중에 해마가 낮에 받은 정보를 정리하고 장기 기억으로 통합하는 작업을 합니다.</p><p>MIT 연구팀은 2024년 11월 <em>Nature Neuroscience</em>에 이 연구 결과를 발표하며, 알츠하이머 치료 연구에도 중요한 단서를 제공했다고 밝혔습니다.</p>`,
+   detailEn:`<h3>The Mechanism of Memory — Hippocampus & Synapses</h3><p>According to the latest research from MIT's Picower Institute, when we remember something, the brain doesn't simply save a file. Physical changes occur — neurons form new connections or strengthen existing ones.</p><div class="highlight">A synapse is the connection point between neurons. The more intense the experience, the more synapses form and the stronger those connections become.</div><h3>Long-Term vs Short-Term Memory</h3><p>The brain processes two kinds of memory differently. Short-term memory is handled temporarily in the prefrontal cortex, lasting seconds to minutes. Important or repeated experiences are converted to long-term memory through the hippocampus.</p><h3>Implications for High Schoolers</h3><p>These findings directly inform study techniques. Science confirms that spaced repetition builds stronger synaptic connections than last-minute cramming. Also, the hippocampus consolidates daytime information into long-term memory during sleep.</p><p>The MIT team published these results in <em>Nature Neuroscience</em> in November 2024, noting important clues for Alzheimer's research.</p>`,
+   date:'2024.11', color:'#7eb8d4'},
+
+  {id:'n2',tag:'스탠퍼드 · 2025',tagEn:'Stanford · 2025',title:'수면 중 뇌는 스스로 청소한다',titleEn:'The Brain Cleans Itself During Sleep',
+   body:'스탠퍼드 수면의학센터 연구에 따르면, 잠을 잘 때 뇌척수액이 흘러들어 독성 단백질(아밀로이드)을 씻어냅니다.',
+   bodyEn:'Stanford Sleep Medicine Center found that cerebrospinal fluid washes out toxic proteins (amyloid) during sleep.',
+   detail:`<h3>수면과 뇌 청소 시스템 — 글림파틱 시스템</h3><p>스탠퍼드 수면의학센터의 연구팀은 2025년 초 놀라운 사실을 발표했습니다. 뇌에는 '글림파틱 시스템(Glymphatic System)'이라는 자체 청소 시스템이 있으며, 이 시스템은 주로 수면 중에 활성화됩니다.</p><div class="highlight">잠을 자는 동안 뇌세포들이 약 60% 수축하고, 그 공간으로 뇌척수액(CSF)이 밀려들어와 독성 노폐물을 씻어냅니다. 대표적인 노폐물이 알츠하이머와 관련된 아밀로이드-베타 단백질입니다.</div><h3>수면 부족이 위험한 이유</h3><p>잠이 부족하면 이 청소 시스템이 제대로 작동하지 못해 뇌에 독성 단백질이 쌓이기 시작합니다. 장기적으로 이는 치매, 특히 알츠하이머 위험을 높이는 원인이 됩니다. 또한 단기적으로는 집중력 저하, 감정 조절 어려움, 의사결정 능력 저하로 이어집니다.</p><h3>최적 수면 시간</h3><p>연구팀은 성인 기준 7~9시간, 10대 청소년은 8~10시간의 수면이 글림파틱 시스템을 최적으로 유지하는 데 필요하다고 밝혔습니다. 특히 깊은 수면(NREM 수면 3단계)에서 이 시스템이 가장 활발하게 작동합니다.</p>`,
+   detailEn:`<h3>Sleep & the Brain's Cleaning System — Glymphatic System</h3><p>Stanford Sleep Medicine Center announced a remarkable finding in early 2025: the brain has a self-cleaning system called the glymphatic system, which activates primarily during sleep.</p><div class="highlight">While sleeping, brain cells shrink by about 60%, allowing cerebrospinal fluid to flow in and flush out toxic waste—most notably amyloid-beta, the protein linked to Alzheimer's.</div><h3>Why Sleep Deprivation is Dangerous</h3><p>Without enough sleep, this cleaning system fails to work properly and toxic proteins accumulate. Long-term, this raises the risk of dementia. Short-term, it leads to reduced focus, poor emotional regulation, and impaired decision-making.</p><h3>Optimal Sleep Duration</h3><p>The team recommends 7–9 hours for adults and 8–10 hours for teenagers to keep the glymphatic system optimal. Deep sleep (NREM Stage 3) is when this system works hardest.</p>`,
+   date:'2025.02', color:'#c9b6e0'},
+
+  {id:'n3',tag:'존스홉킨스 · 2024',tagEn:'Johns Hopkins · 2024',title:'뇌가소성: 뇌는 평생 변한다',titleEn:'Neuroplasticity: The Brain Changes Throughout Life',
+   body:'존스홉킨스대 신경과학부가 확인한 놀라운 사실 — 성인의 뇌도 새로운 것을 배울 때마다 물리적으로 변합니다. 이를 \'신경가소성\'이라고 해요.',
+   bodyEn:'Johns Hopkins neuroscientists confirmed that adult brains physically change every time we learn something new—a phenomenon called neuroplasticity.',
+   detail:`<h3>신경가소성이란?</h3><p>오랫동안 과학자들은 뇌가 어린 시절에만 발달하고 성인이 되면 고정된다고 믿었습니다. 그러나 존스홉킨스대 신경과학부의 연구는 이 통념을 완전히 뒤집었습니다. 뇌는 나이에 상관없이 새로운 경험과 학습에 따라 계속해서 구조적, 기능적으로 변화합니다.</p><div class="highlight">신경가소성(Neuroplasticity)은 뇌가 환경과 경험에 반응해 스스로 재조직하는 능력입니다. 새로운 시냅스가 형성되고, 기존 연결이 강화되거나 약화됩니다.</div><h3>실생활 적용 사례</h3><p>런던 택시 기사들을 대상으로 한 유명한 연구에서, 복잡한 런던 지도를 외워야 하는 택시 기사들의 해마가 일반인보다 유의미하게 크다는 것이 확인되었습니다. 반복적 학습과 경험이 뇌 구조 자체를 바꾼 것입니다.</p><h3>뇌가소성을 높이는 방법</h3><p>①새로운 언어나 악기 배우기 ②규칙적인 유산소 운동 ③충분한 수면 ④사회적 교류와 새로운 경험 ⑤마음챙김 명상. 존스홉킨스 연구팀은 특히 도전적인 인지 과제가 뇌가소성을 가장 효과적으로 높인다고 강조했습니다.</p>`,
+   detailEn:`<h3>What is Neuroplasticity?</h3><p>Scientists long believed the brain only develops in childhood and becomes fixed in adulthood. Johns Hopkins research completely overturned this idea. The brain continues to change structurally and functionally at any age in response to new experiences and learning.</p><div class="highlight">Neuroplasticity is the brain's ability to reorganize itself in response to environment and experience—forming new synapses and strengthening or weakening existing connections.</div><h3>Real-World Examples</h3><p>In a famous study of London cab drivers, who must memorize the complex street map, researchers found their hippocampi were significantly larger than average—proof that repeated learning physically changes brain structure.</p><h3>How to Boost Neuroplasticity</h3><p>① Learn a new language or instrument ② Regular aerobic exercise ③ Adequate sleep ④ Social interaction and novel experiences ⑤ Mindfulness meditation. The Johns Hopkins team emphasized that challenging cognitive tasks are most effective.</p>`,
+   date:'2024.09', color:'#89d4b8'},
+
+  {id:'n4',tag:'하버드 · 2025',tagEn:'Harvard · 2025',title:'파킨슨병 조기 진단의 새 길',titleEn:'A New Path to Early Parkinson\'s Detection',
+   body:'하버드 의대 연구팀이 혈액 검사만으로 파킨슨병을 10년 전에 발견할 수 있는 바이오마커를 발굴했습니다.',
+   bodyEn:'Harvard Medical School researchers identified a blood-based biomarker that can detect Parkinson\'s disease 10 years before symptoms appear.',
+   detail:`<h3>파킨슨병과 조기 진단의 중요성</h3><p>파킨슨병은 도파민을 생성하는 뇌세포가 서서히 손상되는 신경퇴행성 질환입니다. 현재까지 증상이 나타났을 때는 이미 뇌세포의 60~80%가 손상된 이후입니다. 하버드 의과대학 연구팀이 2025년 1월 발표한 연구는 이 문제의 돌파구를 열었습니다.</p><div class="highlight">연구팀은 혈액 내 특정 단백질(α-시누클레인 응집체)을 검출하는 방법을 개발했으며, 이를 통해 증상 발현 최대 10년 전에 파킨슨병을 예측할 수 있음을 확인했습니다.</div><h3>연구 결과의 의미</h3><p>조기에 발견한다면 신경보호 치료를 통해 병의 진행을 늦추고 환자의 삶의 질을 크게 향상시킬 수 있습니다. 이 연구는 단순히 파킨슨병에만 그치지 않고, 알츠하이머·루게릭병 등 다른 신경퇴행성 질환의 조기 진단 연구에도 중요한 방법론적 기반이 됩니다.</p><h3>간호 및 의학적 의의</h3><p>간호학 관점에서 조기 진단 기술의 발전은 환자 관리의 패러다임을 '치료 중심'에서 '예방 및 조기 개입 중심'으로 전환하는 데 핵심 역할을 합니다. 특히 신경과 전문 간호사(NP)의 역할이 더욱 중요해질 것으로 예상됩니다.</p>`,
+   detailEn:`<h3>Parkinson's Disease & the Importance of Early Detection</h3><p>Parkinson's is a neurodegenerative disease where dopamine-producing brain cells gradually degrade. By the time symptoms appear, 60–80% of those cells are already lost. Harvard Medical School's January 2025 study offers a breakthrough.</p><div class="highlight">Researchers developed a method to detect specific proteins (α-synuclein aggregates) in blood, enabling Parkinson's prediction up to 10 years before symptoms emerge.</div><h3>Significance of the Findings</h3><p>Early detection enables neuroprotective treatments that slow progression and dramatically improve quality of life. The methodology also forms a foundation for early detection of other neurodegenerative diseases like Alzheimer's and ALS.</p><h3>Nursing & Medical Implications</h3><p>From a nursing perspective, advances in early diagnosis are key to shifting the care paradigm from treatment-focused to prevention and early-intervention-focused, making the role of neurology nurse practitioners increasingly vital.</p>`,
+   date:'2025.01', color:'#7eb8d4'},
+
+  {id:'n5',tag:'UC샌디에이고 · 2024',tagEn:'UC San Diego · 2024',title:'10대 청소년의 뇌, 어른과 다르다',titleEn:'The Teen Brain is Different from Adults',
+   body:'청소년의 전두엽(판단·자제력 담당)은 25세까지 완성됩니다. UC샌디에이고 발달신경과학팀이 청소년 뇌 발달 지도를 완성했습니다.',
+   bodyEn:'The prefrontal cortex (responsible for judgment and self-control) isn\'t fully developed until age 25. UC San Diego\'s team completed a comprehensive map of adolescent brain development.',
+   detail:`<h3>청소년 뇌 발달의 비밀</h3><p>UC샌디에이고 발달신경과학팀이 2024년 12월 발표한 연구는 청소년기 뇌 발달에 관한 가장 포괄적인 지도를 완성했습니다. 이 연구는 10~25세 약 1만 명의 뇌 MRI 데이터를 분석해 이루어졌습니다.</p><div class="highlight">전두엽(Prefrontal Cortex)은 충동 억제, 판단, 계획, 감정 조절을 담당하는 뇌의 '사령탑'입니다. 이 영역은 25세가 되어야 완전히 성숙합니다.</div><h3>청소년기 뇌의 특징</h3><p>청소년의 뇌는 감정과 보상을 처리하는 변연계(limbic system)가 이미 활발하게 활동하는 반면, 이를 조절하는 전두엽은 아직 완성 중입니다. 이것이 청소년이 종종 충동적이거나 위험을 과소평가하는 행동을 보이는 신경과학적 이유입니다.</p><h3>시사점</h3><p>이 연구는 청소년이 '의지 부족'이 아니라 '뇌 발달 단계' 때문에 자제력에 어려움을 겪을 수 있다는 것을 과학적으로 입증합니다. 부모와 교사, 의료진 모두 청소년을 이해할 때 이 맥락을 고려해야 합니다.</p>`,
+   detailEn:`<h3>The Secrets of Adolescent Brain Development</h3><p>UC San Diego's developmental neuroscience team published the most comprehensive map of adolescent brain development in December 2024, analyzing MRI data from ~10,000 people aged 10–25.</p><div class="highlight">The prefrontal cortex — the brain's command center for impulse control, judgment, planning, and emotional regulation — doesn't fully mature until age 25.</div><h3>Characteristics of the Teen Brain</h3><p>The teen brain's limbic system (emotions and reward) is already highly active while the prefrontal cortex is still maturing—the neuroscientific reason why adolescents often act impulsively or underestimate risks.</p><h3>Implications</h3><p>This research scientifically demonstrates that teens struggle with self-control due to brain development stage, not lack of willpower—important context for parents, teachers, and healthcare providers.</p>`,
+   date:'2024.12', color:'#c9b6e0'},
+
+  {id:'n6',tag:'컬럼비아 · 2025',tagEn:'Columbia · 2025',title:'언어와 음악은 같은 뇌 회로를 쓴다',titleEn:'Language and Music Share the Same Brain Circuit',
+   body:'컬럼비아대 음악신경과학 연구에서 언어와 음악이 같은 뇌 영역(브로카 영역)을 공유한다는 것이 밝혀졌습니다.',
+   bodyEn:'Columbia\'s music neuroscience research revealed that language and music share the same brain region (Broca\'s area).',
+   detail:`<h3>음악과 언어의 공통 신경 기반</h3><p>컬럼비아대 음악신경과학 연구소가 2025년 3월 발표한 연구에서, 언어 처리와 음악 처리가 뇌의 동일한 핵심 영역인 '브로카 영역(Broca\'s area)'을 공유한다는 것이 fMRI 실험을 통해 명확히 밝혀졌습니다.</p><div class="highlight">브로카 영역은 말을 이해하고 생성하는 데 핵심적인 역할을 합니다. 이 영역이 음악의 리듬과 화성 처리에도 동일하게 관여한다는 것이 이번 연구의 핵심 발견입니다.</div><h3>음악 교육의 신경과학적 근거</h3><p>이 발견은 음악 교육이 언어 능력을 향상시킨다는 수많은 교육학 연구에 신경과학적 근거를 제공합니다. 악기를 배우거나 노래를 하면 브로카 영역이 강화되고, 이것이 읽기, 어휘 습득, 외국어 학습 능력 향상으로 이어집니다.</p><h3>뇌졸중 재활에의 응용</h3><p>이 연구는 뇌졸중으로 언어 능력을 잃은 환자들의 재활에도 음악 치료(Music Therapy)가 효과적인 이유를 설명합니다. 실제로 음악을 통한 멜로딕 억양 치료(MIT, Melodic Intonation Therapy)는 언어 재활에서 주목받는 방법입니다.</p>`,
+   detailEn:`<h3>The Common Neural Basis of Music and Language</h3><p>Columbia's Music and Neuroscience Lab confirmed through fMRI experiments in March 2025 that language and music processing share the same core brain region: Broca's area.</p><div class="highlight">Broca's area plays a central role in understanding and producing speech. The key finding is that it is equally involved in processing musical rhythm and harmony.</div><h3>Neuroscientific Basis for Music Education</h3><p>This finding provides neuroscientific grounding for educational research showing music training improves language skills. Learning an instrument or singing strengthens Broca's area, improving reading, vocabulary, and foreign language learning.</p><h3>Application in Stroke Rehabilitation</h3><p>The research also explains why music therapy is effective for stroke patients who have lost language abilities. Melodic Intonation Therapy (MIT) is a notable music-based language rehabilitation method.</p>`,
+   date:'2025.03', color:'#89d4b8'},
+
+  {id:'n7',tag:'UCLA · 2024',tagEn:'UCLA · 2024',title:'도파민: 쾌감이 아닌 \'동기\'의 물질',titleEn:'Dopamine: The Molecule of Motivation, Not Pleasure',
+   body:'UCLA 신경과학자들이 도파민은 단순한 행복 호르몬이 아니라, \'무언가를 원하게 만드는\' 동기 부여 시스템임을 밝혔습니다.',
+   bodyEn:'UCLA neuroscientists clarified that dopamine isn\'t a happiness hormone but a motivation system that makes you \'want\' things.',
+   detail:`<h3>도파민에 대한 오해와 진실</h3><p>도파민은 흔히 '행복 호르몬' 또는 '쾌감 물질'로 불립니다. 그러나 UCLA 신경과학자들의 2024년 10월 연구는 이 통념이 부정확하다는 것을 밝혔습니다. 도파민의 핵심 기능은 쾌감을 느끼게 하는 것이 아니라, 목표를 향해 행동하도록 '동기'를 부여하는 것입니다.</p><div class="highlight">도파민 시스템은 '원함(wanting)'을 담당합니다. 좋아하는 음식을 먹을 때가 아니라, 그 음식을 먹고 싶다고 느낄 때 도파민이 분비됩니다. 즉, 도파민은 목표 추구 행동을 이끄는 신호입니다.</div><h3>공부와 도파민</h3><p>어려운 문제를 해결했을 때 느끼는 짜릿한 성취감이 바로 도파민 분비입니다. 이 경험이 반복될수록 '도전 → 해결 → 보상'의 회로가 강화되어, 공부 자체가 즐거워질 수 있습니다. 이것이 바로 몰입 학습이 장기적으로 강력한 효과를 내는 신경과학적 이유입니다.</p><h3>스마트폰과 도파민의 위험</h3><p>소셜미디어와 스마트폰 알람은 예측 불가능한 보상을 통해 도파민 시스템을 과도하게 자극합니다. 이는 도파민 수용체를 둔감화시켜 공부나 독서처럼 느린 보상이 오는 활동에서 만족감을 느끼기 어렵게 만들 수 있습니다.</p>`,
+   detailEn:`<h3>Misconceptions and Truth About Dopamine</h3><p>Dopamine is often called the 'happiness hormone.' However, UCLA neuroscientists' October 2024 research revealed this is inaccurate. Dopamine's core function is not to create pleasure but to generate the motivation to act toward goals.</p><div class="highlight">The dopamine system governs 'wanting.' Dopamine is released not when you eat something delicious, but when you want to eat it—it's the signal that drives goal-directed behavior.</div><h3>Studying and Dopamine</h3><p>The exhilarating satisfaction of solving a hard problem is dopamine release. The more this is repeated, the stronger the 'challenge → solve → reward' circuit becomes, making studying itself enjoyable—the neuroscientific reason immersion learning works powerfully long-term.</p><h3>The Danger of Smartphones and Dopamine</h3><p>Social media and phone notifications overstimulate the dopamine system with unpredictable rewards, desensitizing receptors and making it harder to find satisfaction in slow-reward activities like studying or reading.</p>`,
+   date:'2024.10', color:'#7eb8d4'},
+
+  {id:'n8',tag:'러트거스 · 2025',tagEn:'Rutgers · 2025',title:'명상이 뇌 구조를 바꾼다',titleEn:'Meditation Changes Brain Structure',
+   body:'러트거스대 인지과학부의 연구에서 8주간 마음챙김 명상을 한 참가자들의 편도체(스트레스 중추)가 실제로 작아졌습니다.',
+   bodyEn:'Rutgers Cognitive Science found that after 8 weeks of mindfulness meditation, participants\' amygdalae (stress centers) physically shrank.',
+   detail:`<h3>명상과 뇌 구조 변화</h3><p>러트거스대 인지과학부가 2025년 1월 발표한 연구는 8주간의 마음챙김 명상(MBSR: Mindfulness-Based Stress Reduction) 프로그램이 뇌의 물리적 구조를 변화시킨다는 것을 MRI 영상으로 직접 확인했습니다.</p><div class="highlight">연구 참가자들의 편도체(Amygdala) — 공포·불안·스트레스 반응의 중심 — 의 크기가 8주 후 유의미하게 감소했습니다. 동시에 자기 조절과 집중력을 담당하는 전전두엽 피질의 두께는 증가했습니다.</div><h3>명상의 구체적 효과</h3><p>연구 참가자들은 8주 후 스트레스 지수 23% 감소, 집중력 31% 향상, 수면 질 개선을 보고했습니다. 혈액 검사에서는 스트레스 호르몬인 코르티솔 수치도 유의미하게 낮아졌습니다.</p><h3>고등학생 수험생에게 주는 메시지</h3><p>하루 단 10~20분의 마음챙김 명상이 시험 스트레스를 실질적으로 줄이고 집중력을 높일 수 있습니다. 러트거스 연구팀은 특히 청소년 그룹에서 뇌 가소성이 더 높아 명상 효과가 성인보다 빠르게 나타날 수 있다고 강조했습니다.</p>`,
+   detailEn:`<h3>Meditation and Brain Structural Changes</h3><p>Rutgers Cognitive Science's January 2025 study directly confirmed via MRI that an 8-week MBSR program physically changes brain structure.</p><div class="highlight">The amygdala — the brain's fear, anxiety, and stress response center — significantly shrank in size after 8 weeks. Meanwhile, the prefrontal cortex responsible for self-regulation and focus increased in thickness.</div><h3>Specific Effects of Meditation</h3><p>After 8 weeks, participants reported 23% lower stress, 31% improved concentration, and better sleep quality. Blood tests also showed significantly reduced cortisol (stress hormone) levels.</p><h3>Message for High School Students</h3><p>Just 10–20 minutes of daily mindfulness meditation can meaningfully reduce exam stress and boost focus. The Rutgers team noted that adolescents show faster meditation effects than adults due to higher neuroplasticity.</p>`,
+   date:'2025.01', color:'#c9b6e0'},
+
+  {id:'n9',tag:'예일 · 2024',tagEn:'Yale · 2024',title:'알츠하이머 새 치료제 임상 3상 성공',titleEn:'Alzheimer\'s New Treatment Succeeds in Phase 3',
+   body:'예일대와 공동 개발한 항체 치료제가 알츠하이머 진행을 27% 늦추는 임상 3상 결과를 발표했습니다.',
+   bodyEn:'An antibody therapy co-developed with Yale slowed Alzheimer\'s progression by 27% in Phase 3 trials.',
+   detail:`<h3>알츠하이머 치료제 개발의 현재</h3><p>예일대학교와 주요 제약사가 공동 개발한 항체 치료제(Anti-amyloid antibody)가 2024년 8월 임상 3상(Phase III Clinical Trial) 결과를 발표하며 의료계의 주목을 받았습니다.</p><div class="highlight">이 치료제는 알츠하이머의 핵심 원인 물질인 뇌 속 아밀로이드-베타 플라크를 표적으로 제거하는 방식으로 작동합니다. 임상 3상에서 치료를 받은 그룹은 대조군 대비 인지 기능 저하 속도가 27% 느려졌습니다.</div><h3>임상 3상이란?</h3><p>임상시험은 1상(안전성 확인) → 2상(효능 및 적정 용량 탐색) → 3상(대규모 효능 및 안전성 확인)으로 진행됩니다. 3상은 수천 명의 환자를 대상으로 하는 최종 검증 단계로, 이 단계를 통과해야 FDA 승인 신청이 가능합니다.</p><h3>간호학적 의의</h3><p>이 치료제가 FDA 승인을 받게 되면, 인지 기능 저하 조기 단계의 환자에게 정기적인 정맥 주사 투여가 필요합니다. 이는 신경과 전문 간호사와 치매 케어 간호사의 역할 수요를 크게 높일 것입니다.</p>`,
+   detailEn:`<h3>The Current State of Alzheimer's Drug Development</h3><p>An anti-amyloid antibody co-developed by Yale and major pharmaceutical companies drew major attention when Phase III clinical trial results were published in August 2024.</p><div class="highlight">The drug targets and removes amyloid-beta plaques — a core cause of Alzheimer's — from the brain. In the Phase III trial, the treated group showed 27% slower cognitive decline than the control group.</div><h3>What is Phase III?</h3><p>Clinical trials progress: Phase I (safety) → Phase II (efficacy/dosing) → Phase III (large-scale efficacy/safety verification). Phase III is the final validation involving thousands of patients before FDA approval can be sought.</p><h3>Nursing Implications</h3><p>If FDA-approved, the treatment will require regular IV infusions for patients in early cognitive decline stages, greatly increasing demand for neurology NPs and dementia care nurses.</p>`,
+   date:'2024.08', color:'#89d4b8'},
+
+  {id:'n10',tag:'프린스턴 · 2025',tagEn:'Princeton · 2025',title:'뇌와 컴퓨터를 잇는 BCI 기술의 현재',titleEn:'The Current State of Brain-Computer Interface (BCI)',
+   body:'프린스턴 신경공학연구소가 최신 BCI(뇌-컴퓨터 인터페이스) 기술 현황을 발표했습니다.',
+   bodyEn:'Princeton\'s Neural Engineering Institute presented the latest BCI technology. The era of spinal cord injury patients moving their limbs with thought alone is approaching.',
+   detail:`<h3>BCI란 무엇인가?</h3><p>뇌-컴퓨터 인터페이스(Brain-Computer Interface, BCI)는 뇌의 신경 신호를 직접 읽어 컴퓨터나 외부 장치를 제어하는 기술입니다. 프린스턴 신경공학연구소는 2025년 4월 BCI 기술의 최신 현황과 임상 응용을 총망라한 리포트를 발표했습니다.</p><div class="highlight">2024년 말 기준, 척수 손상으로 사지 마비가 된 환자가 BCI 임플란트를 통해 생각만으로 컴퓨터 커서를 조작하고 로봇 팔을 움직이는 데 성공한 사례가 복수 보고되었습니다.</div><h3>BCI 기술의 종류</h3><p>침습적 BCI(뇌에 직접 전극 삽입): 정밀도는 가장 높지만 수술 위험 수반. 비침습적 BCI(EEG 헤드셋 등): 수술 불필요, 정밀도 낮음. 반침습적 BCI(두개골 위 전극): 중간 수준의 정밀도와 안전성.</p><h3>미래 전망 및 윤리 문제</h3><p>BCI 기술은 루게릭병, 척수 손상, 뇌졸중 환자의 삶을 혁명적으로 바꿀 잠재력을 가집니다. 동시에 '뇌 정보 프라이버시', '신경 강화(neuro-enhancement)의 공정성' 등 복잡한 생명윤리 문제도 함께 제기하고 있습니다.</p>`,
+   detailEn:`<h3>What is BCI?</h3><p>A Brain-Computer Interface (BCI) reads neural signals from the brain directly to control computers or external devices. Princeton's Neural Engineering Institute published a comprehensive report on BCI technology and clinical applications in April 2025.</p><div class="highlight">As of late 2024, multiple patients with spinal cord-induced paralysis have successfully controlled computer cursors and robotic arms through thought alone using BCI implants.</div><h3>Types of BCI</h3><p>Invasive BCI (direct electrode implant): highest precision but surgical risk. Non-invasive BCI (EEG headset): no surgery, lower precision. Semi-invasive BCI (electrodes on skull): intermediate precision and safety.</p><h3>Future Prospects and Ethical Issues</h3><p>BCI technology has revolutionary potential for ALS, spinal cord injury, and stroke patients—while also raising complex bioethical questions around neural privacy and the fairness of neuro-enhancement.</p>`,
+   date:'2025.04', color:'#7eb8d4'},
+];
+let nursingNews=[
+  {id:'ns1',tag:'존스홉킨스 간호대 · 2025',tagEn:'Johns Hopkins Nursing · 2025',title:'마취과 간호사(CRNA)의 역할 확대',titleEn:'Expanding Role of CRNAs',
+   body:'CRNA(공인 마취전문간호사)가 마취과 의사 부족 문제를 해결하고 있습니다. 존스홉킨스 간호대 연구에서 CRNA의 독립 진료 안전성이 확인되었습니다.',
+   bodyEn:'CRNAs are solving the anesthesiologist shortage. Johns Hopkins confirmed the safety of independent CRNA practice.',
+   detail:`<h3>CRNA란 무엇인가?</h3><p>CRNA(Certified Registered Nurse Anesthetist, 공인 마취전문간호사)는 마취 분야의 최고 전문 간호 자격입니다. 4년제 간호 학사 → 임상 경험 1년 이상 → 마취 전문 석사/박사 과정(2~3년) → 국가 자격시험을 통과해야 취득할 수 있습니다.</p><div class="highlight">미국에서 CRNA는 마취과 의사(Anesthesiologist) 없이 독립적으로 마취를 시행할 수 있습니다. 연간 약 5,500만 건의 마취 시술 중 절반 이상을 CRNA가 담당합니다.</div><h3>존스홉킨스 연구 결과</h3><p>존스홉킨스 간호대학이 2025년 2월 발표한 대규모 연구(20만 건 이상의 수술 데이터 분석)에서, CRNA가 독립적으로 시행한 마취의 합병증 발생률이 마취과 의사와 통계적으로 유의미한 차이가 없음을 확인했습니다.</p><h3>마취과 간호사를 꿈꾸는 학생에게</h3><p>CRNA는 미국에서 가장 고연봉 간호 전문직 중 하나(평균 연봉 $19만~$22만)입니다. 수술실, 집중치료실, 통증 클리닉 등 다양한 환경에서 일하며, 뇌신경과학 지식이 마취 관리에 직접 활용됩니다. 신경 마취(Neuroanesthesia) 분야는 특히 뇌수술·척수 수술에 특화된 CRNA 세부 전문 영역입니다.</p>`,
+   detailEn:`<h3>What is a CRNA?</h3><p>A Certified Registered Nurse Anesthetist (CRNA) is the highest nursing specialty in anesthesia. It requires: BSN → 1+ year clinical experience → Master's/Doctoral program in anesthesia (2–3 years) → national board exam.</p><div class="highlight">In the US, CRNAs can independently administer anesthesia without an anesthesiologist. CRNAs perform more than half of the approximately 55 million anesthesia procedures annually.</div><h3>Johns Hopkins Research Findings</h3><p>Johns Hopkins School of Nursing's February 2025 study (analyzing 200,000+ surgical cases) found no statistically significant difference in complication rates between CRNA-administered and anesthesiologist-administered anesthesia.</p><h3>For Students Who Dream of Becoming a CRNA</h3><p>CRNAs are among the highest-paid nursing specialties in the US (average salary $190,000–$220,000). They work in ORs, ICUs, and pain clinics, directly applying neuroscience knowledge to anesthesia management. Neuroanesthesia is a specialty focused on brain and spinal cord surgeries.</p>`,
+   date:'2025.02', color:'#89d4b8'},
+
+  {id:'ns2',tag:'러트거스 간호대 · 2025',tagEn:'Rutgers Nursing · 2025',title:'간호학과 입학 경쟁률 역대 최고',titleEn:'Record-High Nursing School Applications',
+   body:'2025년 러트거스 간호대에 지원자가 전년 대비 34% 증가했습니다. 팬데믹 이후 간호사 직업에 대한 관심이 급증한 결과입니다.',
+   bodyEn:'Applications to Rutgers School of Nursing increased 34% in 2025, reflecting a post-pandemic surge of interest.',
+   detail:`<h3>러트거스 간호대와 입학 현황</h3><p>러트거스 대학교(Rutgers University) 간호대학은 뉴저지주 뉴어크(Newark)와 뉴브런즈윅(New Brunswick) 캠퍼스에 위치한 미국 동부 최상위 간호 교육 기관 중 하나입니다. 2025년 입학 경쟁률이 전년 대비 34% 급증했습니다.</p><div class="highlight">러트거스 간호대 학부(BSN) 과정은 4년이며, 뇌신경 간호, 마취 전 임상 경험, 지역사회 보건 등 다양한 실습 기회를 제공합니다. 아너스 칼리지(Honors College)와 연계하면 연구 중심 커리큘럼에도 참여할 수 있습니다.</div><h3>간호사 수요 급증의 배경</h3><p>코로나19 팬데믹을 거치면서 간호사 직업에 대한 사회적 인식이 크게 높아졌습니다. 동시에 베이비붐 세대의 고령화로 의료 서비스 수요가 폭발적으로 증가하면서, 미국 노동부는 2032년까지 간호사 수요가 6% 이상 추가 증가할 것으로 전망하고 있습니다.</p><h3>입학 준비 팁</h3><p>러트거스 BSN 지원에는 강한 과학 과목(생물, 화학, 수학) 성적, 의료 관련 봉사·인턴십 경험, 자기소개서의 명확한 의료 직업 동기가 중요합니다. EFR 응급처치 자격증 보유는 입학 사정에 긍정적 영향을 줄 수 있습니다.</p>`,
+   detailEn:`<h3>Rutgers School of Nursing & Admissions</h3><p>Rutgers University School of Nursing (Newark & New Brunswick campuses) is one of the top nursing schools on the US East Coast. Applications surged 34% for 2025.</p><div class="highlight">The 4-year BSN program offers diverse clinical experiences including neuro nursing, pre-anesthesia clinical exposure, and community health. Honors College linkage enables research-focused curriculum participation.</div><h3>Background of the Nursing Demand Surge</h3><p>The COVID-19 pandemic greatly elevated the social recognition of nursing. Combined with the aging Baby Boomer population, the US Bureau of Labor Statistics projects 6%+ additional growth in nursing demand through 2032.</p><h3>Admissions Tips</h3><p>Strong science grades (biology, chemistry, math), healthcare volunteering/internship experience, and a clear medical career motivation in personal essays are key. EFR first aid certification can positively influence admissions decisions.</p>`,
+   date:'2025.01', color:'#7eb8d4'},
+
+  {id:'ns3',tag:'NYU 마이어스 간호대 · 2024',tagEn:'NYU Meyers Nursing · 2024',title:'간호사와 AI — 협력의 시대',titleEn:'Nurses and AI — The Era of Collaboration',
+   body:'NYU 간호대 연구에서 AI 진단 보조 시스템이 간호사의 업무 부담을 30% 줄이면서 환자 만족도를 높인 것으로 나타났습니다.',
+   bodyEn:'NYU research found AI diagnostic assistance reduced nurse workload by 30% while improving patient satisfaction.',
+   detail:`<h3>AI와 간호의 협력 시대</h3><p>NYU 마이어스 간호대학이 2024년 11월 발표한 연구는 AI 임상 의사결정 지원 시스템(Clinical Decision Support System, CDSS)이 간호 현장을 어떻게 바꾸고 있는지 보여줍니다.</p><div class="highlight">AI 시스템 도입 후 간호사의 행정 업무와 기록 시간이 30% 감소했으며, 간호사들은 줄어든 시간을 환자 직접 돌봄에 재투자할 수 있었습니다. 그 결과 환자 만족도 점수가 18% 향상되었습니다.</div><h3>AI가 간호에서 하는 일</h3><p>환자 상태 실시간 모니터링 및 이상 징후 조기 경보. 약물 처방 오류 자동 감지. 욕창, 낙상 위험 예측 알고리즘. 퇴원 후 재입원 위험 예측. 다국어 환자 커뮤니케이션 지원.</p><h3>AI 시대 간호사에게 필요한 역량</h3><p>AI가 대체하지 못하는 것은 환자와의 공감적 소통, 복잡한 윤리적 판단, 팀 리더십입니다. 미래 간호사는 AI를 능숙하게 활용하되, 이 핵심 인간적 역량을 더욱 강화해야 합니다.</p>`,
+   detailEn:`<h3>The Age of AI-Nursing Collaboration</h3><p>NYU Meyers' November 2024 research shows how AI Clinical Decision Support Systems (CDSS) are transforming nursing practice.</p><div class="highlight">After AI system adoption, nurses' administrative and documentation time decreased by 30%, and nurses reinvested that time into direct patient care—resulting in an 18% improvement in patient satisfaction scores.</div><h3>What AI Does in Nursing</h3><p>Real-time patient monitoring with early warning alerts. Automatic medication error detection. Pressure sore and fall risk prediction algorithms. Post-discharge readmission risk prediction. Multilingual patient communication support.</p><h3>Competencies for Nurses in the AI Era</h3><p>What AI cannot replace: empathetic patient communication, complex ethical judgment, and team leadership. Future nurses must proficiently use AI while strengthening these core human competencies.</p>`,
+   date:'2024.11', color:'#c9b6e0'},
+
+  {id:'ns4',tag:'컬럼비아 간호대 · 2024',tagEn:'Columbia Nursing · 2024',title:'뇌졸중 환자 재활 간호의 새 프로토콜',titleEn:'New Protocol for Stroke Rehabilitation Nursing',
+   body:'컬럼비아 의과대학 간호학부가 뇌졸중 후 재활 간호 프로토콜을 개선했습니다. 신경계 중점 간호 접근법이 회복 속도를 20% 개선했습니다.',
+   bodyEn:'Columbia\'s nursing school improved stroke rehab nursing protocols. A neuroscience-focused approach improved recovery by 20%.',
+   detail:`<h3>뇌졸중 재활 간호의 중요성</h3><p>뇌졸중(Stroke)은 뇌혈관이 막히거나 터지면서 뇌 조직이 손상되는 응급 상황입니다. 전 세계 성인 장애의 주요 원인 중 하나로, 발병 후 신속하고 전문적인 재활 간호가 회복의 질을 결정합니다.</p><div class="highlight">컬럼비아 의과대학 간호학부가 2024년 10월 발표한 새 프로토콜은 뇌신경가소성 원리를 재활 계획에 직접 통합했습니다. 이 접근법을 적용한 환자 그룹은 기존 프로토콜 그룹 대비 운동 기능 회복 속도가 20% 빠른 것으로 나타났습니다.</div><h3>새 프로토콜의 핵심 요소</h3><p>① 발병 후 24시간 이내 조기 이동(early mobilization). ② 신경가소성 기반 반복 과제 훈련. ③ 거울 치료(Mirror Therapy)와 음악 치료 병행. ④ 환자 가족의 재활 교육 참여 의무화. ⑤ 디지털 재활 앱 활용.</p><h3>간호사와 신경과학의 연결</h3><p>이 연구는 간호사가 신경과학 지식을 갖출수록 더 효과적인 재활 계획을 수립하고 실행할 수 있음을 보여줍니다. 뇌신경학과 간호학의 융합이 환자 예후를 직접 개선하는 사례입니다.</p>`,
+   detailEn:`<h3>The Importance of Stroke Rehabilitation Nursing</h3><p>A stroke occurs when a brain blood vessel is blocked or ruptures, damaging brain tissue. It is one of the leading causes of adult disability worldwide, and expert post-acute nursing care determines recovery quality.</p><div class="highlight">Columbia's October 2024 protocol directly integrates neuroplasticity principles into rehabilitation planning. Patients under this approach showed 20% faster motor function recovery than those under the previous protocol.</div><h3>Key Elements of the New Protocol</h3><p>① Early mobilization within 24 hours of onset. ② Neuroplasticity-based repetitive task training. ③ Mirror therapy and music therapy. ④ Mandatory family rehabilitation education. ⑤ Digital rehabilitation app usage.</p><h3>Connecting Nursing and Neuroscience</h3><p>This research shows that nurses with deeper neuroscience knowledge can design and execute more effective rehabilitation plans—a direct example of integrating neurology and nursing to improve patient outcomes.</p>`,
+   date:'2024.10', color:'#89d4b8'},
+
+  {id:'ns5',tag:'듀크 간호대 · 2025',tagEn:'Duke Nursing · 2025',title:'정신건강 간호 수요 폭증',titleEn:'Mental Health Nursing Demand Skyrockets',
+   body:'듀크 간호대학원이 정신건강 간호 전문가 과정을 신설했습니다. 청소년 정신건강 위기에 대응하는 간호 인력 수요가 5년 만에 두 배로 늘었습니다.',
+   bodyEn:'Duke launched a new mental health nursing specialty. Demand doubled in five years amid the youth mental health crisis.',
+   detail:`<h3>청소년 정신건강 위기와 간호</h3><p>미국 청소년의 정신건강 위기는 최근 수년간 급격히 심화되고 있습니다. CDC 보고에 따르면 2020년 이후 10대 청소년의 불안과 우울증 유병률이 약 40% 증가했습니다. 이에 대응하는 정신건강 간호사 수요가 폭발적으로 늘고 있습니다.</p><div class="highlight">듀크 간호대학원이 2025년 3월 신설한 '청소년 정신건강 전문 간호사(PMHNP-A)' 과정은 미국 최초의 청소년 특화 정신건강 간호 전문 프로그램입니다.</div><h3>정신건강 간호사(PMHNP)의 역할</h3><p>Psychiatric-Mental Health Nurse Practitioner(PMHNP)는 정신건강 평가, 진단, 치료 계획 수립, 약물 처방(일부 주에서)까지 수행할 수 있는 고급 실무 간호사입니다. 학교, 지역사회 클리닉, 병원 등 다양한 환경에서 일합니다.</p><h3>뇌신경과학과의 연결</h3><p>정신 건강 장애의 대부분은 뇌신경학적 기반을 가집니다. 우울증은 세로토닌·도파민 시스템의 불균형, 불안장애는 편도체의 과활성화와 관련됩니다. 따라서 뇌신경과학 지식은 정신건강 간호사에게도 핵심 기반 지식입니다.</p>`,
+   detailEn:`<h3>Youth Mental Health Crisis and Nursing</h3><p>The youth mental health crisis in America has intensified dramatically. CDC reports show anxiety and depression rates among teenagers increased ~40% since 2020, driving explosive demand for mental health nurses.</p><div class="highlight">Duke's March 2025 'Pediatric/Adolescent PMHNP' program is the first adolescent-specialized psychiatric mental health nurse practitioner program in the US.</div><h3>Role of a PMHNP</h3><p>A Psychiatric-Mental Health Nurse Practitioner (PMHNP) can perform mental health assessments, diagnoses, treatment planning, and prescribing (in some states), working in schools, community clinics, and hospitals.</p><h3>Connection to Neuroscience</h3><p>Most mental health disorders have neurological underpinnings: depression relates to serotonin/dopamine imbalances; anxiety disorders to amygdala hyperactivation. Neuroscience knowledge is therefore foundational for mental health nurses.</p>`,
+   date:'2025.03', color:'#7eb8d4'},
+
+  {id:'ns6',tag:'유펜 간호대 · 2024',tagEn:'UPenn Nursing · 2024',title:'통증 관리 간호의 최신 트렌드',titleEn:'Latest Trends in Pain Management Nursing',
+   body:'펜실베이니아 대학 간호대 연구팀이 오피오이드 없이 통증을 관리하는 비약물 간호 중재 효과를 발표했습니다.',
+   bodyEn:'UPenn nursing researchers published results on non-pharmacological interventions for pain management without opioids.',
+   detail:`<h3>오피오이드 위기와 비약물적 통증 관리</h3><p>미국에서는 오피오이드(마약성 진통제) 과다 복용으로 매일 약 130명이 사망하는 '오피오이드 위기'가 심각한 공중 보건 문제입니다. 펜실베이니아 대학(UPenn) 간호대학 연구팀은 2024년 9월, 오피오이드에 의존하지 않는 다양한 비약물 통증 관리 간호 중재의 효과를 체계적으로 검토한 연구를 발표했습니다.</p><div class="highlight">연구에서 효과가 입증된 비약물적 통증 관리법: 마음챙김 명상(통증 강도 35% 감소), 인지행동치료(CBT), 음악 치료, 침술, 생체피드백, 냉온 찜질, 마사지 치료.</div><h3>간호사의 역할 확대</h3><p>이러한 비약물 중재의 대부분은 간호사가 직접 제공하거나 교육할 수 있는 영역입니다. 특히 통증 전문 간호사(Pain Management NP)는 오피오이드 처방을 최소화하면서 환자의 통증을 효과적으로 관리하는 복합 치료 계획을 수립합니다.</p><h3>뇌신경학적 배경</h3><p>통증은 단순한 신체 감각이 아닙니다. 척수와 뇌의 신경 회로가 통증 신호를 처리하고 증폭하거나 억제합니다. 마음챙김 명상이 통증을 줄이는 이유도 전두엽이 편도체의 통증 신호 처리를 조절하기 때문입니다.</p>`,
+   detailEn:`<h3>The Opioid Crisis and Non-Pharmacological Pain Management</h3><p>The opioid crisis — roughly 130 deaths daily from overdose — is a severe public health crisis. UPenn nursing researchers published a systematic review in September 2024 on non-opioid pain management nursing interventions.</p><div class="highlight">Evidence-based non-pharmacological pain management: mindfulness meditation (35% reduction in pain intensity), cognitive behavioral therapy (CBT), music therapy, acupuncture, biofeedback, hot/cold therapy, massage.</div><h3>Expanded Role of Nurses</h3><p>Most non-pharmacological interventions can be directly delivered or taught by nurses. Pain Management NPs design comprehensive treatment plans minimizing opioid prescriptions while effectively managing patient pain.</p><h3>Neurological Background</h3><p>Pain is not just a physical sensation—the spinal cord and brain's neural circuits process, amplify, or suppress pain signals. Mindfulness meditation reduces pain because the prefrontal cortex regulates the amygdala's pain signal processing.</p>`,
+   date:'2024.09', color:'#c9b6e0'},
+
+  {id:'ns7',tag:'보스턴칼리지 간호대 · 2025',tagEn:'Boston College Nursing · 2025',title:'커뮤니티 간호 — 병원 밖 돌봄의 미래',titleEn:'Community Nursing — The Future of Care',
+   body:'보스턴 칼리지 간호대가 지역사회 기반 간호 프로그램의 성과를 발표했습니다. 만성질환자 입원률이 42% 감소한 놀라운 결과입니다.',
+   bodyEn:'Boston College Nursing published outcomes from community-based nursing programs: hospitalizations dropped 42%.',
+   detail:`<h3>커뮤니티 간호란?</h3><p>커뮤니티 간호(Community Health Nursing, CHN)는 병원이 아닌 지역사회 환경(학교, 가정, 클리닉, 직장 등)에서 이루어지는 간호입니다. 보스턴 칼리지 간호대학이 2025년 2월 발표한 연구는 CHN 프로그램의 놀라운 성과를 보여줍니다.</p><div class="highlight">커뮤니티 간호사가 만성질환자(당뇨·고혈압·심장병)를 정기적으로 방문하여 건강 관리를 지원한 결과, 응급실 방문 횟수가 38%, 병원 입원률이 42% 감소했습니다. 1인당 연간 의료비도 $4,200 절감되었습니다.</div><h3>커뮤니티 간호사의 역할</h3><p>가정 방문 건강 사정 및 투약 관리. 만성질환 자기관리 교육. 정신건강 위기 조기 개입. 예방접종 및 건강검진 코디네이션. 취약 계층(노인, 노숙인, 이민자) 건강 지원.</p><h3>미래 전망</h3><p>고령화와 만성질환 증가로 커뮤니티 간호사 수요는 앞으로 더욱 늘어날 전망입니다. 특히 원격 의료(Telehealth)와 결합한 '하이브리드 커뮤니티 간호' 모델이 빠르게 성장하고 있습니다.</p>`,
+   detailEn:`<h3>What is Community Nursing?</h3><p>Community Health Nursing (CHN) is nursing practiced outside hospitals — in schools, homes, clinics, and workplaces. Boston College Nursing's February 2025 study shows remarkable CHN outcomes.</p><div class="highlight">Community nurses regularly visiting chronic disease patients (diabetes, hypertension, heart disease) resulted in 38% fewer ER visits, 42% fewer hospitalizations, and $4,200 annual healthcare cost savings per person.</div><h3>Roles of Community Health Nurses</h3><p>Home visit health assessments and medication management. Chronic disease self-management education. Mental health crisis early intervention. Vaccination and health screening coordination. Support for vulnerable populations (elderly, homeless, immigrants).</p><h3>Future Outlook</h3><p>As aging and chronic disease increase, CHN demand will continue to grow. The 'hybrid community nursing' model combining Telehealth is growing rapidly.</p>`,
+   date:'2025.02', color:'#89d4b8'},
+
+  {id:'ns8',tag:'존스홉킨스 · 2025',tagEn:'Johns Hopkins · 2025',title:'간호사 번아웃 예방 연구',titleEn:'Research on Preventing Nurse Burnout',
+   body:'존스홉킨스가 병원 간호사의 번아웃을 예방하는 마음챙김 기반 스트레스 감소(MBSR) 프로그램 효과를 입증했습니다.',
+   bodyEn:'Johns Hopkins validated an MBSR program for hospital nurses—turnover rates dropped 18%.',
+   detail:`<h3>간호사 번아웃 — 심각한 현실</h3><p>미국 병원 간호사의 약 44%가 번아웃(소진) 증상을 경험한다는 조사 결과가 있습니다. 번아웃은 환자 안전 오류 증가, 간호사 이직률 상승, 의료 비용 증가로 직결되는 심각한 문제입니다.</p><div class="highlight">존스홉킨스 간호대학이 2025년 1월 발표한 연구에서, 8주 MBSR 프로그램을 이수한 간호사 그룹은 번아웃 지수 31% 감소, 직무 만족도 24% 향상, 이직 의향 18% 감소를 보였습니다.</div><h3>MBSR 프로그램의 구성</h3><p>마음챙김 명상과 요가 기반의 MBSR(Mindfulness-Based Stress Reduction)은 주 1회 2시간, 8주 과정으로 진행됩니다. 호흡 명상, 바디스캔, 마음챙김 동작, 일상 속 마음챙김 적용이 핵심입니다.</p><h3>간호사 지망 학생에게 주는 시사점</h3><p>미래 간호사로서 자기 돌봄(self-care)과 스트레스 관리 능력은 직업 지속 가능성을 위한 핵심 역량입니다. 학생 시절부터 명상, 규칙적 운동, 사회적 지지 네트워크 구축 등을 통해 정서적 회복탄력성을 키우는 것이 중요합니다.</p>`,
+   detailEn:`<h3>Nurse Burnout — A Serious Reality</h3><p>Surveys show ~44% of US hospital nurses experience burnout symptoms, directly linked to increased patient safety errors, higher turnover, and rising healthcare costs.</p><div class="highlight">Johns Hopkins' January 2025 study found nurses completing an 8-week MBSR program showed 31% lower burnout scores, 24% improved job satisfaction, and 18% lower intention to leave.</div><h3>MBSR Program Structure</h3><p>MBSR (Mindfulness-Based Stress Reduction) runs weekly for 2 hours over 8 weeks. Core elements: breathing meditation, body scan, mindful movement, and daily mindfulness application.</p><h3>Implications for Aspiring Nurses</h3><p>Self-care and stress management are core competencies for nursing career sustainability. Building emotional resilience from student years through meditation, regular exercise, and social support networks is essential.</p>`,
+   date:'2025.01', color:'#7eb8d4'},
+
+  {id:'ns9',tag:'UCLA 간호대 · 2024',tagEn:'UCLA Nursing · 2024',title:'소아중환자실 특화 간호 교육',titleEn:'Specialized PICU Nursing Education',
+   body:'UCLA 간호대학원이 소아중환자실(PICU) 특화 시뮬레이션 교육 커리큘럼을 개발했습니다. VR을 활용한 고충실도 시뮬레이션이 핵심입니다.',
+   bodyEn:'UCLA developed a PICU simulation curriculum using high-fidelity VR simulations as a core component.',
+   detail:`<h3>소아중환자실(PICU)이란?</h3><p>소아중환자실(Pediatric Intensive Care Unit, PICU)은 생명을 위협하는 중증 질환이나 손상을 입은 신생아부터 18세까지의 소아 환자를 집중 치료하는 특수 병동입니다. 소아 환자는 성인과 생리적 특성이 달라, 전문 교육과 고도의 집중력이 요구됩니다.</p><div class="highlight">UCLA 간호대학원이 2024년 12월 발표한 커리큘럼은 VR(가상현실) 기술을 활용해 실제 PICU 환경을 96% 수준으로 재현한 고충실도 시뮬레이션을 제공합니다. 이를 경험한 간호학생들은 기존 마네킹 시뮬레이션 대비 임상 판단 능력이 41% 향상되었습니다.</div><h3>PICU 간호사의 역할</h3><p>생명 징후 지속 모니터링(24시간). 기계 환기, 중심 정맥 카테터 관리. 신경학적 상태 평가(Glasgow Coma Scale). 소아 통증 평가 및 관리. 가족 심리 지지 및 교육.</p><h3>뇌신경학 지식의 적용</h3><p>PICU에서 뇌 손상, 뇌수막염, 뇌전증 환아를 자주 접합니다. 신경학적 상태를 신속하게 평가하고 이상 징후를 조기에 발견하는 능력이 소아 뇌 손상 예후를 결정하는 핵심입니다.</p>`,
+   detailEn:`<h3>What is a PICU?</h3><p>A Pediatric Intensive Care Unit (PICU) provides intensive care for critically ill or injured patients from newborns to age 18. Pediatric patients' physiological differences from adults demand specialized training and intense focus.</p><div class="highlight">UCLA's December 2024 curriculum uses VR to recreate actual PICU environments at 96% fidelity. Nursing students who used it showed 41% improved clinical judgment compared to mannequin simulation.</div><h3>Roles of a PICU Nurse</h3><p>Continuous vital sign monitoring (24 hrs). Mechanical ventilation and central venous catheter management. Neurological status assessment (Glasgow Coma Scale). Pediatric pain assessment and management. Family psychological support and education.</p><h3>Applying Neuroscience Knowledge</h3><p>PICU nurses frequently encounter brain injury, meningitis, and epilepsy patients. Rapidly assessing neurological status and early detection of warning signs is critical to pediatric brain injury outcomes.</p>`,
+   date:'2024.12', color:'#c9b6e0'},
+
+  {id:'ns10',tag:'밴더빌트 간호대 · 2025',tagEn:'Vanderbilt Nursing · 2025',title:'다문화 간호 역량, 필수 교육으로',titleEn:'Multicultural Nursing Competency Required',
+   body:'밴더빌트 간호대가 문화적 역량 교육을 필수 과목으로 지정했습니다. 다양한 문화권 환자의 치료 결과가 개선되었다는 연구 결과가 배경입니다.',
+   bodyEn:'Vanderbilt mandated cultural competency education after research showed improved treatment outcomes for diverse patient populations.',
+   detail:`<h3>문화적 역량이란?</h3><p>문화적 역량(Cultural Competency)은 다양한 문화적 배경을 가진 환자와 효과적으로 소통하고, 그들의 문화적 신념과 가치를 존중하며 의료 서비스를 제공하는 능력입니다. 밴더빌트 간호대학은 2025년 4월부터 이를 필수 교육과정으로 지정했습니다.</p><div class="highlight">연구에 따르면, 문화적 역량 교육을 받은 간호사가 돌보는 소수 문화권 환자들은 치료 순응도가 28% 높고, 임상 결과도 유의미하게 개선된 것으로 나타났습니다.</div><h3>왜 다문화 간호가 중요한가?</h3><p>미국 인구의 다양성이 지속적으로 증가하고 있습니다. 2045년에는 비히스패닉계 백인이 미국 인구의 절반 미만이 될 것으로 예측됩니다. 의료 현장에서 문화적 오해는 오진, 치료 거부, 건강 불평등으로 이어질 수 있습니다.</p><h3>유학생 간호사 지망자에게</h3><p>미국 보딩스쿨이나 대학에서 다양한 문화권 친구들과 생활하고 소통한 경험은 다문화 간호 역량의 실질적인 기반이 됩니다. 이 경험을 간호대 지원 에세이에 구체적으로 담는 것은 강력한 자기 서사가 될 수 있습니다.</p>`,
+   detailEn:`<h3>What is Cultural Competency?</h3><p>Cultural competency is the ability to effectively communicate with patients of diverse cultural backgrounds and deliver care that respects their cultural beliefs and values. Vanderbilt School of Nursing mandated this as required curriculum from April 2025.</p><div class="highlight">Research shows patients from minority cultural backgrounds cared for by culturally competent nurses have 28% higher treatment adherence and significantly improved clinical outcomes.</div><h3>Why Multicultural Nursing Matters</h3><p>US population diversity continues to grow — by 2045, non-Hispanic whites are projected to be less than half the US population. Cultural misunderstandings in healthcare can lead to misdiagnosis, treatment refusal, and health inequities.</p><h3>For International Student Nursing Aspirants</h3><p>Living and communicating with diverse peers at an American boarding school or college provides a genuine foundation for multicultural nursing competency — a powerful narrative element in nursing school application essays.</p>`,
+   date:'2025.04', color:'#89d4b8'},
+];
+let activities=[
+  {title:'EFR 응급처치 자격증 취득',titleEn:'EFR First Aid Certification',date:'2024-03-15',
+   content:'대부분 성인 전문가들로 구성된 과정에서 홀로 청소년으로 참여해 응급처치 자격증을 취득했습니다.',
+   contentEn:'Earned EFR First Aid certification as the only teenager among adult professionals.',img:null},
+  {title:'서울대 모의UN 참가 — 대한민국 대표',titleEn:'Seoul National Univ. Model UN — ROK Delegate',date:'2023-11-20',
+   content:'고등학생 선배들과 함께 환경 주제로 2박 3일 모의 UN에 참가, 대한민국 대표로 발언했습니다.',
+   contentEn:'Participated in 3-day Model UN, speaking as the South Korea delegate on environmental issues.',img:null},
+  {title:'Rutgers 아너컬리지 투어 & 캠퍼스 방문',titleEn:'Rutgers Honors College Tour & Campus Visit',date:'2025-04-10',
+   content:'10학년 봄방학에 Rutgers 아너컬리지를 투어하며 예지 선배를 만나고 진로에 대한 큰 다짐을 세웠습니다.',
+   contentEn:'Visited Rutgers Honors College on spring break, met senior Yeji, and made a strong commitment to my academic path.',img:null},
+];
+let lifeDataKo=[
+  {num:'Chapter 1',title:'순수한 호기심의 시기',sub:'어린이집~초등 5학년 · ~2019년',eps:[
+    {t:'똥꼬발랄한 아이',b:'초등학교 1학년 때, 학교 가는 길이 놀러 가는 길이었다. 엄마와 함께 걸으며 매일 고양이를 구경하고, 꽃을 매만지느라 학교에 늦곤 했다. 학교가 놀이의 연장이었던, 순수하게 호기심이 많은 아이였다.'},
+    {t:'가방 없이 학교에 간 날',b:'아침에 학교 간다고 인사까지 하고 나가려는데, 어머니께서 물으셨다. "너 어디 가니?" "저 학교 가는데요?" "학교 가는데 가방은 안 갖고 가니?" 아 맞다, 하고 가방을 챙기며 박장대소한 웃픈 경험.'},
+    {t:'5초 만에 친구를 사귀는 아이',b:'5살, 6살 때 비행기에서 옆자리 미국 아주머니와 언어가 통하지 않는데도 간식을 나눠주며 친구가 되었다. 사교성은 언어의 장벽을 넘는다는 것을 몸으로 먼저 배웠다.'},
+    {t:'몬테소리 교육 — 자기주도성의 뿌리',b:'어린이집과 유치원에서 몬테소리 교육을 받았다. 자기주도적 학습 환경에서 자란 경험은 훗날 미국 유학이라는 선택으로 이어지는 가치관의 뿌리가 되었다.'},
+    {t:'춤과 노래, 활기찬 에너지',b:'어렸을 때부터 춤과 노래를 좋아하고, 밝은 미소와 활기찬 에너지가 넘치는 아이로 자랐다.'},
+  ]},
+  {num:'Chapter 2',title:'각성의 시기 — 코비드와 독서',sub:'초등 6학년 · 2019~2020년',eps:[
+    {t:'줌수업과 홈스쿨링의 시작',b:'6학년이 되어 갑자기 코비드 시기에 접어들며 학교에 갈 수 없게 되었다. 집에서 엄마와 홈스쿨링을 시작하면서, 난생 처음 열심히 공부를 해봤다. 국어·수학·영어 스케줄을 엄마와 함께 짜고, 무엇보다 그동안 읽지 못했던 책을 읽기 시작했다.'},
+    {t:'100권 독서 프로젝트',b:'도서관을 다니며 독서기록을 쓰면서 한국 고전, 세계 고전, 과학책, 소설책 등 다양한 책을 100권 넘게 읽었다. 위인들의 삶을 간접 경험하면서 지적 호기심이 생겼다.'},
+    {t:'정약용과의 만남',b:'정약용의 책을 읽으며 마음에 새긴 한 줄. "최선을 다하라, 정직하라." 이 한 줄이 지금까지 유학을 오고, 마취과 간호사와 뇌신경과학자가 되기 위한 다짐의 밑거름이 되었다.'},
+    {t:'얼굴 하나하나 그려낸 졸업',b:'코비드 때문에 초등학교 졸업식을 제대로 할 수 없었다. 보고 싶은 친구 한 명 한 명의 얼굴을 직접 그림으로 그려서 마음을 표현했다.'},
+  ]},
+  {num:'Chapter 3',title:'성장과 도전 — 중학교',sub:'중1~중3 · 2021~2023년',eps:[
+    {t:'6년간의 낙선 그리고 6연속 반장',b:'초등학교 1학년부터 6학년까지 반장 선거에 매번 낙선했지만, 매번 공약을 적고 녹음하며 연습을 계속했다. 그 결과 중학교 1학년부터 3학년까지 1학기 반장으로 이어졌다. 꾸준함과 성실함, 도전의 성취감을 맛본 첫 경험.'},
+    {t:'수학 각성 — 첫 시험의 충격에서 A 100점까지',b:'중학교 2학년 첫 수학 시험의 낮은 점수에 충격을 받고 각성했다. 이후 1년 반 동안 피나는 노력 끝에 수학 A 100점에 가까운 점수를 달성했고, 외국어 고등학교(고양외고) 입시까지 성공했다.'},
+    {t:'경기도 영재교육원',b:'코로나 시기, 중학교 입학 후 학교에서 영재 선발 시험에 합격해 경기도 영재교육원을 1년간 다니고 수료증을 받았다. 줌수업과 오프라인 수업을 병행했고, 과학에 대한 흥미를 본격적으로 키운 계기.'},
+    {t:'서울대 모의UN — 대한민국 대표로',b:'중학교 3학년 때 서울대학교 모의UN에 2박 3일 일정으로 참여했다. 고등학생 선배들과 함께 환경 주제로 토론했고, 대한민국 대표로 참여해 발언했다.'},
+    {t:'혼자 떠난 캐나다',b:'겨울방학 2주, 혼자 비행기를 타고 캐나다로 이민 간 절친의 집에 다녀왔다. 이민 가족의 적응기를 가까이서 보며 느낀 것, 혼자 비행기를 탄 나 자신에 대한 용기의 재발견.'},
+  ]},
+  {num:'Chapter 4',title:'유학의 결단과 첫 도전 — 9학년',sub:'2023~2024년',eps:[
+    {t:'왜 미국 보딩스쿨을 선택했나',b:'국영수 중심의 획일적 한국 입시보다는, 다양한 경험을 바탕으로 성실함·꾸준함·용기·도전 정신을 인정받을 수 있는 미국 보딩스쿨의 교육 환경을 선택했다. 다양한 민족과 다양한 경험 속에서 내 자신의 부족함을 인지하고 성찰했다.'},
+    {t:'기숙사 생활 — 미국 친구와 룸메이트',b:'미국 친구와 방을 함께 쓰면서 협력하는 법, 지켜야 할 규율, 배려를 배웠다. 공동생활은 공부로 배울 수 없는 것을 가르쳤다.'},
+    {t:'홈스테이 — 다름은 편견이 아닌 확장',b:'홈스테이 부모님들로부터 미국 문화와 새로운 경험을 접했다. 여러 홈스테이를 거치며 "다름"을 편견이 아닌 "세상을 알아가는 또 다른 방식"으로 받아들이게 되었다.'},
+    {t:'EFR 응급처치 자격증',b:'간호학과를 목표로 한 첫 실질적 도전. 대부분 단체로 온 성인 전문가들 사이에서 혼자 청소년으로 참여했고, 실무에 능숙한 분들을 따라가며 느낀 것이 있었다.'},
+  ]},
+  {num:'Chapter 5',title:'정체성의 확립 — The Harvey School & 진로',sub:'10학년~현재 · 2025년~',eps:[
+    {t:'마취과 간호사 → 뇌신경과학자라는 비전',b:'엄마가 뇌과학과 명리를 공부하시며 나눠주신 인사이트가 계기가 되었다. 최종 목표를 마취과 간호사가 되어 뇌신경과학을 공부하는 것으로 정했다. 한국에서는 없던 이런 융합적 진로가, 미국에서는 자연스럽게 하나의 길로 그려졌다.'},
+    {t:'더 아카데믹한 The Harvey School로',b:'진로가 정해지자, 더 학문적 도전을 할 수 있는 Harvey School로 전학했다. 새 환경에서 영어 실력과 학과 공부를 꾸준히 끌어올렸고, 노력에 따른 성적 향상은 자신감으로 이어졌다.'},
+    {t:'H Biology의 시련과 극복 — C+에서 A로',b:'9학년을 마치고 한국에서 토플과 생물·화학 AP를 열심히 준비했지만, Honor Biology가 너무 어려워 C+로 시작했다. 포기하지 않고 나만의 방식으로 공부를 다시 설계해, 결국 A라는 성과로 이어졌다.'},
+    {t:'몰입캠프 — 뇌가소성과 도파민의 발견',b:'하루에도 할 일이 많은 환경에서 시간을 쪼개 공부하다가, 어려운 수학 문제 몇 개를 끊임없이 생각하는 "몰입"의 시간을 통해 문제를 풀어냈다. 공부가 어떻게 즐거움과 만족감으로 이어질 수 있는지의 방향성을 깨달았다.'},
+    {t:'링글틴즈 — 아이비리그 선배들과의 40회 대화',b:'40분 수업을 40회 정도 하며 아이비리그 선배들을 만났다. 내가 가고자 하는 학교·학과를 다니는 선배들의 고등학교 시절 활동, 현재 대학 생활에 대해 직접 들을 수 있었다.'},
+    {t:'Rutgers 아너컬리지 투어 & 예지 선배',b:'10학년 봄방학에 Rutgers 아너컬리지까지 투어했을 때 예지 선배를 만나 이야기를 나누고 메일을 주고받았다. 그 대화에서 이 학교에 가고 싶다는 보다 큰 다짐이 섰다.'},
+    {t:'팀 속의 나 — 오케스트라, 축구, 필드하키, 트랙',b:'오케스트라 4년, 연주회에 여러 번 참여하며 느낀 것. 축구·필드하키·트랙 대회에서 힘들었지만 은메달을 따냈을 때 팀에 기여한 순간.'},
+    {t:'DNA Learning Center 견학',b:'H Biology 수업의 일환으로 리제네론(Regeneron) DNA Learning Center를 견학했다. 관심 유전자를 도입하는 열쇼크(heat shock) 방식으로 복합 세균 변환 연구를 참관했고, 세균 성장 관찰 등 유전공학 관련 수업을 받았다.'},
+    {t:'취미와 표현 — 기타, 아트, 만화',b:'트랙 대신 아트 미술을 선택해 그림을 그리고 있다. 어렸을 때부터 그림에 대화를 넣어 만화책을 만들던 습관이 지금까지 이어진다. 그림은 스트레스를 풀고 환기하는 나만의 방법. 기타도 함께 즐기는 취미.'},
+  ]},
+];
+let lifeDataEn=[
+  {num:'Chapter 1',title:'The Age of Pure Curiosity',sub:'Kindergarten ~ 5th Grade · ~2019',eps:[
+    {t:'A Spirited Child',b:'In 1st grade, going to school felt like going out to play. Walking with mom, I\'d stop to look at cats and touch flowers, often arriving late. School was an extension of play — I was a child overflowing with pure curiosity.'},
+    {t:'The Day I Forgot My Backpack',b:'I said goodbye and was walking out when Mom asked, "Where are you going?" "To school?" "But where\'s your bag?" I burst out laughing, grabbed it, and headed out — a hilariously embarrassing moment.'},
+    {t:'Making Friends in 5 Seconds',b:'At ages 5 and 6, I became friends with an American woman on a plane just by sharing snacks despite the language barrier. I learned with my whole body that friendliness transcends language.'},
+    {t:'Montessori Education — The Root of Self-Direction',b:'I attended Montessori kindergarten and preschool. Growing up in a self-directed learning environment became the foundation of values that eventually led to my decision to study in the US.'},
+    {t:'Dance, Song, and Vibrant Energy',b:'From early childhood I loved dancing and singing, growing up as a bright, energetic child with a big smile.'},
+  ]},
+  {num:'Chapter 2',title:'The Awakening — COVID & Reading',sub:'6th Grade · 2019~2020',eps:[
+    {t:'Zoom Classes & Homeschooling',b:'When COVID hit 6th grade, I began homeschooling with Mom — the first time I truly studied hard. We built a schedule for Korean, math, and English, and I started reading books I\'d never had time for.'},
+    {t:'The 100-Book Project',b:'Visiting the library regularly, I read over 100 books — Korean classics, world literature, science books, and novels. Experiencing the lives of great people indirectly ignited my intellectual curiosity.'},
+    {t:'Meeting Jeong Yak-yong',b:'Reading Jeong Yak-yong, one line stayed with me: "Do your best; be honest." This became the foundation of my commitment to study abroad and become a nurse anesthetist and neuroscientist.'},
+    {t:'Drawing Each Friend\'s Face for Graduation',b:'Because of COVID, we couldn\'t have a proper elementary school graduation. I expressed my feelings by drawing each friend\'s face one by one.'},
+  ]},
+  {num:'Chapter 3',title:'Growth & Challenge — Middle School',sub:'7th~9th Grade · 2021~2023',eps:[
+    {t:'6 Years of Losing, Then 6 Consecutive Class President Wins',b:'I lost every class president election from 1st through 6th grade, but kept practicing — writing speeches and recording myself. That persistence paid off: I was elected class president every 1st semester from 7th to 9th grade.'},
+    {t:'Math Awakening — From Shock to Near-Perfect Score',b:'A low score on my first 7th-grade math test was a wake-up call. After a year and a half of hard work, I achieved near-perfect scores and was accepted into a specialized foreign language high school.'},
+    {t:'Gyeonggi Gifted Education Institute',b:'After passing the gifted selection exam in middle school, I attended the Gyeonggi Gifted Education Institute for a year. It was the real beginning of my passion for science.'},
+    {t:'Seoul National Univ. Model UN — ROK Delegate',b:'In 9th grade I participated in a 3-day Model UN at Seoul National University with high school seniors, speaking as the South Korea delegate on environmental issues.'},
+    {t:'Solo Trip to Canada',b:'During winter break, I flew alone to visit my best friend who had immigrated to Canada — rediscovering my own courage, and feeling deep gratitude for a friendship that strong.'},
+  ]},
+  {num:'Chapter 4',title:'The Decision to Study Abroad — 9th Grade',sub:'2023~2024',eps:[
+    {t:'Why I Chose an American Boarding School',b:'Rather than Korea\'s test-focused system, I chose the American boarding school environment where diligence, perseverance, courage, and a spirit of challenge are recognized through diverse experiences.'},
+    {t:'Dorm Life — Roommates & American Friends',b:'Sharing a room with an American friend taught me how to collaborate, follow rules, and show consideration. Communal living taught things no classroom can.'},
+    {t:'Homestay — Difference as Expansion, Not Prejudice',b:'Through various homestay families I encountered American culture and new experiences. I came to see "difference" not as something wrong but as another way of knowing the world.'},
+    {t:'EFR First Aid Certification',b:'My first concrete step toward nursing. As the only teenager among adult professionals, I followed along and learned from people with real-world expertise.'},
+  ]},
+  {num:'Chapter 5',title:'Establishing Identity — Harvey School & Career',sub:'10th Grade ~ Present · 2025~',eps:[
+    {t:'Vision: Nurse Anesthetist → Neuroscientist',b:'Insights my mom shared while studying brain science inspired my goal: to become a nurse anesthetist who studies neuroscience. In the US, this integrated career path has become a clear and natural vision.'},
+    {t:'Transferring to the More Academic Harvey School',b:'Once my career direction was set, I transferred to Harvey School for greater academic challenge. Steadily improving my English and academics in the new environment turned effort into confidence.'},
+    {t:'H Biology Struggles — From C+ to A',b:'Honor Biology started brutally with a C+. Without giving up, I redesigned my study approach and ultimately earned an A.'},
+    {t:'Immersion Camp — Discovering Neuroplasticity & Dopamine',b:'Through "immersion" — endlessly thinking through difficult math problems — I solved them and experienced a dopamine rush unlike anything before. I discovered how studying can become genuine joy.'},
+    {t:'Ringle Teens — 40 Conversations with Ivy League Mentors',b:'Through 40 sessions I met Ivy League students studying the majors and schools I aspire to. I heard firsthand about their high school activities and current college life.'},
+    {t:'Rutgers Honors College Tour & Senior Yeji',b:'Visiting Rutgers Honors College on spring break, I met senior Yeji and exchanged emails. That conversation deepened my resolve to attend this school.'},
+    {t:'Me on the Team — Orchestra, Soccer, Field Hockey, Track',b:'Four years of orchestra, multiple concerts. Silver medals in soccer, field hockey, and track despite the struggles — moments of contributing to the team.'},
+    {t:'DNA Learning Center Visit',b:'As part of H Biology, I visited the Regeneron DNA Learning Center and observed bacterial transformation research via heat shock, with lessons on genetic engineering and bacterial growth.'},
+    {t:'Hobbies & Expression — Guitar, Art, Comics',b:'I chose Art over Track. The habit of adding dialogue to drawings to make comics, which started when I was young, continues to this day. Art is my personal way of relieving stress. Guitar too.'},
+  ]},
+];
+
+/* ── BRAIN CANVAS 3D (NeuralVersa hero) — fully responsive ── */
+(function(){
+  var canvas    = document.getElementById('brainCanvas');
+  var container = document.getElementById('brain-wrap');
+  var ctx       = canvas.getContext('2d');
+
+  /* ── 런타임에서 매번 읽는 동적 치수 ── */
+  var W, H, CX, CY, BRAIN_RX, BRAIN_RY;
+
+  /* ── 노드/연결/펄스는 리사이즈 시 재생성 ── */
+  var nodes  = [];
+  var pulses = [];
+  var angle  = 0;
+  var resizeTimer = null;
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  function inBrainShape(x, y, cx, cy, rx, ry) {
+    var dx = x - cx, dy = y - cy;
+    var leftLobe  = Math.pow((dx + rx*0.22)/(rx*0.85), 2) + Math.pow(dy/(ry*1.05), 2) < 1;
+    var rightLobe = Math.pow((dx - rx*0.22)/(rx*0.85), 2) + Math.pow(dy/(ry*1.05), 2) < 1;
+    var cereb     = Math.pow(dx/(rx*0.38), 2) + Math.pow((dy - ry*0.75)/(ry*0.28), 2) < 1;
+    return leftLobe || rightLobe || cereb;
+  }
+
+  function buildBrain() {
+    /* 캔버스 크기 갱신 */
+    canvas.width  = container.offsetWidth  || window.innerWidth;
+    canvas.height = container.offsetHeight || window.innerHeight;
+    W = canvas.width;
+    H = canvas.height;
+    CX = W / 2;
+    CY = H / 2;
+    BRAIN_RX = Math.min(W, H) * 0.30;
+    BRAIN_RY = Math.min(W, H) * 0.23;
+
+    /* 노드 재생성 */
+    nodes  = [];
+    pulses = [];
+    var NUM_NODES = 320;
+    var attempts  = 0;
+    while(nodes.length < NUM_NODES && attempts < 30000) {
+      attempts++;
+      var x = CX + (Math.random()-0.5) * BRAIN_RX * 2.2;
+      var y = CY + (Math.random()-0.5) * BRAIN_RY * 2.6;
+      if(inBrainShape(x, y, CX, CY, BRAIN_RX, BRAIN_RY)) {
+        var depth = Math.random();
+        nodes.push({
+          x:x, y:y, baseX:x, baseY:y,
+          r: 0.8 + depth * 1.8,
+          depth: depth,
+          pulsePhase:  Math.random() * Math.PI * 2,
+          pulseSpeed:  0.02 + Math.random() * 0.03,
+          active: false,
+          activeDuration: 0,
+          connections: []
+        });
+      }
+    }
+
+    /* 연결 재생성 */
+    var MAX_DIST = BRAIN_RX * 0.28;
+    for(var i = 0; i < nodes.length; i++) {
+      for(var j = i+1; j < nodes.length; j++) {
+        var ddx = nodes[i].x - nodes[j].x;
+        var ddy = nodes[i].y - nodes[j].y;
+        var d   = Math.sqrt(ddx*ddx + ddy*ddy);
+        if(d < MAX_DIST && nodes[i].connections.length < 5 && nodes[j].connections.length < 5) {
+          nodes[i].connections.push(j);
+          nodes[j].connections.push(i);
+        }
+      }
+    }
+
+    /* 초기 펄스 */
+    for(var si = 0; si < 18; si++) spawnPulse();
+  }
+
+  function spawnPulse() {
+    if(!nodes.length) return;
+    var src = Math.floor(Math.random() * nodes.length);
+    if(nodes[src].connections.length === 0) return;
+    var tgt = nodes[src].connections[Math.floor(Math.random()*nodes[src].connections.length)];
+    pulses.push({src:src, tgt:tgt, t:0,
+      speed: 0.015 + Math.random()*0.025,
+      color: Math.random() > 0.3 ? 'cyan' : 'white'});
+    nodes[src].active = true;
+    nodes[src].activeDuration = 25;
+  }
+
+  function draw() {
+    /* draw() 안에서 항상 최신 W/H/CX/CY 사용 */
+    ctx.clearRect(0, 0, W, H);
+
+    /* background */
+    var bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, Math.max(W,H)*0.8);
+    bg.addColorStop(0,   'rgba(3,11,26,1)');
+    bg.addColorStop(0.6, 'rgba(0,5,8,1)');
+    bg.addColorStop(1,   'rgba(0,0,0,1)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    angle += 0.003;
+
+    nodes.forEach(function(n){
+      n.pulsePhase += n.pulseSpeed;
+      var breath = Math.sin(n.pulsePhase) * 2.5;
+      n.x = n.baseX + Math.cos(angle*0.4 + n.pulsePhase) * breath;
+      n.y = n.baseY + Math.sin(angle*0.3 + n.pulsePhase*1.1) * breath * 0.7;
+      if(n.activeDuration > 0) n.activeDuration--;
+      else n.active = false;
+    });
+
+    /* sort by depth */
+    var sorted = [];
+    for(var k = 0; k < nodes.length; k++) sorted.push(k);
+    sorted.sort(function(a,b){ return nodes[a].depth - nodes[b].depth; });
+
+    /* connections */
+    sorted.forEach(function(i){
+      var n = nodes[i];
+      n.connections.forEach(function(j){
+        if(j <= i) return;
+        var m = nodes[j];
+        var depthAvg = (n.depth + m.depth) / 2;
+        var alpha = 0.04 + depthAvg * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(n.x, n.y);
+        ctx.lineTo(m.x, m.y);
+        ctx.strokeStyle = 'rgba(60,180,255,'+alpha+')';
+        ctx.lineWidth = 0.4 + depthAvg * 0.5;
+        ctx.stroke();
+      });
+    });
+
+    /* pulses */
+    for(var pi = pulses.length-1; pi >= 0; pi--) {
+      var p = pulses[pi];
+      p.t += p.speed;
+      if(p.t >= 1) {
+        var cur = nodes[p.tgt];
+        if(!cur) { pulses.splice(pi,1); continue; }
+        cur.active = true; cur.activeDuration = 30;
+        if(cur.connections.length > 0 && Math.random() > 0.2) {
+          var next = cur.connections[Math.floor(Math.random()*cur.connections.length)];
+          pulses[pi] = {src:p.tgt, tgt:next, t:0, speed:p.speed*(0.9+Math.random()*0.2), color:p.color};
+        } else {
+          pulses.splice(pi, 1);
+        }
+        continue;
+      }
+      if(!nodes[p.src] || !nodes[p.tgt]) { pulses.splice(pi,1); continue; }
+      var sx = nodes[p.src].x, sy = nodes[p.src].y;
+      var tx = nodes[p.tgt].x, ty = nodes[p.tgt].y;
+      var ppx = lerp(sx, tx, p.t);
+      var ppy = lerp(sy, ty, p.t);
+      var grad = ctx.createRadialGradient(ppx, ppy, 0, ppx, ppy, 6);
+      if(p.color === 'cyan') {
+        grad.addColorStop(0, 'rgba(120,240,255,0.95)');
+        grad.addColorStop(0.4, 'rgba(50,180,255,0.4)');
+        grad.addColorStop(1, 'rgba(0,80,200,0)');
+      } else {
+        grad.addColorStop(0, 'rgba(255,255,255,0.9)');
+        grad.addColorStop(0.4, 'rgba(180,220,255,0.3)');
+        grad.addColorStop(1, 'rgba(100,160,255,0)');
+      }
+      ctx.beginPath();
+      ctx.arc(ppx, ppy, 6, 0, Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+
+    /* nodes */
+    sorted.forEach(function(i){
+      var n = nodes[i];
+      var glow  = n.active ? 1 : 0;
+      var alpha = 0.3 + n.depth*0.5 + glow*0.4;
+      var r     = n.r + glow*2.5;
+      if(n.active) {
+        var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r*4);
+        g.addColorStop(0, 'rgba(100,220,255,'+(0.6*alpha)+')');
+        g.addColorStop(1, 'rgba(0,100,255,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r*4, 0, Math.PI*2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+      if(n.active) {
+        ctx.fillStyle = 'rgba(160,240,255,'+alpha+')';
+      } else {
+        var blue = Math.floor(180 + n.depth*60);
+        ctx.fillStyle = 'rgba(80,'+blue+',255,'+(alpha*0.7)+')';
+      }
+      ctx.fill();
+    });
+
+    /* fold lines */
+    ctx.save();
+    ctx.globalAlpha = 0.04;
+    ctx.strokeStyle = 'rgba(80,180,255,1)';
+    ctx.lineWidth = 1;
+    for(var fold = 0; fold < 7; fold++) {
+      var yf = CY - BRAIN_RY*0.6 + fold*BRAIN_RY*0.2;
+      var wf = BRAIN_RX*(0.8 - Math.abs(fold-3)*0.08);
+      ctx.beginPath();
+      ctx.moveTo(CX-wf, yf);
+      ctx.bezierCurveTo(
+        CX-wf*0.5, yf-8+Math.sin(angle+fold)*4,
+        CX+wf*0.5, yf+8+Math.cos(angle*1.3+fold)*4,
+        CX+wf, yf
+      );
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    /* ambient glow */
+    var ambGrad = ctx.createRadialGradient(CX, CY, 0, CX, CY, BRAIN_RX*1.1);
+    ambGrad.addColorStop(0, 'rgba(30,100,200,0.06)');
+    ambGrad.addColorStop(0.5, 'rgba(0,60,180,0.04)');
+    ambGrad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = ambGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    if(Math.random() < 0.08) spawnPulse();
+    if(pulses.length < 8)    spawnPulse();
+
+    requestAnimationFrame(draw);
+  }
+
+  /* ── 리사이즈: 디바운스 150ms 후 buildBrain() 재실행 ── */
+  function onResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      buildBrain();
+    }, 150);
+  }
+
+  window.addEventListener('resize', onResize);
+
+  /* ── 최초 빌드 & 렌더 루프 시작 ── */
+  buildBrain();
+  requestAnimationFrame(draw);
+})();
+/* ── STATE ── */
+var currentLang='ko';
+var articleSource='neuro';
+var currentArticleItem=null;
+var detailLang='ko';
+
+/* ── PERSIST: localStorage 저장/복원 유틸 ── */
+var LNV = {
+  save: function(key, val){
+    try{ localStorage.setItem('lnv_'+key, JSON.stringify(val)); }catch(e){}
+  },
+  load: function(key){
+    try{
+      var v = localStorage.getItem('lnv_'+key);
+      return v ? JSON.parse(v) : null;
+    }catch(e){ return null; }
+  },
+  /* 앱 시작 시 저장된 데이터로 배열 교체 */
+  restore: function(){
+    var n = LNV.load('neuro');
+    if(n && n.length) neuroNews = n;
+    var ns = LNV.load('nursing');
+    if(ns && ns.length) nursingNews = ns;
+    var a = LNV.load('activities');
+    if(a) activities = a;
+    var lk = LNV.load('lifeko');
+    if(lk && lk.length) lifeDataKo = lk;
+    var le = LNV.load('lifeen');
+    if(le && le.length) lifeDataEn = le;
+    /* 홈 텍스트 복원 */
+    var g = LNV.load('general');
+    if(g){
+      var eyeEl = document.getElementById('home-eyebrow-el');
+      var subEl = document.getElementById('home-sub-el');
+      if(eyeEl && g.eyeKo){
+        eyeEl.setAttribute('data-ko', g.eyeKo);
+        eyeEl.setAttribute('data-en', g.eyeEn||g.eyeKo);
+        eyeEl.textContent = g.eyeKo;
+      }
+      if(subEl && g.subKo){
+        subEl.setAttribute('data-ko', g.subKo);
+        subEl.setAttribute('data-en', g.subEn||g.subKo);
+        subEl.textContent = g.subKo;
+      }
+      /* 관리자 패널 입력값도 복원 */
+      var f = function(id, val){var el=document.getElementById(id);if(el&&val)el.value=val;};
+      f('ad-eyebrow-ko', g.eyeKo); f('ad-eyebrow-en', g.eyeEn);
+      f('ad-sub-ko', g.subKo);     f('ad-sub-en', g.subEn);
+    }
+    /* Connect 페이지 복원 */
+    var c = LNV.load('connect');
+    if(c){
+      var el; var dUrl;
+      el=document.getElementById('con-disp-email');
+      if(el&&c.email) el.innerHTML='<a href="mailto:'+c.email+'">'+c.email+'</a>';
+      el=document.getElementById('con-disp-school');
+      if(el) el.innerHTML='<strong>'+(c.school||'')+'</strong><br><span style="color:var(--text-secondary);font-size:13px;">'+(c.addr||'')+'</span>';
+      el=document.getElementById('con-disp-url');
+      if(el&&c.url){ dUrl=c.url.replace(/^https?:\/\//, ''); el.innerHTML='<a href="'+c.url+'" target="_blank">'+dUrl+'</a>'; }
+      el=document.getElementById('con-disp-major');
+      if(el&&c.majKo){ el.setAttribute('data-ko',c.majKo); el.setAttribute('data-en',c.majEn||c.majKo); el.textContent=c.majKo; }
+      /* 관리자 패널 입력값 복원 */
+      var f2=function(id,val){var e2=document.getElementById(id);if(e2&&val)e2.value=val;};
+      f2('con-email',c.email); f2('con-school',c.school); f2('con-addr',c.addr);
+      f2('con-url',c.url); f2('con-major-ko',c.majKo); f2('con-major-en',c.majEn);
+    }
+  }
+};
+
+/* ── LANG ── */
+function setLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.textContent.toLowerCase()===lang);});
+  updateMobileLang(lang);
+  document.querySelectorAll('[data-ko]').forEach(function(el){
+    var v=el.getAttribute('data-'+lang);
+    if(v) el.innerHTML=v;
+  });
+  var active=document.querySelector('.page.active');
+  if(active){
+    if(active.id==='page-neuro') renderGrid('neuro-grid',neuroNews);
+    if(active.id==='page-nursing') renderGrid('nursing-grid',nursingNews);
+    if(active.id==='page-activities') renderActivities();
+    if(active.id==='page-life') renderLife();
+    if(active.id==='page-article'){detailLang=lang;renderArticleContent();}
+  }
+}
+
+/* ── PAGE ROUTER ── */
+function _activatePage(id){
+  /* 실제 페이지 전환만 담당 (history 조작 없음) */
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var t=document.getElementById('page-'+id);
+  if(t){t.classList.add('active');window.scrollTo(0,0);}
+  if(id==='neuro') renderGrid('neuro-grid',neuroNews);
+  if(id==='nursing') renderGrid('nursing-grid',nursingNews);
+  if(id==='activities') renderActivities();
+  if(id==='life') renderLife();
+  closeMobileDrawer();
+}
+function showPage(id){
+  /* history에 push한 뒤 페이지 전환 */
+  var state={page:id, articleSrc:null, articleId:null};
+  history.pushState(state, '', '#'+id);
+  _activatePage(id);
+}
+function toggleMobileDrawer(){
+  var d=document.getElementById('mobile-drawer');
+  var b=document.getElementById('hamburger-btn');
+  var open=d.classList.contains('open');
+  d.classList.toggle('open',!open);
+  b.classList.toggle('open',!open);
+}
+function closeMobileDrawer(){
+  var d=document.getElementById('mobile-drawer');
+  var b=document.getElementById('hamburger-btn');
+  if(d){d.classList.remove('open');}
+  if(b){b.classList.remove('open');}
+}
+function updateMobileLang(lang){
+  var ko=document.getElementById('mlb-ko');
+  var en=document.getElementById('mlb-en');
+  if(ko) ko.classList.toggle('active',lang==='ko');
+  if(en) en.classList.toggle('active',lang==='en');
+  /* also sync desktop lang buttons */
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active',b.textContent.toLowerCase()===lang);
+  });
+}
+
+/* ── SVG ILLUSTRATIONS ── */
+function svgIllus(color,idx){
+  var s=[
+    '<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="170" fill="#111118"/><g fill="'+color+'" fill-opacity=".14"><circle cx="60" cy="85" r="38"/><circle cx="260" cy="85" r="38"/><circle cx="160" cy="45" r="28"/><circle cx="160" cy="125" r="28"/></g><g stroke="'+color+'" stroke-opacity=".28" fill="none" stroke-width="1"><line x1="60" y1="85" x2="160" y2="45"/><line x1="60" y1="85" x2="160" y2="125"/><line x1="260" y1="85" x2="160" y2="45"/><line x1="260" y1="85" x2="160" y2="125"/></g><g fill="'+color+'" fill-opacity=".65"><circle cx="60" cy="85" r="5"/><circle cx="260" cy="85" r="5"/><circle cx="160" cy="45" r="4"/><circle cx="160" cy="125" r="4"/></g></svg>',
+    '<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="170" fill="#111118"/><path d="M0,85 Q40,38 80,85 Q120,132 160,85 Q200,38 240,85 Q280,132 320,85" stroke="'+color+'" stroke-opacity=".5" stroke-width="2.5" fill="none"/><g fill="'+color+'" fill-opacity=".6"><circle cx="80" cy="85" r="4"/><circle cx="160" cy="85" r="4"/><circle cx="240" cy="85" r="4"/></g></svg>',
+    '<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="170" fill="#111118"/><path d="M70,15 Q160,85 250,155" stroke="'+color+'" stroke-opacity=".48" stroke-width="2" fill="none"/><path d="M70,155 Q160,85 250,15" stroke="'+color+'" stroke-opacity=".28" stroke-width="2" fill="none"/></svg>',
+    '<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="170" fill="#111118"/><circle cx="160" cy="85" r="65" stroke="'+color+'" stroke-opacity=".22" stroke-width="1.5" fill="none"/><circle cx="160" cy="85" r="18" fill="'+color+'" fill-opacity=".14"/><g fill="'+color+'" fill-opacity=".6"><circle cx="160" cy="20" r="3.5"/><circle cx="225" cy="85" r="3.5"/><circle cx="160" cy="150" r="3.5"/><circle cx="95" cy="85" r="3.5"/></g></svg>',
+    '<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="170" fill="#111118"/><rect x="143" y="48" width="34" height="74" rx="5" fill="'+color+'" fill-opacity=".18"/><rect x="123" y="68" width="74" height="34" rx="5" fill="'+color+'" fill-opacity=".18"/></svg>'
+  ];
+  return s[idx%5];
+}
+
+/* ── NEWS GRID ── */
+function newsCardImg(item,i){
+  if(item.img) return '<img src="'+item.img+'" alt="" style="width:100%;height:100%;object-fit:cover;">';
+  return svgIllus(item.color,i);
+}
+function renderGrid(gridId,data){
+  var el=document.getElementById(gridId);
+  var src=gridId.indexOf('neuro')>=0?'neuro':'nursing';
+  el.innerHTML=data.map(function(item,i){
+    var tag=currentLang==='ko'?item.tag:item.tagEn;
+    var title=currentLang==='ko'?item.title:item.titleEn;
+    var body=currentLang==='ko'?item.body:item.bodyEn;
+    var rm=currentLang==='ko'?'자세히 읽기 →':'Read more →';
+    return '<div class="news-card" onclick="openArticle(\''+src+'\',\''+item.id+'\')">'
+      +'<div class="news-card-img">'+newsCardImg(item,i)+'</div>'
+      +'<div class="news-card-body">'
+      +'<div class="news-card-tag">'+tag+'</div>'
+      +'<div class="news-card-title">'+title+'</div>'
+      +'<p>'+body+'</p>'
+      +'<div class="news-card-date">'+item.date+'</div>'
+      +'<div class="read-more">'+rm+'</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+/* ── ARTICLE DETAIL ── */
+function openArticle(src,id){
+  var arr=src==='neuro'?neuroNews:nursingNews;
+  var item=null;
+  for(var i=0;i<arr.length;i++){if(arr[i].id===id){item=arr[i];break;}}
+  if(!item) return;
+  articleSource=src; currentArticleItem=item; detailLang=currentLang;
+  renderArticleContent();
+  document.getElementById('art-back-btn').onclick=function(){showPage(articleSource);};
+  /* 기사 상세는 article 페이지 + 기사 정보를 state에 함께 저장 */
+  var state={page:'article', articleSrc:src, articleId:id};
+  history.pushState(state, '', '#article-'+id);
+  _activatePage('article');
+}
+function renderArticleContent(){
+  var item=currentArticleItem; if(!item) return;
+  var lang=detailLang;
+  var tag=lang==='ko'?item.tag:item.tagEn;
+  var title=lang==='ko'?item.title:item.titleEn;
+  var detail=lang==='ko'?item.detail:item.detailEn;
+  var heroImg=item.img
+    ?'<img src="'+item.img+'" alt="" style="width:100%;height:100%;object-fit:cover;">'
+    :svgIllus(item.color,2);
+  document.getElementById('article-content').innerHTML=
+    '<div class="article-tag">'+tag+'</div>'
+    +'<h1 class="article-title">'+title+'</h1>'
+    +'<div class="article-date">'+item.date+'</div>'
+    +'<div class="article-hero-img">'+heroImg+'</div>'
+    +'<div class="article-body">'+(detail||'<p>내용이 없습니다.</p>')+'</div>';
+}
+
+
+/* ── ACTIVITIES ── */
+function renderActivities(){
+  var g=document.getElementById('activities-grid');
+  if(!activities.length){g.innerHTML='<p style="color:var(--text-secondary)">아직 등록된 활동이 없습니다.</p>';return;}
+  g.innerHTML=activities.map(function(a,i){
+    var title=currentLang==='ko'?a.title:a.titleEn;
+    var body=currentLang==='ko'?a.content:a.contentEn;
+    var img=a.img?'<img src="'+a.img+'" alt="">':svgIllus(['#7eb8d4','#c9b6e0','#89d4b8'][i%3],i+2);
+    return '<div class="act-card">'
+      +'<div class="act-card-img">'+img+'</div>'
+      +'<div class="act-card-body">'
+      +'<div class="act-card-title">'+title+'</div>'
+      +'<div class="act-card-date">'+a.date+'</div>'
+      +'<p>'+body+'</p>'
+      +'</div></div>';
+  }).join('');
+}
+function previewFile(input){
+  if(input.files&&input.files[0]){
+    var r=new FileReader();
+    r.onload=function(e){
+      document.getElementById('preview-img').src=e.target.result;
+      document.getElementById('file-preview').style.display='block';
+    };
+    r.readAsDataURL(input.files[0]);
+  }
+}
+function checkAdminPw(inputId,errId){
+  var val=document.getElementById(inputId).value;
+  var stored=localStorage.getItem('lnv_pw');
+  if(!stored){document.getElementById(errId).textContent='먼저 관리자 비밀번호를 등록해주세요.';return false;}
+  if(btoa(val)!==stored){document.getElementById(errId).textContent='비밀번호가 올바르지 않습니다.';return false;}
+  document.getElementById(errId).textContent='';return true;
+}
+function addActivity(){
+  if(!checkAdminPw('act-pw','act-err')) return;
+  var title=document.getElementById('act-title').value.trim();
+  var date=document.getElementById('act-date').value;
+  var content=document.getElementById('act-content').value.trim();
+  var prev=document.getElementById('preview-img').src;
+  if(!title||!date||!content){document.getElementById('act-err').textContent='제목, 날짜, 내용을 모두 입력해주세요.';return;}
+  activities.unshift({title:title,titleEn:title,date:date,content:content,contentEn:content,
+    img:prev&&prev.indexOf('data:')===0?prev:null});
+  renderActivities();
+  ['act-title','act-content','act-pw'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('act-date').value='';
+  document.getElementById('file-preview').style.display='none';
+  window.scrollTo(0,0);
+}
+function previewNewsFile(pre,input){
+  if(input.files&&input.files[0]){
+    var r=new FileReader();
+    r.onload=function(e){
+      document.getElementById(pre+'-photo-img').src=e.target.result;
+      document.getElementById(pre+'-photo-preview').style.display='block';
+    };
+    r.readAsDataURL(input.files[0]);
+  }
+}
+function addNewsItem(type){
+  var isN=(type==='neuro');
+  var pwId=isN?'nn-pw':'ns-pw';
+  var errId=isN?'nn-err':'ns-err';
+  if(!checkAdminPw(pwId,errId)) return;
+  var pre=isN?'nn':'ns';
+  var tag=document.getElementById(pre+'-tag').value.trim();
+  var tagEn=document.getElementById(pre+'-tag-en').value.trim();
+  var title=document.getElementById(pre+'-title').value.trim();
+  var titleEn=document.getElementById(pre+'-title-en').value.trim();
+  var body=document.getElementById(pre+'-body').value.trim();
+  var bodyEn=document.getElementById(pre+'-body-en').value.trim();
+  var detail=document.getElementById(pre+'-detail').value.trim();
+  var detailEn=document.getElementById(pre+'-detail-en').value.trim();
+  var date=document.getElementById(pre+'-date').value.trim();
+  var imgEl=document.getElementById(pre+'-photo-img');
+  var imgSrc=imgEl&&imgEl.src&&imgEl.src.indexOf('data:')===0?imgEl.src:null;
+  if(!title||!body){document.getElementById(errId).textContent='제목과 요약 내용은 필수입니다.';return;}
+  var cols=['#7eb8d4','#c9b6e0','#89d4b8'];
+  var newItem={id:type+'_'+Date.now(),tag:tag||'New',tagEn:tagEn||tag||'New',
+    title:title,titleEn:titleEn||title,body:body,bodyEn:bodyEn||body,
+    detail:detail||'<p>'+body+'</p>',detailEn:detailEn||'<p>'+(bodyEn||body)+'</p>',
+    date:date||'2025',color:cols[Math.floor(Math.random()*3)],img:imgSrc};
+  if(isN) neuroNews.unshift(newItem); else nursingNews.unshift(newItem);
+  renderGrid(isN?'neuro-grid':'nursing-grid',isN?neuroNews:nursingNews);
+  ['tag','tag-en','title','title-en','body','body-en','detail','detail-en','date','pw'].forEach(function(k){
+    var el=document.getElementById(pre+'-'+k);if(el) el.value='';
+  });
+  document.getElementById(pre+'-photo-preview').style.display='none';
+  document.getElementById(pre+'-photo-img').src='';
+  window.scrollTo(0,0);
+}
+
+/* ── LIFE ── */
+function renderLife(){
+  var data=currentLang==='ko'?lifeDataKo:lifeDataEn;
+  document.getElementById('life-area').innerHTML=data.map(function(ch){
+    return '<div class="life-chapter">'
+      +'<div class="life-chapter-num">'+ch.num+'</div>'
+      +'<h2 class="life-chapter-title">'+ch.title+'</h2>'
+      +'<div class="life-chapter-sub">'+ch.sub+'</div>'
+      +ch.eps.map(function(ep){
+        return '<div class="life-episode"><div class="life-episode-title">&#10022; '+ep.t+'</div>'
+          +'<div class="life-episode-body">'+ep.b+'</div></div>';
+      }).join('')
+      +'</div>';
+  }).join('');
+}
+
+/* ── ADMIN PASSWORD ── */
+function openAdminModal(){
+  var stored=localStorage.getItem('lnv_pw');
+  if(!stored) showRegisterModal(); else showLoginModal();
+}
+function showRegisterModal(){
+  document.getElementById('modal-inner').innerHTML=
+    '<div class="modal-title">관리자 비밀번호 등록</div>'
+    +'<div class="modal-desc">처음 방문입니다. 관리자 비밀번호를 설정해주세요.</div>'
+    +'<input class="modal-input" id="reg-pw" type="password" placeholder="새 비밀번호">'
+    +'<input class="modal-input" id="reg-pw2" type="password" placeholder="비밀번호 확인">'
+    +'<div class="modal-err" id="reg-err"></div>'
+    +'<div class="modal-btns">'
+    +'<button class="modal-btn modal-btn-primary" onclick="registerPw()">등록</button>'
+    +'<button class="modal-btn modal-btn-secondary" onclick="closeModal()">취소</button>'
+    +'</div>';
+  document.getElementById('admin-modal').classList.add('open');
+}
+function showLoginModal(){
+  document.getElementById('modal-inner').innerHTML=
+    '<div class="modal-title">관리자 로그인</div>'
+    +'<div class="modal-desc">비밀번호를 입력하세요.</div>'
+    +'<input class="modal-input" id="login-pw" type="password" placeholder="비밀번호" onkeydown="if(event.key===\'Enter\')doLogin()">'
+    +'<div class="modal-err" id="login-err"></div>'
+    +'<div class="modal-btns">'
+    +'<button class="modal-btn modal-btn-primary" onclick="doLogin()">로그인</button>'
+    +'<button class="modal-btn modal-btn-secondary" onclick="closeModal()">취소</button>'
+    +'</div>'
+    +'<button class="modal-link" onclick="showResetModal()">비밀번호를 잊어버렸나요?</button>';
+  document.getElementById('admin-modal').classList.add('open');
+}
+function showResetModal(){
+  document.getElementById('modal-inner').innerHTML=
+    '<div class="modal-title">비밀번호 재설정</div>'
+    +'<div class="modal-desc">임시 비밀번호를 생성합니다.<br><small>(데모: 브라우저 콘솔 F12에서 확인)</small></div>'
+    +'<div class="modal-btns">'
+    +'<button class="modal-btn modal-btn-primary" onclick="sendReset()">임시 비밀번호 생성</button>'
+    +'<button class="modal-btn modal-btn-secondary" onclick="showLoginModal()">← 돌아가기</button>'
+    +'</div>'
+    +'<div class="modal-ok" id="reset-ok"></div>'
+    +'<input class="modal-input" id="tmp-pw-input" type="text" placeholder="임시 비밀번호 입력" style="margin-top:14px;display:none;">'
+    +'<div class="modal-err" id="reset-err"></div>'
+    +'<button class="modal-btn modal-btn-primary" id="tmp-confirm-btn" onclick="confirmReset()" style="display:none;margin-top:8px;width:100%;">확인 후 로그인</button>';
+  document.getElementById('admin-modal').classList.add('open');
+}
+var tempPw='';
+function sendReset(){
+  var chars='ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  tempPw='';for(var i=0;i<8;i++) tempPw+=chars[Math.floor(Math.random()*chars.length)];
+  console.log('%c임시 비밀번호: '+tempPw,'color:#7eb8d4;font-size:16px;font-weight:bold;');
+  var ok=document.getElementById('reset-ok');
+  ok.textContent='임시 비밀번호가 생성되었습니다. 콘솔(F12)에서 확인하세요.';ok.style.display='block';
+  document.getElementById('tmp-pw-input').style.display='block';
+  document.getElementById('tmp-confirm-btn').style.display='block';
+}
+function confirmReset(){
+  var val=document.getElementById('tmp-pw-input').value.trim();
+  if(val===tempPw){localStorage.setItem('lnv_pw',btoa(tempPw));closeModal();enterAdmin();}
+  else{var e=document.getElementById('reset-err');e.textContent='임시 비밀번호가 올바르지 않습니다.';e.style.display='block';}
+}
+function registerPw(){
+  var p1=document.getElementById('reg-pw').value;
+  var p2=document.getElementById('reg-pw2').value;
+  var err=document.getElementById('reg-err');
+  if(!p1||p1.length<4){err.textContent='비밀번호는 4자 이상이어야 합니다.';err.style.display='block';return;}
+  if(p1!==p2){err.textContent='비밀번호가 일치하지 않습니다.';err.style.display='block';return;}
+  localStorage.setItem('lnv_pw',btoa(p1));closeModal();enterAdmin();
+}
+function doLogin(){
+  var val=document.getElementById('login-pw').value;
+  var stored=localStorage.getItem('lnv_pw');
+  if(btoa(val)===stored){closeModal();enterAdmin();}
+  else{var e=document.getElementById('login-err');e.textContent='비밀번호가 올바르지 않습니다.';e.style.display='block';}
+}
+function closeModal(){document.getElementById('admin-modal').classList.remove('open');}
+function enterAdmin(){buildAdminPanels();showPage('admin');}
+function adminLogout(){showPage('home');}
+
+/* ── ADMIN PANEL ── */
+function switchAdminTab(name,btn){
+  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.admin-panel').forEach(function(p){p.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+  var panel=document.getElementById('tab-'+name);
+  if(panel) panel.classList.add('active');
+}
+function buildAdminPanels(){
+  buildNewsAdmin('neuro-admin-list',neuroNews);
+  buildNewsAdmin('nursing-admin-list',nursingNews);
+  buildLifeAdminPanel();
+  buildActAdminPanel();
+}
+function buildNewsAdmin(elId,data){
+  var el=document.getElementById(elId);
+  el.innerHTML=data.map(function(item,i){
+    var imgHtml=item.img
+      ?'<img src="'+item.img+'" class="admin-img-thumb" alt=""><br>'
+      +'<label style="font-size:11px;color:var(--text-secondary);">이미지 교체:</label><br>'
+      :'<label style="font-size:11px;color:var(--text-secondary);">이미지 업로드:</label><br>';
+    return '<div class="admin-news-item" id="ani-block-'+elId+'-'+i+'">'
+      +'<div class="admin-news-hd"><span class="admin-news-num">#'+(i+1)+' '+item.tag+'</span>'
+      +'<div style="display:flex;gap:8px;">'
+      +'<button class="btn-save" style="padding:5px 14px;font-size:11px;" onclick="saveOneNewsItem(\''+elId+'\','+i+')">저장</button>'
+      +'<button class="btn-del" onclick="deleteNewsItem(\''+elId+'\','+i+')">삭제</button>'
+      +'</div></div>'
+      +'<div class="admin-field"><label>제목 (KO)</label><input id="ani-'+elId+'-'+i+'-tko" value="'+item.title.replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="admin-field"><label>Title (EN)</label><input id="ani-'+elId+'-'+i+'-ten" value="'+item.titleEn.replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="admin-field"><label>요약 (KO)</label><textarea id="ani-'+elId+'-'+i+'-bko">'+item.body+'</textarea></div>'
+      +'<div class="admin-field"><label>Summary (EN)</label><textarea id="ani-'+elId+'-'+i+'-ben">'+item.bodyEn+'</textarea></div>'
+      +'<div class="admin-field"><label>상세내용 (KO)</label><textarea id="ani-'+elId+'-'+i+'-dko" style="min-height:80px;">'+item.detail+'</textarea></div>'
+      +'<div class="admin-field"><label>Detail (EN)</label><textarea id="ani-'+elId+'-'+i+'-den" style="min-height:80px;">'+item.detailEn+'</textarea></div>'
+      +'<div class="admin-field"><label>날짜</label><input id="ani-'+elId+'-'+i+'-dt" value="'+item.date+'"></div>'
+      +'<div class="admin-field">'+imgHtml
+      +'<input type="file" accept="image/*" onchange="adminUpdateNewsImg(\''+elId+'\','+i+',this)" style="font-size:12px;color:var(--text-secondary);margin-top:4px;">'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function adminUpdateNewsImg(elId,idx,input){
+  if(!input.files||!input.files[0]) return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var data=elId.indexOf('neuro')>=0?neuroNews:nursingNews;
+    data[idx].img=e.target.result;
+    if(elId.indexOf('neuro')>=0) LNV.save('neuro',neuroNews); else LNV.save('nursing',nursingNews);
+    buildNewsAdmin(elId,data);
+  };
+  r.readAsDataURL(input.files[0]);
+}
+function saveOneNewsItem(elId,i){
+  var data=elId.indexOf('neuro')>=0?neuroNews:nursingNews;
+  var item=data[i];
+  var g=function(s){var el=document.getElementById(s);return el?el.value:null;};
+  if(g('ani-'+elId+'-'+i+'-tko')) item.title=g('ani-'+elId+'-'+i+'-tko');
+  if(g('ani-'+elId+'-'+i+'-ten')) item.titleEn=g('ani-'+elId+'-'+i+'-ten');
+  if(g('ani-'+elId+'-'+i+'-bko')) item.body=g('ani-'+elId+'-'+i+'-bko');
+  if(g('ani-'+elId+'-'+i+'-ben')) item.bodyEn=g('ani-'+elId+'-'+i+'-ben');
+  if(g('ani-'+elId+'-'+i+'-dko')) item.detail=g('ani-'+elId+'-'+i+'-dko');
+  if(g('ani-'+elId+'-'+i+'-den')) item.detailEn=g('ani-'+elId+'-'+i+'-den');
+  if(g('ani-'+elId+'-'+i+'-dt'))  item.date=g('ani-'+elId+'-'+i+'-dt');
+  renderGrid(elId.indexOf('neuro')>=0?'neuro-grid':'nursing-grid',data);
+  if(elId.indexOf('neuro')>=0) LNV.save('neuro', neuroNews); else LNV.save('nursing', nursingNews);
+  alert('#'+(i+1)+' 저장되었습니다.');
+}
+function buildActAdminPanel(){
+  var el=document.getElementById('act-admin-list');
+  if(!activities.length){el.innerHTML='<p style="color:var(--text-secondary);padding:16px;">등록된 활동이 없습니다.</p>';return;}
+  el.innerHTML=activities.map(function(a,i){
+    var imgHtml=a.img
+      ?'<img src="'+a.img+'" class="admin-img-thumb" alt=""><br>'
+        +'<label style="font-size:11px;color:var(--text-secondary);">이미지 교체:</label><br>'
+      :'<label style="font-size:11px;color:var(--text-secondary);">이미지 업로드:</label><br>';
+    return '<div class="admin-news-item" id="act-admin-block-'+i+'">'
+      +'<div class="admin-news-hd"><span class="admin-news-num">#'+(i+1)+' '+a.date+' '+a.title.substring(0,20)+'</span>'
+      +'<div style="display:flex;gap:8px;">'
+      +'<button class="btn-save" style="padding:5px 14px;font-size:11px;" onclick="saveOneActivity('+i+')">저장</button>'
+      +'<button class="btn-del" onclick="deleteActivity('+i+')">삭제</button>'
+      +'</div></div>'
+      +'<div class="admin-field"><label>제목</label><input id="act-ad-'+i+'-title" value="'+a.title.replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="admin-field"><label>날짜</label><input id="act-ad-'+i+'-date" type="date" value="'+a.date+'"></div>'
+      +'<div class="admin-field"><label>내용</label><textarea id="act-ad-'+i+'-content">'+a.content+'</textarea></div>'
+      +'<div class="admin-field">'+imgHtml
+      +'<input type="file" accept="image/*" onchange="adminUpdateActImg('+i+',this)" style="font-size:12px;color:var(--text-secondary);margin-top:4px;">'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function saveOneActivity(i){
+  var g=function(s){var el=document.getElementById(s);return el?el.value:null;};
+  if(g('act-ad-'+i+'-title')) activities[i].title=g('act-ad-'+i+'-title');
+  if(g('act-ad-'+i+'-title')) activities[i].titleEn=g('act-ad-'+i+'-title');
+  if(g('act-ad-'+i+'-date'))  activities[i].date=g('act-ad-'+i+'-date');
+  if(g('act-ad-'+i+'-content')){activities[i].content=g('act-ad-'+i+'-content');activities[i].contentEn=g('act-ad-'+i+'-content');}
+  renderActivities();
+  LNV.save('activities', activities);
+  alert('#'+(i+1)+' 저장되었습니다.');
+}
+function adminUpdateActImg(idx,input){
+  if(!input.files||!input.files[0]) return;
+  var r=new FileReader();
+  r.onload=function(e){activities[idx].img=e.target.result;LNV.save('activities',activities);buildActAdminPanel();};
+  r.readAsDataURL(input.files[0]);
+}
+function deleteActivity(i){
+  if(!confirm('활동을 삭제하시겠습니까?')) return;
+  activities.splice(i,1);
+  LNV.save('activities', activities);
+  renderActivities();
+  buildActAdminPanel();
+}
+function saveActAdmin(){
+  activities.forEach(function(a,i){
+    var g=function(s){var el=document.getElementById(s);return el?el.value:null;};
+    if(g('act-ad-'+i+'-title')){a.title=g('act-ad-'+i+'-title');a.titleEn=g('act-ad-'+i+'-title');}
+    if(g('act-ad-'+i+'-date'))  a.date=g('act-ad-'+i+'-date');
+    if(g('act-ad-'+i+'-content')){a.content=g('act-ad-'+i+'-content');a.contentEn=g('act-ad-'+i+'-content');}
+  });
+  renderActivities();
+  LNV.save('activities', activities);
+  alert('모두 저장되었습니다.');
+}
+function buildLifeAdminPanel(){
+  var el=document.getElementById('life-admin-list');
+  el.innerHTML=lifeDataKo.map(function(ch,ci){
+    return '<div class="admin-section"><div class="admin-section-title">'+ch.num+': '+ch.title+'</div>'
+      +ch.eps.map(function(ep,ei){
+        return '<div class="admin-news-item">'
+          +'<div class="admin-news-hd"><span class="admin-news-num">에피소드 '+(ei+1)+'</span>'
+          +'<button class="btn-del" onclick="deleteLifeEp('+ci+','+ei+')">삭제</button></div>'
+          +'<div class="admin-field"><label>제목</label><input id="lep-'+ci+'-'+ei+'-t" value="'+ep.t.replace(/"/g,'&quot;')+'"></div>'
+          +'<div class="admin-field"><label>내용</label><textarea id="lep-'+ci+'-'+ei+'-b">'+ep.b+'</textarea></div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }).join('');
+}
+function deleteNewsItem(elId,idx){
+  if(!confirm('삭제하시겠습니까?')) return;
+  if(elId.indexOf('neuro')>=0){ neuroNews.splice(idx,1); LNV.save('neuro', neuroNews); }
+  else { nursingNews.splice(idx,1); LNV.save('nursing', nursingNews); }
+  buildNewsAdmin(elId,elId.indexOf('neuro')>=0?neuroNews:nursingNews);
+}
+function deleteLifeEp(ci,ei){
+  if(!confirm('삭제하시겠습니까?')) return;
+  lifeDataKo[ci].eps.splice(ei,1);lifeDataEn[ci].eps.splice(ei,1);
+  LNV.save('lifeko', lifeDataKo);
+  LNV.save('lifeen', lifeDataEn);
+  buildLifeAdminPanel();
+}
+function saveNewsAdmin(type){
+  var elId=type+'-admin-list';
+  var data=type==='neuro'?neuroNews:nursingNews;
+  data.forEach(function(item,i){
+    var g=function(s){var el=document.getElementById(s);return el?el.value:null;};
+    if(g('ani-'+elId+'-'+i+'-tko')) item.title=g('ani-'+elId+'-'+i+'-tko');
+    if(g('ani-'+elId+'-'+i+'-ten')) item.titleEn=g('ani-'+elId+'-'+i+'-ten');
+    if(g('ani-'+elId+'-'+i+'-bko')) item.body=g('ani-'+elId+'-'+i+'-bko');
+    if(g('ani-'+elId+'-'+i+'-ben')) item.bodyEn=g('ani-'+elId+'-'+i+'-ben');
+    if(g('ani-'+elId+'-'+i+'-dko')) item.detail=g('ani-'+elId+'-'+i+'-dko');
+    if(g('ani-'+elId+'-'+i+'-den')) item.detailEn=g('ani-'+elId+'-'+i+'-den');
+    if(g('ani-'+elId+'-'+i+'-dt'))  item.date=g('ani-'+elId+'-'+i+'-dt');
+  });
+  renderGrid(type==='neuro'?'neuro-grid':'nursing-grid',data);
+  if(type==='neuro') LNV.save('neuro', neuroNews); else LNV.save('nursing', nursingNews);
+  alert('모두 저장되었습니다.');
+}
+function saveLifeAdmin(){
+  lifeDataKo.forEach(function(ch,ci){
+    ch.eps.forEach(function(ep,ei){
+      var t=document.getElementById('lep-'+ci+'-'+ei+'-t');
+      var b=document.getElementById('lep-'+ci+'-'+ei+'-b');
+      if(t) ep.t=t.value;if(b) ep.b=b.value;
+    });
+  });alert('저장되었습니다.');
+}
+function saveGeneral(){
+  var eyeKo = document.getElementById('ad-eyebrow-ko').value.trim();
+  var eyeEn = document.getElementById('ad-eyebrow-en').value.trim();
+  var subKo = document.getElementById('ad-sub-ko').value.trim();
+  var subEn = document.getElementById('ad-sub-en').value.trim();
+
+  /* ── 홈 eyebrow 업데이트 ── */
+  var eyeEl = document.getElementById('home-eyebrow-el');
+  if(eyeEl && eyeKo){
+    eyeEl.setAttribute('data-ko', eyeKo);
+    eyeEl.setAttribute('data-en', eyeEn || eyeKo);
+    eyeEl.textContent = currentLang === 'ko' ? eyeKo : (eyeEn || eyeKo);
+  }
+
+  /* ── 홈 sub 업데이트 ── */
+  var subEl = document.getElementById('home-sub-el');
+  if(subEl && subKo){
+    subEl.setAttribute('data-ko', subKo);
+    subEl.setAttribute('data-en', subEn || subKo);
+    subEl.textContent = currentLang === 'ko' ? subKo : (subEn || subKo);
+  }
+
+  LNV.save('general', {eyeKo:eyeKo, eyeEn:eyeEn||eyeKo, subKo:subKo, subEn:subEn||subKo});
+  alert('✓ 메인 화면 텍스트가 업데이트되었습니다.');
+}
+function changePw(){
+  var cur=document.getElementById('pw-cur').value;
+  var nw=document.getElementById('pw-new').value;
+  var cf=document.getElementById('pw-confirm').value;
+  var msg=document.getElementById('pw-msg');
+  var stored=localStorage.getItem('lnv_pw');
+  if(btoa(cur)!==stored){msg.style.color='#f08080';msg.textContent='현재 비밀번호가 올바르지 않습니다.';return;}
+  if(nw.length<4){msg.style.color='#f08080';msg.textContent='새 비밀번호는 4자 이상이어야 합니다.';return;}
+  if(nw!==cf){msg.style.color='#f08080';msg.textContent='새 비밀번호가 일치하지 않습니다.';return;}
+  localStorage.setItem('lnv_pw',btoa(nw));
+  msg.style.color='var(--accent3)';msg.textContent='비밀번호가 변경되었습니다.';
+  ['pw-cur','pw-new','pw-confirm'].forEach(function(id){document.getElementById(id).value='';});
+}
+
+
+/* ── 관리자 패널: 새 항목 작성 헬퍼 ── */
+function toggleAdminAddForm(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.style.display=el.style.display==='none'?'block':'none';
+  /* 나의 삶 폼 열릴 때 챕터 셀렉트 채우기 */
+  if(id==='life-add-form'&&el.style.display==='block'){
+    var sel=document.getElementById('adlife-chapter');
+    sel.innerHTML=lifeDataKo.map(function(ch,i){
+      return '<option value="'+i+'">'+ch.num+': '+ch.title+'</option>';
+    }).join('');
+  }
+}
+function adminPreviewPhoto(pre,input){
+  if(!input.files||!input.files[0]) return;
+  var r=new FileReader();
+  r.onload=function(e){
+    document.getElementById(pre+'-photo-img').src=e.target.result;
+    document.getElementById(pre+'-photo-preview').style.display='block';
+  };
+  r.readAsDataURL(input.files[0]);
+}
+function adminAddNews(type){
+  var isN=(type==='neuro');
+  var pre=isN?'adn':'adns';
+  var g=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+  var title=g(pre+'-title');
+  var body=g(pre+'-body');
+  if(!title||!body){alert('제목과 요약 내용은 필수입니다.');return;}
+  var imgEl=document.getElementById(pre+'-photo-img');
+  var imgSrc=imgEl&&imgEl.src&&imgEl.src.indexOf('data:')===0?imgEl.src:null;
+  var cols=['#7eb8d4','#c9b6e0','#89d4b8'];
+  var newItem={
+    id:type+'_'+Date.now(),
+    tag:g(pre+'-tag')||'New',tagEn:g(pre+'-tag-en')||g(pre+'-tag')||'New',
+    title:title,titleEn:g(pre+'-title-en')||title,
+    body:body,bodyEn:g(pre+'-body-en')||body,
+    detail:g(pre+'-detail')||'<p>'+body+'</p>',
+    detailEn:g(pre+'-detail-en')||'<p>'+(g(pre+'-body-en')||body)+'</p>',
+    date:g(pre+'-date')||'2025',
+    color:cols[Math.floor(Math.random()*3)],
+    img:imgSrc
+  };
+  if(isN) neuroNews.unshift(newItem); else nursingNews.unshift(newItem);
+  renderGrid(isN?'neuro-grid':'nursing-grid',isN?neuroNews:nursingNews);
+  buildNewsAdmin(isN?'neuro-admin-list':'nursing-admin-list',isN?neuroNews:nursingNews);
+  /* 폼 초기화 */
+  ['tag','tag-en','title','title-en','body','body-en','detail','detail-en','date'].forEach(function(k){
+    var el=document.getElementById(pre+'-'+k);if(el) el.value='';
+  });
+  var pp=document.getElementById(pre+'-photo-preview');
+  if(pp) pp.style.display='none';
+  var pi=document.getElementById(pre+'-photo-img');
+  if(pi) pi.src='';
+  if(isN) LNV.save('neuro', neuroNews); else LNV.save('nursing', nursingNews);
+  toggleAdminAddForm(isN?'neuro-add-form':'nursing-add-form');
+  alert('등록되었습니다!');
+}
+function adminAddActivity(){
+  var g=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+  var title=g('adact-title');
+  var date=document.getElementById('adact-date').value;
+  var content=g('adact-content');
+  if(!title||!date||!content){alert('제목, 날짜, 내용을 모두 입력해주세요.');return;}
+  var imgEl=document.getElementById('adact-photo-img');
+  var imgSrc=imgEl&&imgEl.src&&imgEl.src.indexOf('data:')===0?imgEl.src:null;
+  activities.unshift({title:title,titleEn:title,date:date,content:content,contentEn:content,img:imgSrc});
+  renderActivities();
+  buildActAdminPanel();
+  ['adact-title','adact-content'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('adact-date').value='';
+  var pp=document.getElementById('adact-photo-preview');if(pp) pp.style.display='none';
+  LNV.save('activities', activities);
+  toggleAdminAddForm('act-add-form');
+  alert('등록되었습니다!');
+}
+function adminAddLifeEp(){
+  var g=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+  var ci=parseInt(document.getElementById('adlife-chapter').value);
+  var title=g('adlife-title');
+  var body=g('adlife-body');
+  if(isNaN(ci)||!title||!body){alert('챕터, 제목, 내용을 모두 입력해주세요.');return;}
+  lifeDataKo[ci].eps.push({t:title,b:body});
+  var titleEn=g('adlife-title-en')||title;
+  var bodyEn=g('adlife-body-en')||body;
+  if(lifeDataEn[ci]) lifeDataEn[ci].eps.push({t:titleEn,b:bodyEn});
+  renderLife();
+  buildLifeAdminPanel();
+  ['adlife-title','adlife-title-en','adlife-body','adlife-body-en'].forEach(function(id){document.getElementById(id).value='';});
+  LNV.save('lifeko', lifeDataKo);
+  LNV.save('lifeen', lifeDataEn);
+  toggleAdminAddForm('life-add-form');
+  alert('등록되었습니다!');
+}
+
+function saveConnectAdmin(){
+  var email  = document.getElementById('con-email').value.trim();
+  var school = document.getElementById('con-school').value.trim();
+  var addr   = document.getElementById('con-addr').value.trim();
+  var url    = document.getElementById('con-url').value.trim();
+  var majKo  = document.getElementById('con-major-ko').value.trim();
+  var majEn  = document.getElementById('con-major-en').value.trim();
+  var msg    = document.getElementById('con-msg');
+
+  /* ── 이메일 ── */
+  var elEmail = document.getElementById('con-disp-email');
+  if(elEmail && email){
+    elEmail.innerHTML = '<a href="mailto:'+email+'">'+email+'</a>';
+  }
+  /* ── 학교명 + 주소 ── */
+  var elSchool = document.getElementById('con-disp-school');
+  if(elSchool){
+    elSchool.innerHTML = '<strong>'+school+'</strong><br>'
+      +'<span style="color:var(--text-secondary);font-size:13px;">'+addr+'</span>';
+  }
+  /* ── 웹사이트 ── */
+  var elUrl = document.getElementById('con-disp-url');
+  if(elUrl && url){
+    var displayUrl = url.replace(/^https?:\/\//, '');
+    elUrl.innerHTML = '<a href="'+url+'" target="_blank">'+displayUrl+'</a>';
+  }
+  /* ── 목표 전공 ── */
+  var elMajor = document.getElementById('con-disp-major');
+  if(elMajor){
+    elMajor.setAttribute('data-ko', majKo);
+    elMajor.setAttribute('data-en', majEn);
+    elMajor.textContent = currentLang === 'ko' ? majKo : majEn;
+  }
+
+  LNV.save('connect', {email:email, school:school, addr:addr, url:url, majKo:majKo, majEn:majEn});
+  msg.style.color = 'var(--accent3)';
+  msg.textContent = '✓ Connect 페이지가 업데이트되었습니다.';
+  setTimeout(function(){ msg.textContent = ''; }, 3000);
+}
+
+document.getElementById('admin-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ── 앱 시작: localStorage에서 데이터 복원 ── */
+document.addEventListener('DOMContentLoaded', function(){
+  LNV.restore();
+});
+/* ── BROWSER HISTORY (뒤로가기 지원) ── */
+window.addEventListener('popstate', function(e){
+  var state = e.state;
+  if(!state){
+    /* 히스토리 스택의 맨 처음(홈) */
+    _activatePage('home');
+    return;
+  }
+  if(state.page === 'article' && state.articleSrc && state.articleId){
+    /* 기사 상세 페이지 복원 */
+    var arr = state.articleSrc==='neuro' ? neuroNews : nursingNews;
+    var item = null;
+    for(var i=0;i<arr.length;i++){if(arr[i].id===state.articleId){item=arr[i];break;}}
+    if(item){
+      articleSource=state.articleSrc;
+      currentArticleItem=item;
+      detailLang=currentLang;
+      renderArticleContent();
+      document.getElementById('art-back-btn').onclick=function(){showPage(articleSource);};
+    }
+    _activatePage('article');
+  } else if(state.page){
+    _activatePage(state.page);
+  }
+});
+
+/* 최초 진입: 홈 상태를 히스토리에 등록 (replaceState로 현재 항목 교체) */
+(function(){
+  var initState = {page:'home', articleSrc:null, articleId:null};
+  history.replaceState(initState, '', window.location.pathname + window.location.search);
+})();
+
+</script>
+</body>
+</html>
