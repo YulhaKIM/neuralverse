@@ -1398,10 +1398,110 @@ var articleSource='neuro';
 var currentArticleItem=null;
 var detailLang='ko';
 
-/* ── PERSIST: localStorage 저장/복원 유틸 ── */
+/* ══════════════════════════════════════════════════════
+   PERSIST: 텍스트 → localStorage / 이미지 → IndexedDB
+   이미지는 base64가 커서 localStorage(5MB)를 초과함.
+   IndexedDB는 수백MB를 지원하며 모든 기기에서 동작함.
+══════════════════════════════════════════════════════ */
+
+/* ── IndexedDB 이미지 스토어 ── */
+var IMGDB = (function(){
+  var DB_NAME = 'lnv_imgdb';
+  var DB_VER  = 1;
+  var STORE   = 'images';
+  var _db     = null;
+
+  function open(cb){
+    if(_db){ cb(_db); return; }
+    var req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = function(e){
+      e.target.result.createObjectStore(STORE);
+    };
+    req.onsuccess = function(e){ _db = e.target.result; cb(_db); };
+    req.onerror   = function(){ cb(null); };
+  }
+
+  return {
+    /* 이미지 저장: key='neuro_n1', val=base64 string or null */
+    put: function(key, val, cb){
+      open(function(db){
+        if(!db){ if(cb) cb(false); return; }
+        try{
+          var tx = db.transaction(STORE, 'readwrite');
+          var op = val ? tx.objectStore(STORE).put(val, key)
+                       : tx.objectStore(STORE).delete(key);
+          op.onsuccess = function(){ if(cb) cb(true); };
+          op.onerror   = function(){ if(cb) cb(false); };
+        }catch(e){ if(cb) cb(false); }
+      });
+    },
+    /* 이미지 읽기 */
+    get: function(key, cb){
+      open(function(db){
+        if(!db){ cb(null); return; }
+        try{
+          var tx  = db.transaction(STORE, 'readonly');
+          var req = tx.objectStore(STORE).get(key);
+          req.onsuccess = function(){ cb(req.result || null); };
+          req.onerror   = function(){ cb(null); };
+        }catch(e){ cb(null); }
+      });
+    },
+    /* 키 패턴으로 전체 읽기 (prefix match) */
+    getAll: function(prefix, cb){
+      open(function(db){
+        if(!db){ cb({}); return; }
+        try{
+          var tx  = db.transaction(STORE, 'readonly');
+          var req = tx.objectStore(STORE).openCursor();
+          var out = {};
+          req.onsuccess = function(e){
+            var cur = e.target.result;
+            if(cur){
+              if(cur.key.indexOf(prefix)===0) out[cur.key] = cur.value;
+              cur.continue();
+            } else {
+              cb(out);
+            }
+          };
+          req.onerror = function(){ cb({}); };
+        }catch(e){ cb({}); }
+      });
+    }
+  };
+})();
+
+/* ── 데이터 저장 시 이미지를 분리하는 헬퍼 ── */
+function stripImgs(arr){
+  /* img 필드를 제거한 shallow copy 배열 반환 */
+  return arr.map(function(item){
+    var copy = {};
+    for(var k in item){ if(k !== 'img') copy[k] = item[k]; }
+    return copy;
+  });
+}
+
+/* ── IndexedDB에 배열의 이미지 일괄 저장 ── */
+function saveImgs(prefix, arr){
+  arr.forEach(function(item){
+    IMGDB.put(prefix + item.id, item.img || null);
+  });
+}
+
+/* ── localStorage 텍스트 유틸 ── */
 var LNV = {
   save: function(key, val){
-    try{ localStorage.setItem('lnv_'+key, JSON.stringify(val)); }catch(e){}
+    /* 뉴스/활동 배열은 이미지 제거 후 저장 */
+    var toStore = (Array.isArray(val) && val.length && val[0].hasOwnProperty('img'))
+      ? stripImgs(val) : val;
+    try{ localStorage.setItem('lnv_'+key, JSON.stringify(toStore)); }
+    catch(e){
+      console.warn('localStorage quota exceeded for key:', key);
+    }
+    /* 이미지는 IndexedDB에 별도 저장 */
+    if(Array.isArray(val) && val.length && val[0].hasOwnProperty('img')){
+      saveImgs('img_'+key+'_', val);
+    }
   },
   load: function(key){
     try{
@@ -1409,8 +1509,19 @@ var LNV = {
       return v ? JSON.parse(v) : null;
     }catch(e){ return null; }
   },
-  /* 앱 시작 시 저장된 데이터로 배열 교체 */
+  /* 이미지를 IndexedDB에서 읽어 배열에 주입 */
+  injectImgs: function(prefix, arr, cb){
+    IMGDB.getAll('img_'+prefix+'_', function(imgMap){
+      arr.forEach(function(item){
+        var k = 'img_'+prefix+'_'+item.id;
+        if(imgMap[k]) item.img = imgMap[k];
+      });
+      if(cb) cb();
+    });
+  },
+  /* 앱 시작 시 저장된 데이터로 배열 교체 후 이미지 주입 */
   restore: function(){
+    /* 텍스트 데이터 복원 */
     var n = LNV.load('neuro');
     if(n && n.length) neuroNews = n;
     var ns = LNV.load('nursing');
@@ -1421,6 +1532,21 @@ var LNV = {
     if(lk && lk.length) lifeDataKo = lk;
     var le = LNV.load('lifeen');
     if(le && le.length) lifeDataEn = le;
+
+    /* 이미지 비동기 주입 후 그리드 재렌더 */
+    LNV.injectImgs('neuro', neuroNews, function(){
+      var active = document.querySelector('.page.active');
+      if(active && active.id==='page-neuro') renderGrid('neuro-grid', neuroNews);
+    });
+    LNV.injectImgs('nursing', nursingNews, function(){
+      var active = document.querySelector('.page.active');
+      if(active && active.id==='page-nursing') renderGrid('nursing-grid', nursingNews);
+    });
+    LNV.injectImgs('activities', activities, function(){
+      var active = document.querySelector('.page.active');
+      if(active && active.id==='page-activities') renderActivities();
+    });
+
     /* 홈 텍스트 복원 */
     var g = LNV.load('general');
     if(g){
@@ -1436,7 +1562,6 @@ var LNV = {
         subEl.setAttribute('data-en', g.subEn||g.subKo);
         subEl.textContent = g.subKo;
       }
-      /* 관리자 패널 입력값도 복원 */
       var f = function(id, val){var el=document.getElementById(id);if(el&&val)el.value=val;};
       f('ad-eyebrow-ko', g.eyeKo); f('ad-eyebrow-en', g.eyeEn);
       f('ad-sub-ko', g.subKo);     f('ad-sub-en', g.subEn);
@@ -1453,7 +1578,6 @@ var LNV = {
       if(el&&c.url){ dUrl=c.url.replace(/^https?:\/\//, ''); el.innerHTML='<a href="'+c.url+'" target="_blank">'+dUrl+'</a>'; }
       el=document.getElementById('con-disp-major');
       if(el&&c.majKo){ el.setAttribute('data-ko',c.majKo); el.setAttribute('data-en',c.majEn||c.majKo); el.textContent=c.majKo; }
-      /* 관리자 패널 입력값 복원 */
       var f2=function(id,val){var e2=document.getElementById(id);if(e2&&val)e2.value=val;};
       f2('con-email',c.email); f2('con-school',c.school); f2('con-addr',c.addr);
       f2('con-url',c.url); f2('con-major-ko',c.majKo); f2('con-major-en',c.majEn);
@@ -1486,9 +1610,15 @@ function _activatePage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   var t=document.getElementById('page-'+id);
   if(t){t.classList.add('active');window.scrollTo(0,0);}
-  if(id==='neuro') renderGrid('neuro-grid',neuroNews);
-  if(id==='nursing') renderGrid('nursing-grid',nursingNews);
-  if(id==='activities') renderActivities();
+  if(id==='neuro'){
+    LNV.injectImgs('neuro', neuroNews, function(){ renderGrid('neuro-grid', neuroNews); });
+  }
+  if(id==='nursing'){
+    LNV.injectImgs('nursing', nursingNews, function(){ renderGrid('nursing-grid', nursingNews); });
+  }
+  if(id==='activities'){
+    LNV.injectImgs('activities', activities, function(){ renderActivities(); });
+  }
   if(id==='life') renderLife();
   closeMobileDrawer();
 }
@@ -1566,7 +1696,15 @@ function openArticle(src,id){
   for(var i=0;i<arr.length;i++){if(arr[i].id===id){item=arr[i];break;}}
   if(!item) return;
   articleSource=src; currentArticleItem=item; detailLang=currentLang;
-  renderArticleContent();
+  /* 이미지가 없으면 IndexedDB에서 로드 후 렌더 */
+  if(!item.img){
+    IMGDB.get('img_'+src+'_'+item.id, function(imgData){
+      if(imgData) item.img = imgData;
+      renderArticleContent();
+    });
+  } else {
+    renderArticleContent();
+  }
   document.getElementById('art-back-btn').onclick=function(){showPage(articleSource);};
   /* 기사 상세는 article 페이지 + 기사 정보를 state에 함께 저장 */
   var state={page:'article', articleSrc:src, articleId:id};
