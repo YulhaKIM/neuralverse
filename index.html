@@ -851,6 +851,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
         <div class="admin-field"><label>하단 소개 문구 (EN)</label><input id="ad-sub-en" value="Between the science of care and the mysteries of the brain — Lisa Yulha Kim." placeholder="e.g. Between the science of care..."></div>
         <button class="btn-save" onclick="saveGeneral()">저장</button>
       </div>
+      <div class="admin-section">
+        <div class="admin-section-title">&#128247; 이미지 호스팅 설정 (ImgBB)</div>
+        <div class="imgbb-notice">
+          <strong>모든 기기에서 이미지를 보려면 ImgBB API Key가 필요합니다.</strong><br>
+          1. <a href="https://imgbb.com" target="_blank">imgbb.com</a> 에서 무료 계정 생성<br>
+          2. <a href="https://api.imgbb.com" target="_blank">api.imgbb.com</a> 에서 API Key 발급<br>
+          3. 아래에 API Key 입력 후 저장 — 이후 업로드되는 이미지는 모든 기기에서 보입니다.
+          <div class="imgbb-key-row">
+            <input class="imgbb-key-input" id="imgbb-key-input" type="text" placeholder="ImgBB API Key 입력 (예: a1b2c3d4e5f6...)">
+            <button class="imgbb-save-btn" onclick="saveImgbbKey()">저장</button>
+          </div>
+          <div id="imgbb-key-status" style="font-size:12px;margin-top:6px;"></div>
+        </div>
+      </div>
     </div>
     <div id="tab-neuro-admin" class="admin-panel">
       <div id="neuro-admin-list"></div>
