@@ -432,6 +432,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
 }
 /* 상세 페이지 hero 이미지만 확대 커서 */
 .article-hero-img img{cursor:zoom-in;}
+
+/* ── ImgBB 설정 배너 ── */
+.imgbb-notice{
+  background:rgba(126,184,212,0.08);
+  border:1px solid rgba(126,184,212,0.25);
+  border-radius:10px;padding:14px 18px;
+  font-size:13px;color:var(--text-secondary);
+  margin-bottom:20px;line-height:1.6;
+}
+.imgbb-notice a{color:var(--accent);text-decoration:underline;}
+.imgbb-notice strong{color:var(--text-primary);}
+.imgbb-key-row{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+.imgbb-key-input{flex:1;min-width:200px;background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);border-radius:7px;padding:9px 13px;
+  color:var(--text-primary);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;}
+.imgbb-key-input:focus{border-color:var(--accent);}
+.imgbb-save-btn{background:var(--accent);color:#000;border:none;padding:9px 18px;
+  border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.img-upload-status{font-size:12px;color:var(--accent3);margin-top:6px;display:none;}
+.img-upload-status.err{color:#f08080;}
 </style>
 </head>
 <body>
@@ -560,6 +581,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
           <div id="nn-photo-preview" style="display:none;margin-top:8px;">
             <img id="nn-photo-img" src="" style="max-height:100px;border-radius:6px;">
           </div>
+          <div id="nn-img-status" class="img-upload-status"></div>
         </div>
       </div>
       <div class="upload-lock">
@@ -629,6 +651,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
           <div id="ns-photo-preview" style="display:none;margin-top:8px;">
             <img id="ns-photo-img" src="" style="max-height:100px;border-radius:6px;">
           </div>
+          <div id="ns-img-status" class="img-upload-status"></div>
         </div>
       </div>
       <div class="upload-lock">
@@ -712,6 +735,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
             <div class="file-drop-text" data-ko="클릭하여 사진 선택" data-en="Click to select photo">클릭하여 사진 선택</div>
           </div>
           <div id="file-preview"><img id="preview-img" src="" alt="preview"></div>
+          <div id="act-img-status" class="img-upload-status"></div>
         </div>
       </div>
       <div class="upload-lock">
@@ -1463,6 +1487,90 @@ var articleSource='neuro';
 var currentArticleItem=null;
 var detailLang='ko';
 
+
+/* ══════════════════════════════════════════════════════
+   IMAGE HOSTING — ImgBB API
+   이미지를 외부 서버(ImgBB)에 업로드하여 URL로 저장.
+   URL은 작아서 localStorage에 저장 가능 → 모든 기기 공유.
+   API Key 없으면 base64 로컬 fallback.
+══════════════════════════════════════════════════════ */
+function getImgbbKey(){
+  return localStorage.getItem('lnv_imgbb_key') || '';
+}
+function saveImgbbKey(){
+  var key = document.getElementById('imgbb-key-input').value.trim();
+  var st  = document.getElementById('imgbb-key-status');
+  if(!key){ st.style.color='#f08080'; st.textContent='API Key를 입력해주세요.'; return; }
+  localStorage.setItem('lnv_imgbb_key', key);
+  st.style.color='var(--accent3)'; st.textContent='✓ API Key가 저장되었습니다.';
+  setTimeout(function(){ st.textContent=''; }, 3000);
+}
+
+/* base64 data URL → Blob */
+function dataURLtoBlob(dataURL){
+  var arr=dataURL.split(','), mime=arr[0].match(/:(.*?);/)[1];
+  var bstr=atob(arr[1]), n=bstr.length, u8=new Uint8Array(n);
+  for(var i=0;i<n;i++) u8[i]=bstr.charCodeAt(i);
+  return new Blob([u8],{type:mime});
+}
+
+/* 
+  uploadImage(dataURL, onSuccess(url), onFail(msg))
+  - ImgBB Key 있으면 API 업로드 → URL 반환
+  - Key 없으면 dataURL 그대로 fallback
+*/
+function uploadImage(dataURL, onSuccess, onFail){
+  var key = getImgbbKey();
+  if(!key){
+    /* fallback: base64 그대로 사용 (로컬 기기에서만 보임) */
+    onSuccess(dataURL);
+    return;
+  }
+  var blob = dataURLtoBlob(dataURL);
+  var form = new FormData();
+  form.append('image', blob);
+  form.append('key', key);
+  fetch('https://api.imgbb.com/1/upload', {method:'POST', body:form})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.success && data.data && data.data.url){
+        onSuccess(data.data.url);
+      } else {
+        /* API 실패 시 base64 fallback */
+        console.warn('ImgBB upload failed:', data);
+        onSuccess(dataURL);
+        if(onFail) onFail('ImgBB 업로드 실패, 로컬 이미지 사용');
+      }
+    })
+    .catch(function(e){
+      console.warn('ImgBB fetch error:', e);
+      onSuccess(dataURL); /* fallback */
+      if(onFail) onFail('네트워크 오류, 로컬 이미지 사용');
+    });
+}
+
+/* 파일 input → dataURL로 읽은 뒤 ImgBB 업로드, 결과를 콜백으로 */
+function readAndUpload(file, statusElId, onDone){
+  var statusEl = statusElId ? document.getElementById(statusElId) : null;
+  if(statusEl){ statusEl.style.display='block'; statusEl.className='img-upload-status'; statusEl.textContent='이미지 업로드 중...'; }
+  var r = new FileReader();
+  r.onload = function(e){
+    var dataURL = e.target.result;
+    uploadImage(dataURL,
+      function(finalUrl){
+        if(statusEl){
+          statusEl.textContent = finalUrl.startsWith('http') ? '✓ 이미지 업로드 완료 (외부 URL)' : '⚠ API Key 없음 — 로컬 저장 (이 기기에서만 보임)';
+          setTimeout(function(){ statusEl.style.display='none'; }, 3000);
+        }
+        onDone(finalUrl);
+      },
+      function(msg){
+        if(statusEl){ statusEl.className='img-upload-status err'; statusEl.textContent=msg; }
+      }
+    );
+  };
+  r.readAsDataURL(file);
+}
 /* ══════════════════════════════════════════════════════
    PERSIST: 텍스트 → localStorage / 이미지 → IndexedDB
    이미지는 base64가 커서 localStorage(5MB)를 초과함.
@@ -1538,10 +1646,17 @@ var IMGDB = (function(){
 
 /* ── 데이터 저장 시 이미지를 분리하는 헬퍼 ── */
 function stripImgs(arr){
-  /* img 필드를 제거한 shallow copy 배열 반환 */
+  /* URL 이미지는 localStorage에 저장 가능 (작음), base64만 제거 */
   return arr.map(function(item){
     var copy = {};
-    for(var k in item){ if(k !== 'img') copy[k] = item[k]; }
+    for(var k in item){
+      if(k === 'img'){
+        /* URL이면 유지, base64(data:로 시작)면 제거 */
+        if(item.img && !item.img.startsWith('data:')) copy.img = item.img;
+      } else {
+        copy[k] = item[k];
+      }
+    }
     return copy;
   });
 }
@@ -1549,7 +1664,10 @@ function stripImgs(arr){
 /* ── IndexedDB에 배열의 이미지 일괄 저장 ── */
 function saveImgs(prefix, arr){
   arr.forEach(function(item){
-    IMGDB.put(prefix + item.id, item.img || null);
+    /* base64만 IndexedDB에 저장, URL 이미지는 localStorage에 이미 저장됨 */
+    if(item.img && item.img.startsWith('data:')){
+      IMGDB.put(prefix + item.id, item.img);
+    }
   });
 }
 
@@ -1580,7 +1698,7 @@ var LNV = {
     var pending = arr.length;
     var done = function(){ if(--pending === 0 && cb) cb(); };
     arr.forEach(function(item){
-      /* 이미 메모리에 이미지가 있으면 스킵 */
+      /* URL 이미지나 이미 로드된 이미지는 스킵 */
       if(item.img){ done(); return; }
       IMGDB.get('img_'+prefix+'_'+item.id, function(imgData){
         if(imgData) item.img = imgData;
@@ -1867,14 +1985,11 @@ function _renderActDetail(a){
     +'<div class="article-body"><p>'+body.replace(/\n/g,'</p><p>')+'</p></div>';
 }
 function previewFile(input){
-  if(input.files&&input.files[0]){
-    var r=new FileReader();
-    r.onload=function(e){
-      document.getElementById('preview-img').src=e.target.result;
-      document.getElementById('file-preview').style.display='block';
-    };
-    r.readAsDataURL(input.files[0]);
-  }
+  if(!input.files||!input.files[0]) return;
+  readAndUpload(input.files[0], 'act-img-status', function(finalUrl){
+    document.getElementById('preview-img').src=finalUrl;
+    document.getElementById('file-preview').style.display='block';
+  });
 }
 function checkAdminPw(inputId,errId){
   var val=document.getElementById(inputId).value;
@@ -1899,14 +2014,11 @@ function addActivity(){
   window.scrollTo(0,0);
 }
 function previewNewsFile(pre,input){
-  if(input.files&&input.files[0]){
-    var r=new FileReader();
-    r.onload=function(e){
-      document.getElementById(pre+'-photo-img').src=e.target.result;
-      document.getElementById(pre+'-photo-preview').style.display='block';
-    };
-    r.readAsDataURL(input.files[0]);
-  }
+  if(!input.files||!input.files[0]) return;
+  readAndUpload(input.files[0], pre+'-img-status', function(finalUrl){
+    document.getElementById(pre+'-photo-img').src=finalUrl;
+    document.getElementById(pre+'-photo-preview').style.display='block';
+  });
 }
 function addNewsItem(type){
   var isN=(type==='neuro');
@@ -2048,6 +2160,12 @@ function buildAdminPanels(){
   buildNewsAdmin('nursing-admin-list',nursingNews);
   buildLifeAdminPanel();
   buildActAdminPanel();
+  /* ImgBB key 복원 */
+  var savedKey = getImgbbKey();
+  var ki = document.getElementById('imgbb-key-input');
+  if(ki && savedKey) ki.value = savedKey;
+  var ks = document.getElementById('imgbb-key-status');
+  if(ks && savedKey){ ks.style.color='var(--accent3)'; ks.textContent='✓ API Key 저장됨'; }
 }
 function buildNewsAdmin(elId,data){
   var el=document.getElementById(elId);
@@ -2077,14 +2195,12 @@ function buildNewsAdmin(elId,data){
 }
 function adminUpdateNewsImg(elId,idx,input){
   if(!input.files||!input.files[0]) return;
-  var r=new FileReader();
-  r.onload=function(e){
+  readAndUpload(input.files[0], null, function(finalUrl){
     var data=elId.indexOf('neuro')>=0?neuroNews:nursingNews;
-    data[idx].img=e.target.result;
+    data[idx].img=finalUrl;
     if(elId.indexOf('neuro')>=0) LNV.save('neuro',neuroNews); else LNV.save('nursing',nursingNews);
     buildNewsAdmin(elId,data);
-  };
-  r.readAsDataURL(input.files[0]);
+  });
 }
 function saveOneNewsItem(elId,i){
   var data=elId.indexOf('neuro')>=0?neuroNews:nursingNews;
@@ -2139,9 +2255,11 @@ function saveOneActivity(i){
 }
 function adminUpdateActImg(idx,input){
   if(!input.files||!input.files[0]) return;
-  var r=new FileReader();
-  r.onload=function(e){activities[idx].img=e.target.result;LNV.save('activities',activities);buildActAdminPanel();};
-  r.readAsDataURL(input.files[0]);
+  readAndUpload(input.files[0], null, function(finalUrl){
+    activities[idx].img=finalUrl;
+    LNV.save('activities',activities);
+    buildActAdminPanel();
+  });
 }
 function deleteActivity(i){
   if(!confirm('활동을 삭제하시겠습니까?')) return;
@@ -2272,12 +2390,10 @@ function toggleAdminAddForm(id){
 }
 function adminPreviewPhoto(pre,input){
   if(!input.files||!input.files[0]) return;
-  var r=new FileReader();
-  r.onload=function(e){
-    document.getElementById(pre+'-photo-img').src=e.target.result;
+  readAndUpload(input.files[0], null, function(finalUrl){
+    document.getElementById(pre+'-photo-img').src=finalUrl;
     document.getElementById(pre+'-photo-preview').style.display='block';
-  };
-  r.readAsDataURL(input.files[0]);
+  });
 }
 function adminAddNews(type){
   var isN=(type==='neuro');
