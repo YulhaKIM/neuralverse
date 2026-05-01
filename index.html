@@ -390,9 +390,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
   border:1px solid rgba(126,184,212,0.2);
   border-radius:12px;padding:24px;margin-top:20px;
 }
+
+/* ── 이미지 라이트박스 ── */
+.lb-overlay{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(0,0,0,0.92);
+  display:none;align-items:center;justify-content:center;
+  cursor:zoom-out;
+  animation:lbFadeIn .2s ease;
+}
+.lb-overlay.open{display:flex;}
+@keyframes lbFadeIn{from{opacity:0;}to{opacity:1;}}
+.lb-img-wrap{
+  position:relative;
+  max-width:92vw;max-height:88vh;
+  display:flex;align-items:center;justify-content:center;
+}
+.lb-img{
+  max-width:92vw;max-height:88vh;
+  object-fit:contain;
+  border-radius:8px;
+  box-shadow:0 8px 48px rgba(0,0,0,0.7);
+  cursor:default;
+  display:block;
+}
+.lb-close{
+  position:fixed;top:18px;right:22px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,0.12);border:none;
+  color:#fff;font-size:22px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:901;
+}
+.lb-close:hover{background:rgba(255,255,255,0.25);}
+.lb-caption{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,0.7);font-size:13px;
+  font-family:'DM Sans',sans-serif;letter-spacing:.04em;
+  text-align:center;pointer-events:none;
+  max-width:80vw;
+}
+/* 이미지에 클릭 커서 */
+.news-card-img img,.act-card-img img,.article-hero-img img{cursor:zoom-in;}
 </style>
 </head>
 <body>
+
+<!-- 이미지 라이트박스 -->
+<div class="lb-overlay" id="lb-overlay" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()" title="닫기">&#10005;</button>
+  <div class="lb-img-wrap" onclick="event.stopPropagation()">
+    <img class="lb-img" id="lb-img" src="" alt="">
+  </div>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1666,7 +1717,11 @@ function svgIllus(color,idx){
 
 /* ── NEWS GRID ── */
 function newsCardImg(item,i){
-  if(item.img) return '<img src="'+item.img+'" alt="">';
+  if(item.img){
+    var cap=(item.tag||'')+(item.date?' · '+item.date:'');
+    return '<img src="'+item.img+'" alt="'+item.title.replace(/"/g,'&quot;')+'" '
+      +'onclick="event.stopPropagation();openLightbox(this.src,\''+cap.replace(/'/g,"\'")+'\');">';
+  }
   return svgIllus(item.color,i);
 }
 function renderGrid(gridId,data){
@@ -1718,7 +1773,8 @@ function renderArticleContent(){
   var title=lang==='ko'?item.title:item.titleEn;
   var detail=lang==='ko'?item.detail:item.detailEn;
   var heroImg=item.img
-    ?'<img src="'+item.img+'" alt="">'
+    ?'<img src="'+item.img+'" alt="'+item.title.replace(/"/g,'&quot;')+'" '
+      +'onclick="openLightbox(this.src,\''+( (item.tag||'')+(item.date?' · '+item.date:'') ).replace(/'/g,"\'")+'\')">'
     :svgIllus(item.color,2);
   document.getElementById('article-content').innerHTML=
     '<div class="article-tag">'+tag+'</div>'
@@ -1736,7 +1792,10 @@ function renderActivities(){
   g.innerHTML=activities.map(function(a,i){
     var title=currentLang==='ko'?a.title:a.titleEn;
     var body=currentLang==='ko'?a.content:a.contentEn;
-    var img=a.img?'<img src="'+a.img+'" alt="">':'<div style="position:absolute;inset:0;">'+svgIllus(['#7eb8d4','#c9b6e0','#89d4b8'][i%3],i+2)+'</div>';
+    var img=a.img
+      ?'<img src="'+a.img+'" alt="'+a.title.replace(/"/g,'&quot;')+'" '
+        +'onclick="openLightbox(this.src,\''+a.title.replace(/'/g,"\'")+' · '+a.date+'\');">'
+      :'<div style="position:absolute;inset:0;">'+svgIllus(['#7eb8d4','#c9b6e0','#89d4b8'][i%3],i+2)+'</div>';
     return '<div class="act-card">'
       +'<div class="act-card-img">'+img+'</div>'
       +'<div class="act-card-body">'
@@ -2276,6 +2335,26 @@ function saveConnectAdmin(){
   setTimeout(function(){ msg.textContent = ''; }, 3000);
 }
 
+
+/* ── 이미지 라이트박스 ── */
+function openLightbox(src, caption){
+  var ov  = document.getElementById('lb-overlay');
+  var img = document.getElementById('lb-img');
+  var cap = document.getElementById('lb-caption');
+  img.src = src;
+  cap.textContent = caption || '';
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  var ov = document.getElementById('lb-overlay');
+  ov.classList.remove('open');
+  document.getElementById('lb-img').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
 document.getElementById('admin-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
 /* ── 앱 시작: localStorage에서 데이터 복원 (즉시 실행) ── */
