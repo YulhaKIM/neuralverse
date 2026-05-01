@@ -1,0 +1,608 @@
+{
+  "version": 1777613901832,
+  "neuroNews": [
+    {
+      "id": "n1",
+      "tag": "MIT · 2024",
+      "tagEn": "MIT · 2024",
+      "title": "뇌의 기억은 어떻게 만들어질까?",
+      "titleEn": "How Does the Brain Create Memories?",
+      "body": "MIT 피코워 학습&기억 연구소가 밝혀낸 해마의 역할. 기억은 뇌세포(뉴런)들이 서로 연결되는 '시냅스'에서 만들어집니다. 강한 경험일수록 연결이 강해져요.",
+      "bodyEn": "MIT's Picower Institute revealed the hippocampus's role in memory formation. Memories are created at synapses where neurons connect—the stronger the experience, the stronger the connection.",
+      "detail": "<h3>기억의 메커니즘 — 해마와 시냅스</h3><p>MIT 피코워 학습&기억 연구소의 최신 연구에 따르면, 우리가 무언가를 기억할 때 뇌는 단순히 파일을 저장하는 것이 아닙니다. 뇌세포(뉴런)들이 서로 새롭게 연결되거나 기존 연결이 강화되는 물리적인 변화가 일어납니다.</p><div class=\"highlight\">시냅스(Synapse)는 뉴런과 뉴런 사이의 연결 지점입니다. 강렬한 경험을 할수록 더 많은 시냅스가 형성되고, 그 연결이 더 두터워집니다.</div><h3>장기 기억 vs 단기 기억</h3><p>뇌는 두 가지 종류의 기억을 다르게 처리합니다. 단기 기억은 주로 전전두엽(이마 뒤쪽)에서 일시적으로 처리되며, 수 초에서 수 분간 유지됩니다. 반면, 중요한 경험이나 반복 학습된 내용은 해마(Hippocampus)를 통해 장기 기억으로 전환됩니다.</p><h3>고등학생에게 주는 시사점</h3><p>이 연구 결과는 공부법에 직접적인 시사점을 제공합니다. 한 번에 모든 것을 외우려는 '벼락치기'보다 반복 학습(Spaced Repetition)이 더 강한 시냅스 연결을 만들어 낸다는 것이 과학적으로 증명되었습니다. 또한 수면 중에 해마가 낮에 받은 정보를 정리하고 장기 기억으로 통합하는 작업을 합니다.</p><p>MIT 연구팀은 2024년 11월 <em>Nature Neuroscience</em>에 이 연구 결과를 발표하며, 알츠하이머 치료 연구에도 중요한 단서를 제공했다고 밝혔습니다.</p>",
+      "detailEn": "<h3>The Mechanism of Memory — Hippocampus & Synapses</h3><p>According to the latest research from MIT's Picower Institute, when we remember something, the brain doesn't simply save a file. Physical changes occur — neurons form new connections or strengthen existing ones.</p><div class=\"highlight\">A synapse is the connection point between neurons. The more intense the experience, the more synapses form and the stronger those connections become.</div><h3>Long-Term vs Short-Term Memory</h3><p>The brain processes two kinds of memory differently. Short-term memory is handled temporarily in the prefrontal cortex, lasting seconds to minutes. Important or repeated experiences are converted to long-term memory through the hippocampus.</p><h3>Implications for High Schoolers</h3><p>These findings directly inform study techniques. Science confirms that spaced repetition builds stronger synaptic connections than last-minute cramming. Also, the hippocampus consolidates daytime information into long-term memory during sleep.</p><p>The MIT team published these results in <em>Nature Neuroscience</em> in November 2024, noting important clues for Alzheimer's research.</p>",
+      "date": "2024.11",
+      "color": "#7eb8d4"
+    },
+    {
+      "id": "n2",
+      "tag": "스탠퍼드 · 2025",
+      "tagEn": "Stanford · 2025",
+      "title": "수면 중 뇌는 스스로 청소한다",
+      "titleEn": "The Brain Cleans Itself During Sleep",
+      "body": "스탠퍼드 수면의학센터 연구에 따르면, 잠을 잘 때 뇌척수액이 흘러들어 독성 단백질(아밀로이드)을 씻어냅니다.",
+      "bodyEn": "Stanford Sleep Medicine Center found that cerebrospinal fluid washes out toxic proteins (amyloid) during sleep.",
+      "detail": "<h3>수면과 뇌 청소 시스템 — 글림파틱 시스템</h3><p>스탠퍼드 수면의학센터의 연구팀은 2025년 초 놀라운 사실을 발표했습니다. 뇌에는 '글림파틱 시스템(Glymphatic System)'이라는 자체 청소 시스템이 있으며, 이 시스템은 주로 수면 중에 활성화됩니다.</p><div class=\"highlight\">잠을 자는 동안 뇌세포들이 약 60% 수축하고, 그 공간으로 뇌척수액(CSF)이 밀려들어와 독성 노폐물을 씻어냅니다. 대표적인 노폐물이 알츠하이머와 관련된 아밀로이드-베타 단백질입니다.</div><h3>수면 부족이 위험한 이유</h3><p>잠이 부족하면 이 청소 시스템이 제대로 작동하지 못해 뇌에 독성 단백질이 쌓이기 시작합니다. 장기적으로 이는 치매, 특히 알츠하이머 위험을 높이는 원인이 됩니다. 또한 단기적으로는 집중력 저하, 감정 조절 어려움, 의사결정 능력 저하로 이어집니다.</p><h3>최적 수면 시간</h3><p>연구팀은 성인 기준 7~9시간, 10대 청소년은 8~10시간의 수면이 글림파틱 시스템을 최적으로 유지하는 데 필요하다고 밝혔습니다. 특히 깊은 수면(NREM 수면 3단계)에서 이 시스템이 가장 활발하게 작동합니다.</p>",
+      "detailEn": "<h3>Sleep & the Brain's Cleaning System — Glymphatic System</h3><p>Stanford Sleep Medicine Center announced a remarkable finding in early 2025: the brain has a self-cleaning system called the glymphatic system, which activates primarily during sleep.</p><div class=\"highlight\">While sleeping, brain cells shrink by about 60%, allowing cerebrospinal fluid to flow in and flush out toxic waste—most notably amyloid-beta, the protein linked to Alzheimer's.</div><h3>Why Sleep Deprivation is Dangerous</h3><p>Without enough sleep, this cleaning system fails to work properly and toxic proteins accumulate. Long-term, this raises the risk of dementia. Short-term, it leads to reduced focus, poor emotional regulation, and impaired decision-making.</p><h3>Optimal Sleep Duration</h3><p>The team recommends 7–9 hours for adults and 8–10 hours for teenagers to keep the glymphatic system optimal. Deep sleep (NREM Stage 3) is when this system works hardest.</p>",
+      "date": "2025.02",
+      "color": "#c9b6e0"
+    },
+    {
+      "id": "n3",
+      "tag": "존스홉킨스 · 2024",
+      "tagEn": "Johns Hopkins · 2024",
+      "title": "뇌가소성: 뇌는 평생 변한다",
+      "titleEn": "Neuroplasticity: The Brain Changes Throughout Life",
+      "body": "존스홉킨스대 신경과학부가 확인한 놀라운 사실 — 성인의 뇌도 새로운 것을 배울 때마다 물리적으로 변합니다. 이를 '신경가소성'이라고 해요.",
+      "bodyEn": "Johns Hopkins neuroscientists confirmed that adult brains physically change every time we learn something new—a phenomenon called neuroplasticity.",
+      "detail": "<h3>신경가소성이란?</h3><p>오랫동안 과학자들은 뇌가 어린 시절에만 발달하고 성인이 되면 고정된다고 믿었습니다. 그러나 존스홉킨스대 신경과학부의 연구는 이 통념을 완전히 뒤집었습니다. 뇌는 나이에 상관없이 새로운 경험과 학습에 따라 계속해서 구조적, 기능적으로 변화합니다.</p><div class=\"highlight\">신경가소성(Neuroplasticity)은 뇌가 환경과 경험에 반응해 스스로 재조직하는 능력입니다. 새로운 시냅스가 형성되고, 기존 연결이 강화되거나 약화됩니다.</div><h3>실생활 적용 사례</h3><p>런던 택시 기사들을 대상으로 한 유명한 연구에서, 복잡한 런던 지도를 외워야 하는 택시 기사들의 해마가 일반인보다 유의미하게 크다는 것이 확인되었습니다. 반복적 학습과 경험이 뇌 구조 자체를 바꾼 것입니다.</p><h3>뇌가소성을 높이는 방법</h3><p>①새로운 언어나 악기 배우기 ②규칙적인 유산소 운동 ③충분한 수면 ④사회적 교류와 새로운 경험 ⑤마음챙김 명상. 존스홉킨스 연구팀은 특히 도전적인 인지 과제가 뇌가소성을 가장 효과적으로 높인다고 강조했습니다.</p>",
+      "detailEn": "<h3>What is Neuroplasticity?</h3><p>Scientists long believed the brain only develops in childhood and becomes fixed in adulthood. Johns Hopkins research completely overturned this idea. The brain continues to change structurally and functionally at any age in response to new experiences and learning.</p><div class=\"highlight\">Neuroplasticity is the brain's ability to reorganize itself in response to environment and experience—forming new synapses and strengthening or weakening existing connections.</div><h3>Real-World Examples</h3><p>In a famous study of London cab drivers, who must memorize the complex street map, researchers found their hippocampi were significantly larger than average—proof that repeated learning physically changes brain structure.</p><h3>How to Boost Neuroplasticity</h3><p>① Learn a new language or instrument ② Regular aerobic exercise ③ Adequate sleep ④ Social interaction and novel experiences ⑤ Mindfulness meditation. The Johns Hopkins team emphasized that challenging cognitive tasks are most effective.</p>",
+      "date": "2024.09",
+      "color": "#89d4b8"
+    },
+    {
+      "id": "n4",
+      "tag": "하버드 · 2025",
+      "tagEn": "Harvard · 2025",
+      "title": "파킨슨병 조기 진단의 새 길",
+      "titleEn": "A New Path to Early Parkinson's Detection",
+      "body": "하버드 의대 연구팀이 혈액 검사만으로 파킨슨병을 10년 전에 발견할 수 있는 바이오마커를 발굴했습니다.",
+      "bodyEn": "Harvard Medical School researchers identified a blood-based biomarker that can detect Parkinson's disease 10 years before symptoms appear.",
+      "detail": "<h3>파킨슨병과 조기 진단의 중요성</h3><p>파킨슨병은 도파민을 생성하는 뇌세포가 서서히 손상되는 신경퇴행성 질환입니다. 현재까지 증상이 나타났을 때는 이미 뇌세포의 60~80%가 손상된 이후입니다. 하버드 의과대학 연구팀이 2025년 1월 발표한 연구는 이 문제의 돌파구를 열었습니다.</p><div class=\"highlight\">연구팀은 혈액 내 특정 단백질(α-시누클레인 응집체)을 검출하는 방법을 개발했으며, 이를 통해 증상 발현 최대 10년 전에 파킨슨병을 예측할 수 있음을 확인했습니다.</div><h3>연구 결과의 의미</h3><p>조기에 발견한다면 신경보호 치료를 통해 병의 진행을 늦추고 환자의 삶의 질을 크게 향상시킬 수 있습니다. 이 연구는 단순히 파킨슨병에만 그치지 않고, 알츠하이머·루게릭병 등 다른 신경퇴행성 질환의 조기 진단 연구에도 중요한 방법론적 기반이 됩니다.</p><h3>간호 및 의학적 의의</h3><p>간호학 관점에서 조기 진단 기술의 발전은 환자 관리의 패러다임을 '치료 중심'에서 '예방 및 조기 개입 중심'으로 전환하는 데 핵심 역할을 합니다. 특히 신경과 전문 간호사(NP)의 역할이 더욱 중요해질 것으로 예상됩니다.</p>",
+      "detailEn": "<h3>Parkinson's Disease & the Importance of Early Detection</h3><p>Parkinson's is a neurodegenerative disease where dopamine-producing brain cells gradually degrade. By the time symptoms appear, 60–80% of those cells are already lost. Harvard Medical School's January 2025 study offers a breakthrough.</p><div class=\"highlight\">Researchers developed a method to detect specific proteins (α-synuclein aggregates) in blood, enabling Parkinson's prediction up to 10 years before symptoms emerge.</div><h3>Significance of the Findings</h3><p>Early detection enables neuroprotective treatments that slow progression and dramatically improve quality of life. The methodology also forms a foundation for early detection of other neurodegenerative diseases like Alzheimer's and ALS.</p><h3>Nursing & Medical Implications</h3><p>From a nursing perspective, advances in early diagnosis are key to shifting the care paradigm from treatment-focused to prevention and early-intervention-focused, making the role of neurology nurse practitioners increasingly vital.</p>",
+      "date": "2025.01",
+      "color": "#7eb8d4"
+    },
+    {
+      "id": "n5",
+      "tag": "UC샌디에이고 · 2024",
+      "tagEn": "UC San Diego · 2024",
+      "title": "10대 청소년의 뇌, 어른과 다르다",
+      "titleEn": "The Teen Brain is Different from Adults",
+      "body": "청소년의 전두엽(판단·자제력 담당)은 25세까지 완성됩니다. UC샌디에이고 발달신경과학팀이 청소년 뇌 발달 지도를 완성했습니다.",
+      "bodyEn": "The prefrontal cortex (responsible for judgment and self-control) isn't fully developed until age 25. UC San Diego's team completed a comprehensive map of adolescent brain development.",
+      "detail": "<h3>청소년 뇌 발달의 비밀</h3><p>UC샌디에이고 발달신경과학팀이 2024년 12월 발표한 연구는 청소년기 뇌 발달에 관한 가장 포괄적인 지도를 완성했습니다. 이 연구는 10~25세 약 1만 명의 뇌 MRI 데이터를 분석해 이루어졌습니다.</p><div class=\"highlight\">전두엽(Prefrontal Cortex)은 충동 억제, 판단, 계획, 감정 조절을 담당하는 뇌의 '사령탑'입니다. 이 영역은 25세가 되어야 완전히 성숙합니다.</div><h3>청소년기 뇌의 특징</h3><p>청소년의 뇌는 감정과 보상을 처리하는 변연계(limbic system)가 이미 활발하게 활동하는 반면, 이를 조절하는 전두엽은 아직 완성 중입니다. 이것이 청소년이 종종 충동적이거나 위험을 과소평가하는 행동을 보이는 신경과학적 이유입니다.</p><h3>시사점</h3><p>이 연구는 청소년이 '의지 부족'이 아니라 '뇌 발달 단계' 때문에 자제력에 어려움을 겪을 수 있다는 것을 과학적으로 입증합니다. 부모와 교사, 의료진 모두 청소년을 이해할 때 이 맥락을 고려해야 합니다.</p>",
+      "detailEn": "<h3>The Secrets of Adolescent Brain Development</h3><p>UC San Diego's developmental neuroscience team published the most comprehensive map of adolescent brain development in December 2024, analyzing MRI data from ~10,000 people aged 10–25.</p><div class=\"highlight\">The prefrontal cortex — the brain's command center for impulse control, judgment, planning, and emotional regulation — doesn't fully mature until age 25.</div><h3>Characteristics of the Teen Brain</h3><p>The teen brain's limbic system (emotions and reward) is already highly active while the prefrontal cortex is still maturing—the neuroscientific reason why adolescents often act impulsively or underestimate risks.</p><h3>Implications</h3><p>This research scientifically demonstrates that teens struggle with self-control due to brain development stage, not lack of willpower—important context for parents, teachers, and healthcare providers.</p>",
+      "date": "2024.12",
+      "color": "#c9b6e0"
+    },
+    {
+      "id": "n6",
+      "tag": "컬럼비아 · 2025",
+      "tagEn": "Columbia · 2025",
+      "title": "언어와 음악은 같은 뇌 회로를 쓴다",
+      "titleEn": "Language and Music Share the Same Brain Circuit",
+      "body": "컬럼비아대 음악신경과학 연구에서 언어와 음악이 같은 뇌 영역(브로카 영역)을 공유한다는 것이 밝혀졌습니다.",
+      "bodyEn": "Columbia's music neuroscience research revealed that language and music share the same brain region (Broca's area).",
+      "detail": "<h3>음악과 언어의 공통 신경 기반</h3><p>컬럼비아대 음악신경과학 연구소가 2025년 3월 발표한 연구에서, 언어 처리와 음악 처리가 뇌의 동일한 핵심 영역인 '브로카 영역(Broca's area)'을 공유한다는 것이 fMRI 실험을 통해 명확히 밝혀졌습니다.</p><div class=\"highlight\">브로카 영역은 말을 이해하고 생성하는 데 핵심적인 역할을 합니다. 이 영역이 음악의 리듬과 화성 처리에도 동일하게 관여한다는 것이 이번 연구의 핵심 발견입니다.</div><h3>음악 교육의 신경과학적 근거</h3><p>이 발견은 음악 교육이 언어 능력을 향상시킨다는 수많은 교육학 연구에 신경과학적 근거를 제공합니다. 악기를 배우거나 노래를 하면 브로카 영역이 강화되고, 이것이 읽기, 어휘 습득, 외국어 학습 능력 향상으로 이어집니다.</p><h3>뇌졸중 재활에의 응용</h3><p>이 연구는 뇌졸중으로 언어 능력을 잃은 환자들의 재활에도 음악 치료(Music Therapy)가 효과적인 이유를 설명합니다. 실제로 음악을 통한 멜로딕 억양 치료(MIT, Melodic Intonation Therapy)는 언어 재활에서 주목받는 방법입니다.</p>",
+      "detailEn": "<h3>The Common Neural Basis of Music and Language</h3><p>Columbia's Music and Neuroscience Lab confirmed through fMRI experiments in March 2025 that language and music processing share the same core brain region: Broca's area.</p><div class=\"highlight\">Broca's area plays a central role in understanding and producing speech. The key finding is that it is equally involved in processing musical rhythm and harmony.</div><h3>Neuroscientific Basis for Music Education</h3><p>This finding provides neuroscientific grounding for educational research showing music training improves language skills. Learning an instrument or singing strengthens Broca's area, improving reading, vocabulary, and foreign language learning.</p><h3>Application in Stroke Rehabilitation</h3><p>The research also explains why music therapy is effective for stroke patients who have lost language abilities. Melodic Intonation Therapy (MIT) is a notable music-based language rehabilitation method.</p>",
+      "date": "2025.03",
+      "color": "#89d4b8"
+    },
+    {
+      "id": "n7",
+      "tag": "UCLA · 2024",
+      "tagEn": "UCLA · 2024",
+      "title": "도파민: 쾌감이 아닌 '동기'의 물질",
+      "titleEn": "Dopamine: The Molecule of Motivation, Not Pleasure",
+      "body": "UCLA 신경과학자들이 도파민은 단순한 행복 호르몬이 아니라, '무언가를 원하게 만드는' 동기 부여 시스템임을 밝혔습니다.",
+      "bodyEn": "UCLA neuroscientists clarified that dopamine isn't a happiness hormone but a motivation system that makes you 'want' things.",
+      "detail": "<h3>도파민에 대한 오해와 진실</h3><p>도파민은 흔히 '행복 호르몬' 또는 '쾌감 물질'로 불립니다. 그러나 UCLA 신경과학자들의 2024년 10월 연구는 이 통념이 부정확하다는 것을 밝혔습니다. 도파민의 핵심 기능은 쾌감을 느끼게 하는 것이 아니라, 목표를 향해 행동하도록 '동기'를 부여하는 것입니다.</p><div class=\"highlight\">도파민 시스템은 '원함(wanting)'을 담당합니다. 좋아하는 음식을 먹을 때가 아니라, 그 음식을 먹고 싶다고 느낄 때 도파민이 분비됩니다. 즉, 도파민은 목표 추구 행동을 이끄는 신호입니다.</div><h3>공부와 도파민</h3><p>어려운 문제를 해결했을 때 느끼는 짜릿한 성취감이 바로 도파민 분비입니다. 이 경험이 반복될수록 '도전 → 해결 → 보상'의 회로가 강화되어, 공부 자체가 즐거워질 수 있습니다. 이것이 바로 몰입 학습이 장기적으로 강력한 효과를 내는 신경과학적 이유입니다.</p><h3>스마트폰과 도파민의 위험</h3><p>소셜미디어와 스마트폰 알람은 예측 불가능한 보상을 통해 도파민 시스템을 과도하게 자극합니다. 이는 도파민 수용체를 둔감화시켜 공부나 독서처럼 느린 보상이 오는 활동에서 만족감을 느끼기 어렵게 만들 수 있습니다.</p>",
+      "detailEn": "<h3>Misconceptions and Truth About Dopamine</h3><p>Dopamine is often called the 'happiness hormone.' However, UCLA neuroscientists' October 2024 research revealed this is inaccurate. Dopamine's core function is not to create pleasure but to generate the motivation to act toward goals.</p><div class=\"highlight\">The dopamine system governs 'wanting.' Dopamine is released not when you eat something delicious, but when you want to eat it—it's the signal that drives goal-directed behavior.</div><h3>Studying and Dopamine</h3><p>The exhilarating satisfaction of solving a hard problem is dopamine release. The more this is repeated, the stronger the 'challenge → solve → reward' circuit becomes, making studying itself enjoyable—the neuroscientific reason immersion learning works powerfully long-term.</p><h3>The Danger of Smartphones and Dopamine</h3><p>Social media and phone notifications overstimulate the dopamine system with unpredictable rewards, desensitizing receptors and making it harder to find satisfaction in slow-reward activities like studying or reading.</p>",
+      "date": "2024.10",
+      "color": "#7eb8d4"
+    },
+    {
+      "id": "n8",
+      "tag": "러트거스 · 2025",
+      "tagEn": "Rutgers · 2025",
+      "title": "명상이 뇌 구조를 바꾼다",
+      "titleEn": "Meditation Changes Brain Structure",
+      "body": "러트거스대 인지과학부의 연구에서 8주간 마음챙김 명상을 한 참가자들의 편도체(스트레스 중추)가 실제로 작아졌습니다.",
+      "bodyEn": "Rutgers Cognitive Science found that after 8 weeks of mindfulness meditation, participants' amygdalae (stress centers) physically shrank.",
+      "detail": "<h3>명상과 뇌 구조 변화</h3><p>러트거스대 인지과학부가 2025년 1월 발표한 연구는 8주간의 마음챙김 명상(MBSR: Mindfulness-Based Stress Reduction) 프로그램이 뇌의 물리적 구조를 변화시킨다는 것을 MRI 영상으로 직접 확인했습니다.</p><div class=\"highlight\">연구 참가자들의 편도체(Amygdala) — 공포·불안·스트레스 반응의 중심 — 의 크기가 8주 후 유의미하게 감소했습니다. 동시에 자기 조절과 집중력을 담당하는 전전두엽 피질의 두께는 증가했습니다.</div><h3>명상의 구체적 효과</h3><p>연구 참가자들은 8주 후 스트레스 지수 23% 감소, 집중력 31% 향상, 수면 질 개선을 보고했습니다. 혈액 검사에서는 스트레스 호르몬인 코르티솔 수치도 유의미하게 낮아졌습니다.</p><h3>고등학생 수험생에게 주는 메시지</h3><p>하루 단 10~20분의 마음챙김 명상이 시험 스트레스를 실질적으로 줄이고 집중력을 높일 수 있습니다. 러트거스 연구팀은 특히 청소년 그룹에서 뇌 가소성이 더 높아 명상 효과가 성인보다 빠르게 나타날 수 있다고 강조했습니다.</p>",
+      "detailEn": "<h3>Meditation and Brain Structural Changes</h3><p>Rutgers Cognitive Science's January 2025 study directly confirmed via MRI that an 8-week MBSR program physically changes brain structure.</p><div class=\"highlight\">The amygdala — the brain's fear, anxiety, and stress response center — significantly shrank in size after 8 weeks. Meanwhile, the prefrontal cortex responsible for self-regulation and focus increased in thickness.</div><h3>Specific Effects of Meditation</h3><p>After 8 weeks, participants reported 23% lower stress, 31% improved concentration, and better sleep quality. Blood tests also showed significantly reduced cortisol (stress hormone) levels.</p><h3>Message for High School Students</h3><p>Just 10–20 minutes of daily mindfulness meditation can meaningfully reduce exam stress and boost focus. The Rutgers team noted that adolescents show faster meditation effects than adults due to higher neuroplasticity.</p>",
+      "date": "2025.01",
+      "color": "#c9b6e0"
+    },
+    {
+      "id": "n9",
+      "tag": "예일 · 2024",
+      "tagEn": "Yale · 2024",
+      "title": "알츠하이머 새 치료제 임상 3상 성공",
+      "titleEn": "Alzheimer's New Treatment Succeeds in Phase 3",
+      "body": "예일대와 공동 개발한 항체 치료제가 알츠하이머 진행을 27% 늦추는 임상 3상 결과를 발표했습니다.",
+      "bodyEn": "An antibody therapy co-developed with Yale slowed Alzheimer's progression by 27% in Phase 3 trials.",
+      "detail": "<h3>알츠하이머 치료제 개발의 현재</h3><p>예일대학교와 주요 제약사가 공동 개발한 항체 치료제(Anti-amyloid antibody)가 2024년 8월 임상 3상(Phase III Clinical Trial) 결과를 발표하며 의료계의 주목을 받았습니다.</p><div class=\"highlight\">이 치료제는 알츠하이머의 핵심 원인 물질인 뇌 속 아밀로이드-베타 플라크를 표적으로 제거하는 방식으로 작동합니다. 임상 3상에서 치료를 받은 그룹은 대조군 대비 인지 기능 저하 속도가 27% 느려졌습니다.</div><h3>임상 3상이란?</h3><p>임상시험은 1상(안전성 확인) → 2상(효능 및 적정 용량 탐색) → 3상(대규모 효능 및 안전성 확인)으로 진행됩니다. 3상은 수천 명의 환자를 대상으로 하는 최종 검증 단계로, 이 단계를 통과해야 FDA 승인 신청이 가능합니다.</p><h3>간호학적 의의</h3><p>이 치료제가 FDA 승인을 받게 되면, 인지 기능 저하 조기 단계의 환자에게 정기적인 정맥 주사 투여가 필요합니다. 이는 신경과 전문 간호사와 치매 케어 간호사의 역할 수요를 크게 높일 것입니다.</p>",
+      "detailEn": "<h3>The Current State of Alzheimer's Drug Development</h3><p>An anti-amyloid antibody co-developed by Yale and major pharmaceutical companies drew major attention when Phase III clinical trial results were published in August 2024.</p><div class=\"highlight\">The drug targets and removes amyloid-beta plaques — a core cause of Alzheimer's — from the brain. In the Phase III trial, the treated group showed 27% slower cognitive decline than the control group.</div><h3>What is Phase III?</h3><p>Clinical trials progress: Phase I (safety) → Phase II (efficacy/dosing) → Phase III (large-scale efficacy/safety verification). Phase III is the final validation involving thousands of patients before FDA approval can be sought.</p><h3>Nursing Implications</h3><p>If FDA-approved, the treatment will require regular IV infusions for patients in early cognitive decline stages, greatly increasing demand for neurology NPs and dementia care nurses.</p>",
+      "date": "2024.08",
+      "color": "#89d4b8"
+    },
+    {
+      "id": "n10",
+      "tag": "프린스턴 · 2025",
+      "tagEn": "Princeton · 2025",
+      "title": "뇌와 컴퓨터를 잇는 BCI 기술의 현재",
+      "titleEn": "The Current State of Brain-Computer Interface (BCI)",
+      "body": "프린스턴 신경공학연구소가 최신 BCI(뇌-컴퓨터 인터페이스) 기술 현황을 발표했습니다.",
+      "bodyEn": "Princeton's Neural Engineering Institute presented the latest BCI technology. The era of spinal cord injury patients moving their limbs with thought alone is approaching.",
+      "detail": "<h3>BCI란 무엇인가?</h3><p>뇌-컴퓨터 인터페이스(Brain-Computer Interface, BCI)는 뇌의 신경 신호를 직접 읽어 컴퓨터나 외부 장치를 제어하는 기술입니다. 프린스턴 신경공학연구소는 2025년 4월 BCI 기술의 최신 현황과 임상 응용을 총망라한 리포트를 발표했습니다.</p><div class=\"highlight\">2024년 말 기준, 척수 손상으로 사지 마비가 된 환자가 BCI 임플란트를 통해 생각만으로 컴퓨터 커서를 조작하고 로봇 팔을 움직이는 데 성공한 사례가 복수 보고되었습니다.</div><h3>BCI 기술의 종류</h3><p>침습적 BCI(뇌에 직접 전극 삽입): 정밀도는 가장 높지만 수술 위험 수반. 비침습적 BCI(EEG 헤드셋 등): 수술 불필요, 정밀도 낮음. 반침습적 BCI(두개골 위 전극): 중간 수준의 정밀도와 안전성.</p><h3>미래 전망 및 윤리 문제</h3><p>BCI 기술은 루게릭병, 척수 손상, 뇌졸중 환자의 삶을 혁명적으로 바꿀 잠재력을 가집니다. 동시에 '뇌 정보 프라이버시', '신경 강화(neuro-enhancement)의 공정성' 등 복잡한 생명윤리 문제도 함께 제기하고 있습니다.</p>",
+      "detailEn": "<h3>What is BCI?</h3><p>A Brain-Computer Interface (BCI) reads neural signals from the brain directly to control computers or external devices. Princeton's Neural Engineering Institute published a comprehensive report on BCI technology and clinical applications in April 2025.</p><div class=\"highlight\">As of late 2024, multiple patients with spinal cord-induced paralysis have successfully controlled computer cursors and robotic arms through thought alone using BCI implants.</div><h3>Types of BCI</h3><p>Invasive BCI (direct electrode implant): highest precision but surgical risk. Non-invasive BCI (EEG headset): no surgery, lower precision. Semi-invasive BCI (electrodes on skull): intermediate precision and safety.</p><h3>Future Prospects and Ethical Issues</h3><p>BCI technology has revolutionary potential for ALS, spinal cord injury, and stroke patients—while also raising complex bioethical questions around neural privacy and the fairness of neuro-enhancement.</p>",
+      "date": "2025.04",
+      "color": "#7eb8d4"
+    }
+  ],
+  "nursingNews": [
+    {
+      "id": "ns1",
+      "tag": "존스홉킨스 간호대 · 2025",
+      "tagEn": "Johns Hopkins Nursing · 2025",
+      "title": "마취과 간호사(CRNA)의 역할 확대",
+      "titleEn": "Expanding Role of CRNAs",
+      "body": "CRNA(공인 마취전문간호사)가 마취과 의사 부족 문제를 해결하고 있습니다. 존스홉킨스 간호대 연구에서 CRNA의 독립 진료 안전성이 확인되었습니다.",
+      "bodyEn": "CRNAs are solving the anesthesiologist shortage. Johns Hopkins confirmed the safety of independent CRNA practice.",
+      "detail": "<h3>CRNA란 무엇인가?</h3><p>CRNA(Certified Registered Nurse Anesthetist, 공인 마취전문간호사)는 마취 분야의 최고 전문 간호 자격입니다. 4년제 간호 학사 → 임상 경험 1년 이상 → 마취 전문 석사/박사 과정(2~3년) → 국가 자격시험을 통과해야 취득할 수 있습니다.</p><div class=\"highlight\">미국에서 CRNA는 마취과 의사(Anesthesiologist) 없이 독립적으로 마취를 시행할 수 있습니다. 연간 약 5,500만 건의 마취 시술 중 절반 이상을 CRNA가 담당합니다.</div><h3>존스홉킨스 연구 결과</h3><p>존스홉킨스 간호대학이 2025년 2월 발표한 대규모 연구(20만 건 이상의 수술 데이터 분석)에서, CRNA가 독립적으로 시행한 마취의 합병증 발생률이 마취과 의사와 통계적으로 유의미한 차이가 없음을 확인했습니다.</p><h3>마취과 간호사를 꿈꾸는 학생에게</h3><p>CRNA는 미국에서 가장 고연봉 간호 전문직 중 하나(평균 연봉 $19만~$22만)입니다. 수술실, 집중치료실, 통증 클리닉 등 다양한 환경에서 일하며, 뇌신경과학 지식이 마취 관리에 직접 활용됩니다. 신경 마취(Neuroanesthesia) 분야는 특히 뇌수술·척수 수술에 특화된 CRNA 세부 전문 영역입니다.</p>",
+      "detailEn": "<h3>What is a CRNA?</h3><p>A Certified Registered Nurse Anesthetist (CRNA) is the highest nursing specialty in anesthesia. It requires: BSN → 1+ year clinical experience → Master's/Doctoral program in anesthesia (2–3 years) → national board exam.</p><div class=\"highlight\">In the US, CRNAs can independently administer anesthesia without an anesthesiologist. CRNAs perform more than half of the approximately 55 million anesthesia procedures annually.</div><h3>Johns Hopkins Research Findings</h3><p>Johns Hopkins School of Nursing's February 2025 study (analyzing 200,000+ surgical cases) found no statistically significant difference in complication rates between CRNA-administered and anesthesiologist-administered anesthesia.</p><h3>For Students Who Dream of Becoming a CRNA</h3><p>CRNAs are among the highest-paid nursing specialties in the US (average salary $190,000–$220,000). They work in ORs, ICUs, and pain clinics, directly applying neuroscience knowledge to anesthesia management. Neuroanesthesia is a specialty focused on brain and spinal cord surgeries.</p>",
+      "date": "2025.02",
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/XrMwsq85/blob.png"
+    },
+    {
+      "id": "ns2",
+      "tag": "러트거스 간호대 · 2025",
+      "tagEn": "Rutgers Nursing · 2025",
+      "title": "간호학과 입학 경쟁률 역대 최고",
+      "titleEn": "Record-High Nursing School Applications",
+      "body": "2025년 러트거스 간호대에 지원자가 전년 대비 34% 증가했습니다. 팬데믹 이후 간호사 직업에 대한 관심이 급증한 결과입니다.",
+      "bodyEn": "Applications to Rutgers School of Nursing increased 34% in 2025, reflecting a post-pandemic surge of interest.",
+      "detail": "<h3>러트거스 간호대와 입학 현황</h3><p>러트거스 대학교(Rutgers University) 간호대학은 뉴저지주 뉴어크(Newark)와 뉴브런즈윅(New Brunswick) 캠퍼스에 위치한 미국 동부 최상위 간호 교육 기관 중 하나입니다. 2025년 입학 경쟁률이 전년 대비 34% 급증했습니다.</p><div class=\"highlight\">러트거스 간호대 학부(BSN) 과정은 4년이며, 뇌신경 간호, 마취 전 임상 경험, 지역사회 보건 등 다양한 실습 기회를 제공합니다. 아너스 칼리지(Honors College)와 연계하면 연구 중심 커리큘럼에도 참여할 수 있습니다.</div><h3>간호사 수요 급증의 배경</h3><p>코로나19 팬데믹을 거치면서 간호사 직업에 대한 사회적 인식이 크게 높아졌습니다. 동시에 베이비붐 세대의 고령화로 의료 서비스 수요가 폭발적으로 증가하면서, 미국 노동부는 2032년까지 간호사 수요가 6% 이상 추가 증가할 것으로 전망하고 있습니다.</p><h3>입학 준비 팁</h3><p>러트거스 BSN 지원에는 강한 과학 과목(생물, 화학, 수학) 성적, 의료 관련 봉사·인턴십 경험, 자기소개서의 명확한 의료 직업 동기가 중요합니다. EFR 응급처치 자격증 보유는 입학 사정에 긍정적 영향을 줄 수 있습니다.</p>",
+      "detailEn": "<h3>Rutgers School of Nursing & Admissions</h3><p>Rutgers University School of Nursing (Newark & New Brunswick campuses) is one of the top nursing schools on the US East Coast. Applications surged 34% for 2025.</p><div class=\"highlight\">The 4-year BSN program offers diverse clinical experiences including neuro nursing, pre-anesthesia clinical exposure, and community health. Honors College linkage enables research-focused curriculum participation.</div><h3>Background of the Nursing Demand Surge</h3><p>The COVID-19 pandemic greatly elevated the social recognition of nursing. Combined with the aging Baby Boomer population, the US Bureau of Labor Statistics projects 6%+ additional growth in nursing demand through 2032.</p><h3>Admissions Tips</h3><p>Strong science grades (biology, chemistry, math), healthcare volunteering/internship experience, and a clear medical career motivation in personal essays are key. EFR first aid certification can positively influence admissions decisions.</p>",
+      "date": "2025.01",
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/pvyLGCBv/blob.png"
+    },
+    {
+      "id": "ns3",
+      "tag": "NYU 마이어스 간호대 · 2024",
+      "tagEn": "NYU Meyers Nursing · 2024",
+      "title": "간호사와 AI — 협력의 시대",
+      "titleEn": "Nurses and AI — The Era of Collaboration",
+      "body": "NYU 간호대 연구에서 AI 진단 보조 시스템이 간호사의 업무 부담을 30% 줄이면서 환자 만족도를 높인 것으로 나타났습니다.",
+      "bodyEn": "NYU research found AI diagnostic assistance reduced nurse workload by 30% while improving patient satisfaction.",
+      "detail": "<h3>AI와 간호의 협력 시대</h3><p>NYU 마이어스 간호대학이 2024년 11월 발표한 연구는 AI 임상 의사결정 지원 시스템(Clinical Decision Support System, CDSS)이 간호 현장을 어떻게 바꾸고 있는지 보여줍니다.</p><div class=\"highlight\">AI 시스템 도입 후 간호사의 행정 업무와 기록 시간이 30% 감소했으며, 간호사들은 줄어든 시간을 환자 직접 돌봄에 재투자할 수 있었습니다. 그 결과 환자 만족도 점수가 18% 향상되었습니다.</div><h3>AI가 간호에서 하는 일</h3><p>환자 상태 실시간 모니터링 및 이상 징후 조기 경보. 약물 처방 오류 자동 감지. 욕창, 낙상 위험 예측 알고리즘. 퇴원 후 재입원 위험 예측. 다국어 환자 커뮤니케이션 지원.</p><h3>AI 시대 간호사에게 필요한 역량</h3><p>AI가 대체하지 못하는 것은 환자와의 공감적 소통, 복잡한 윤리적 판단, 팀 리더십입니다. 미래 간호사는 AI를 능숙하게 활용하되, 이 핵심 인간적 역량을 더욱 강화해야 합니다.</p>",
+      "detailEn": "<h3>The Age of AI-Nursing Collaboration</h3><p>NYU Meyers' November 2024 research shows how AI Clinical Decision Support Systems (CDSS) are transforming nursing practice.</p><div class=\"highlight\">After AI system adoption, nurses' administrative and documentation time decreased by 30%, and nurses reinvested that time into direct patient care—resulting in an 18% improvement in patient satisfaction scores.</div><h3>What AI Does in Nursing</h3><p>Real-time patient monitoring with early warning alerts. Automatic medication error detection. Pressure sore and fall risk prediction algorithms. Post-discharge readmission risk prediction. Multilingual patient communication support.</p><h3>Competencies for Nurses in the AI Era</h3><p>What AI cannot replace: empathetic patient communication, complex ethical judgment, and team leadership. Future nurses must proficiently use AI while strengthening these core human competencies.</p>",
+      "date": "2024.11",
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/8g7KHhjv/blob.png"
+    },
+    {
+      "id": "ns4",
+      "tag": "컬럼비아 간호대 · 2024",
+      "tagEn": "Columbia Nursing · 2024",
+      "title": "뇌졸중 환자 재활 간호의 새 프로토콜",
+      "titleEn": "New Protocol for Stroke Rehabilitation Nursing",
+      "body": "컬럼비아 의과대학 간호학부가 뇌졸중 후 재활 간호 프로토콜을 개선했습니다. 신경계 중점 간호 접근법이 회복 속도를 20% 개선했습니다.",
+      "bodyEn": "Columbia's nursing school improved stroke rehab nursing protocols. A neuroscience-focused approach improved recovery by 20%.",
+      "detail": "<h3>뇌졸중 재활 간호의 중요성</h3><p>뇌졸중(Stroke)은 뇌혈관이 막히거나 터지면서 뇌 조직이 손상되는 응급 상황입니다. 전 세계 성인 장애의 주요 원인 중 하나로, 발병 후 신속하고 전문적인 재활 간호가 회복의 질을 결정합니다.</p><div class=\"highlight\">컬럼비아 의과대학 간호학부가 2024년 10월 발표한 새 프로토콜은 뇌신경가소성 원리를 재활 계획에 직접 통합했습니다. 이 접근법을 적용한 환자 그룹은 기존 프로토콜 그룹 대비 운동 기능 회복 속도가 20% 빠른 것으로 나타났습니다.</div><h3>새 프로토콜의 핵심 요소</h3><p>① 발병 후 24시간 이내 조기 이동(early mobilization). ② 신경가소성 기반 반복 과제 훈련. ③ 거울 치료(Mirror Therapy)와 음악 치료 병행. ④ 환자 가족의 재활 교육 참여 의무화. ⑤ 디지털 재활 앱 활용.</p><h3>간호사와 신경과학의 연결</h3><p>이 연구는 간호사가 신경과학 지식을 갖출수록 더 효과적인 재활 계획을 수립하고 실행할 수 있음을 보여줍니다. 뇌신경학과 간호학의 융합이 환자 예후를 직접 개선하는 사례입니다.</p>",
+      "detailEn": "<h3>The Importance of Stroke Rehabilitation Nursing</h3><p>A stroke occurs when a brain blood vessel is blocked or ruptures, damaging brain tissue. It is one of the leading causes of adult disability worldwide, and expert post-acute nursing care determines recovery quality.</p><div class=\"highlight\">Columbia's October 2024 protocol directly integrates neuroplasticity principles into rehabilitation planning. Patients under this approach showed 20% faster motor function recovery than those under the previous protocol.</div><h3>Key Elements of the New Protocol</h3><p>① Early mobilization within 24 hours of onset. ② Neuroplasticity-based repetitive task training. ③ Mirror therapy and music therapy. ④ Mandatory family rehabilitation education. ⑤ Digital rehabilitation app usage.</p><h3>Connecting Nursing and Neuroscience</h3><p>This research shows that nurses with deeper neuroscience knowledge can design and execute more effective rehabilitation plans—a direct example of integrating neurology and nursing to improve patient outcomes.</p>",
+      "date": "2024.10",
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/cKJFd7pH/blob.png"
+    },
+    {
+      "id": "ns5",
+      "tag": "듀크 간호대 · 2025",
+      "tagEn": "Duke Nursing · 2025",
+      "title": "정신건강 간호 수요 폭증",
+      "titleEn": "Mental Health Nursing Demand Skyrockets",
+      "body": "듀크 간호대학원이 정신건강 간호 전문가 과정을 신설했습니다. 청소년 정신건강 위기에 대응하는 간호 인력 수요가 5년 만에 두 배로 늘었습니다.",
+      "bodyEn": "Duke launched a new mental health nursing specialty. Demand doubled in five years amid the youth mental health crisis.",
+      "detail": "<h3>청소년 정신건강 위기와 간호</h3><p>미국 청소년의 정신건강 위기는 최근 수년간 급격히 심화되고 있습니다. CDC 보고에 따르면 2020년 이후 10대 청소년의 불안과 우울증 유병률이 약 40% 증가했습니다. 이에 대응하는 정신건강 간호사 수요가 폭발적으로 늘고 있습니다.</p><div class=\"highlight\">듀크 간호대학원이 2025년 3월 신설한 '청소년 정신건강 전문 간호사(PMHNP-A)' 과정은 미국 최초의 청소년 특화 정신건강 간호 전문 프로그램입니다.</div><h3>정신건강 간호사(PMHNP)의 역할</h3><p>Psychiatric-Mental Health Nurse Practitioner(PMHNP)는 정신건강 평가, 진단, 치료 계획 수립, 약물 처방(일부 주에서)까지 수행할 수 있는 고급 실무 간호사입니다. 학교, 지역사회 클리닉, 병원 등 다양한 환경에서 일합니다.</p><h3>뇌신경과학과의 연결</h3><p>정신 건강 장애의 대부분은 뇌신경학적 기반을 가집니다. 우울증은 세로토닌·도파민 시스템의 불균형, 불안장애는 편도체의 과활성화와 관련됩니다. 따라서 뇌신경과학 지식은 정신건강 간호사에게도 핵심 기반 지식입니다.</p>",
+      "detailEn": "<h3>Youth Mental Health Crisis and Nursing</h3><p>The youth mental health crisis in America has intensified dramatically. CDC reports show anxiety and depression rates among teenagers increased ~40% since 2020, driving explosive demand for mental health nurses.</p><div class=\"highlight\">Duke's March 2025 'Pediatric/Adolescent PMHNP' program is the first adolescent-specialized psychiatric mental health nurse practitioner program in the US.</div><h3>Role of a PMHNP</h3><p>A Psychiatric-Mental Health Nurse Practitioner (PMHNP) can perform mental health assessments, diagnoses, treatment planning, and prescribing (in some states), working in schools, community clinics, and hospitals.</p><h3>Connection to Neuroscience</h3><p>Most mental health disorders have neurological underpinnings: depression relates to serotonin/dopamine imbalances; anxiety disorders to amygdala hyperactivation. Neuroscience knowledge is therefore foundational for mental health nurses.</p>",
+      "date": "2025.03",
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/fGNY49y2/blob.png"
+    },
+    {
+      "id": "ns6",
+      "tag": "유펜 간호대 · 2024",
+      "tagEn": "UPenn Nursing · 2024",
+      "title": "통증 관리 간호의 최신 트렌드",
+      "titleEn": "Latest Trends in Pain Management Nursing",
+      "body": "펜실베이니아 대학 간호대 연구팀이 오피오이드 없이 통증을 관리하는 비약물 간호 중재 효과를 발표했습니다.",
+      "bodyEn": "UPenn nursing researchers published results on non-pharmacological interventions for pain management without opioids.",
+      "detail": "<h3>오피오이드 위기와 비약물적 통증 관리</h3><p>미국에서는 오피오이드(마약성 진통제) 과다 복용으로 매일 약 130명이 사망하는 '오피오이드 위기'가 심각한 공중 보건 문제입니다. 펜실베이니아 대학(UPenn) 간호대학 연구팀은 2024년 9월, 오피오이드에 의존하지 않는 다양한 비약물 통증 관리 간호 중재의 효과를 체계적으로 검토한 연구를 발표했습니다.</p><div class=\"highlight\">연구에서 효과가 입증된 비약물적 통증 관리법: 마음챙김 명상(통증 강도 35% 감소), 인지행동치료(CBT), 음악 치료, 침술, 생체피드백, 냉온 찜질, 마사지 치료.</div><h3>간호사의 역할 확대</h3><p>이러한 비약물 중재의 대부분은 간호사가 직접 제공하거나 교육할 수 있는 영역입니다. 특히 통증 전문 간호사(Pain Management NP)는 오피오이드 처방을 최소화하면서 환자의 통증을 효과적으로 관리하는 복합 치료 계획을 수립합니다.</p><h3>뇌신경학적 배경</h3><p>통증은 단순한 신체 감각이 아닙니다. 척수와 뇌의 신경 회로가 통증 신호를 처리하고 증폭하거나 억제합니다. 마음챙김 명상이 통증을 줄이는 이유도 전두엽이 편도체의 통증 신호 처리를 조절하기 때문입니다.</p>",
+      "detailEn": "<h3>The Opioid Crisis and Non-Pharmacological Pain Management</h3><p>The opioid crisis — roughly 130 deaths daily from overdose — is a severe public health crisis. UPenn nursing researchers published a systematic review in September 2024 on non-opioid pain management nursing interventions.</p><div class=\"highlight\">Evidence-based non-pharmacological pain management: mindfulness meditation (35% reduction in pain intensity), cognitive behavioral therapy (CBT), music therapy, acupuncture, biofeedback, hot/cold therapy, massage.</div><h3>Expanded Role of Nurses</h3><p>Most non-pharmacological interventions can be directly delivered or taught by nurses. Pain Management NPs design comprehensive treatment plans minimizing opioid prescriptions while effectively managing patient pain.</p><h3>Neurological Background</h3><p>Pain is not just a physical sensation—the spinal cord and brain's neural circuits process, amplify, or suppress pain signals. Mindfulness meditation reduces pain because the prefrontal cortex regulates the amygdala's pain signal processing.</p>",
+      "date": "2024.09",
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/yF7R5BJz/blob.png"
+    },
+    {
+      "id": "ns7",
+      "tag": "보스턴칼리지 간호대 · 2025",
+      "tagEn": "Boston College Nursing · 2025",
+      "title": "커뮤니티 간호 — 병원 밖 돌봄의 미래",
+      "titleEn": "Community Nursing — The Future of Care",
+      "body": "보스턴 칼리지 간호대가 지역사회 기반 간호 프로그램의 성과를 발표했습니다. 만성질환자 입원률이 42% 감소한 놀라운 결과입니다.",
+      "bodyEn": "Boston College Nursing published outcomes from community-based nursing programs: hospitalizations dropped 42%.",
+      "detail": "<h3>커뮤니티 간호란?</h3><p>커뮤니티 간호(Community Health Nursing, CHN)는 병원이 아닌 지역사회 환경(학교, 가정, 클리닉, 직장 등)에서 이루어지는 간호입니다. 보스턴 칼리지 간호대학이 2025년 2월 발표한 연구는 CHN 프로그램의 놀라운 성과를 보여줍니다.</p><div class=\"highlight\">커뮤니티 간호사가 만성질환자(당뇨·고혈압·심장병)를 정기적으로 방문하여 건강 관리를 지원한 결과, 응급실 방문 횟수가 38%, 병원 입원률이 42% 감소했습니다. 1인당 연간 의료비도 $4,200 절감되었습니다.</div><h3>커뮤니티 간호사의 역할</h3><p>가정 방문 건강 사정 및 투약 관리. 만성질환 자기관리 교육. 정신건강 위기 조기 개입. 예방접종 및 건강검진 코디네이션. 취약 계층(노인, 노숙인, 이민자) 건강 지원.</p><h3>미래 전망</h3><p>고령화와 만성질환 증가로 커뮤니티 간호사 수요는 앞으로 더욱 늘어날 전망입니다. 특히 원격 의료(Telehealth)와 결합한 '하이브리드 커뮤니티 간호' 모델이 빠르게 성장하고 있습니다.</p>",
+      "detailEn": "<h3>What is Community Nursing?</h3><p>Community Health Nursing (CHN) is nursing practiced outside hospitals — in schools, homes, clinics, and workplaces. Boston College Nursing's February 2025 study shows remarkable CHN outcomes.</p><div class=\"highlight\">Community nurses regularly visiting chronic disease patients (diabetes, hypertension, heart disease) resulted in 38% fewer ER visits, 42% fewer hospitalizations, and $4,200 annual healthcare cost savings per person.</div><h3>Roles of Community Health Nurses</h3><p>Home visit health assessments and medication management. Chronic disease self-management education. Mental health crisis early intervention. Vaccination and health screening coordination. Support for vulnerable populations (elderly, homeless, immigrants).</p><h3>Future Outlook</h3><p>As aging and chronic disease increase, CHN demand will continue to grow. The 'hybrid community nursing' model combining Telehealth is growing rapidly.</p>",
+      "date": "2025.02",
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/JWBGWW1n/blob.png"
+    },
+    {
+      "id": "ns8",
+      "tag": "존스홉킨스 · 2025",
+      "tagEn": "Johns Hopkins · 2025",
+      "title": "간호사 번아웃 예방 연구",
+      "titleEn": "Research on Preventing Nurse Burnout",
+      "body": "존스홉킨스가 병원 간호사의 번아웃을 예방하는 마음챙김 기반 스트레스 감소(MBSR) 프로그램 효과를 입증했습니다.",
+      "bodyEn": "Johns Hopkins validated an MBSR program for hospital nurses—turnover rates dropped 18%.",
+      "detail": "<h3>간호사 번아웃 — 심각한 현실</h3><p>미국 병원 간호사의 약 44%가 번아웃(소진) 증상을 경험한다는 조사 결과가 있습니다. 번아웃은 환자 안전 오류 증가, 간호사 이직률 상승, 의료 비용 증가로 직결되는 심각한 문제입니다.</p><div class=\"highlight\">존스홉킨스 간호대학이 2025년 1월 발표한 연구에서, 8주 MBSR 프로그램을 이수한 간호사 그룹은 번아웃 지수 31% 감소, 직무 만족도 24% 향상, 이직 의향 18% 감소를 보였습니다.</div><h3>MBSR 프로그램의 구성</h3><p>마음챙김 명상과 요가 기반의 MBSR(Mindfulness-Based Stress Reduction)은 주 1회 2시간, 8주 과정으로 진행됩니다. 호흡 명상, 바디스캔, 마음챙김 동작, 일상 속 마음챙김 적용이 핵심입니다.</p><h3>간호사 지망 학생에게 주는 시사점</h3><p>미래 간호사로서 자기 돌봄(self-care)과 스트레스 관리 능력은 직업 지속 가능성을 위한 핵심 역량입니다. 학생 시절부터 명상, 규칙적 운동, 사회적 지지 네트워크 구축 등을 통해 정서적 회복탄력성을 키우는 것이 중요합니다.</p>",
+      "detailEn": "<h3>Nurse Burnout — A Serious Reality</h3><p>Surveys show ~44% of US hospital nurses experience burnout symptoms, directly linked to increased patient safety errors, higher turnover, and rising healthcare costs.</p><div class=\"highlight\">Johns Hopkins' January 2025 study found nurses completing an 8-week MBSR program showed 31% lower burnout scores, 24% improved job satisfaction, and 18% lower intention to leave.</div><h3>MBSR Program Structure</h3><p>MBSR (Mindfulness-Based Stress Reduction) runs weekly for 2 hours over 8 weeks. Core elements: breathing meditation, body scan, mindful movement, and daily mindfulness application.</p><h3>Implications for Aspiring Nurses</h3><p>Self-care and stress management are core competencies for nursing career sustainability. Building emotional resilience from student years through meditation, regular exercise, and social support networks is essential.</p>",
+      "date": "2025.01",
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/hJBDnzsW/blob.png"
+    },
+    {
+      "id": "ns9",
+      "tag": "UCLA 간호대 · 2024",
+      "tagEn": "UCLA Nursing · 2024",
+      "title": "소아중환자실 특화 간호 교육",
+      "titleEn": "Specialized PICU Nursing Education",
+      "body": "UCLA 간호대학원이 소아중환자실(PICU) 특화 시뮬레이션 교육 커리큘럼을 개발했습니다. VR을 활용한 고충실도 시뮬레이션이 핵심입니다.",
+      "bodyEn": "UCLA developed a PICU simulation curriculum using high-fidelity VR simulations as a core component.",
+      "detail": "<h3>소아중환자실(PICU)이란?</h3><p>소아중환자실(Pediatric Intensive Care Unit, PICU)은 생명을 위협하는 중증 질환이나 손상을 입은 신생아부터 18세까지의 소아 환자를 집중 치료하는 특수 병동입니다. 소아 환자는 성인과 생리적 특성이 달라, 전문 교육과 고도의 집중력이 요구됩니다.</p><div class=\"highlight\">UCLA 간호대학원이 2024년 12월 발표한 커리큘럼은 VR(가상현실) 기술을 활용해 실제 PICU 환경을 96% 수준으로 재현한 고충실도 시뮬레이션을 제공합니다. 이를 경험한 간호학생들은 기존 마네킹 시뮬레이션 대비 임상 판단 능력이 41% 향상되었습니다.</div><h3>PICU 간호사의 역할</h3><p>생명 징후 지속 모니터링(24시간). 기계 환기, 중심 정맥 카테터 관리. 신경학적 상태 평가(Glasgow Coma Scale). 소아 통증 평가 및 관리. 가족 심리 지지 및 교육.</p><h3>뇌신경학 지식의 적용</h3><p>PICU에서 뇌 손상, 뇌수막염, 뇌전증 환아를 자주 접합니다. 신경학적 상태를 신속하게 평가하고 이상 징후를 조기에 발견하는 능력이 소아 뇌 손상 예후를 결정하는 핵심입니다.</p>",
+      "detailEn": "<h3>What is a PICU?</h3><p>A Pediatric Intensive Care Unit (PICU) provides intensive care for critically ill or injured patients from newborns to age 18. Pediatric patients' physiological differences from adults demand specialized training and intense focus.</p><div class=\"highlight\">UCLA's December 2024 curriculum uses VR to recreate actual PICU environments at 96% fidelity. Nursing students who used it showed 41% improved clinical judgment compared to mannequin simulation.</div><h3>Roles of a PICU Nurse</h3><p>Continuous vital sign monitoring (24 hrs). Mechanical ventilation and central venous catheter management. Neurological status assessment (Glasgow Coma Scale). Pediatric pain assessment and management. Family psychological support and education.</p><h3>Applying Neuroscience Knowledge</h3><p>PICU nurses frequently encounter brain injury, meningitis, and epilepsy patients. Rapidly assessing neurological status and early detection of warning signs is critical to pediatric brain injury outcomes.</p>",
+      "date": "2024.12",
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/Wp77nHS7/blob.png"
+    },
+    {
+      "id": "ns10",
+      "tag": "밴더빌트 간호대 · 2025",
+      "tagEn": "Vanderbilt Nursing · 2025",
+      "title": "다문화 간호 역량, 필수 교육으로",
+      "titleEn": "Multicultural Nursing Competency Required",
+      "body": "밴더빌트 간호대가 문화적 역량 교육을 필수 과목으로 지정했습니다. 다양한 문화권 환자의 치료 결과가 개선되었다는 연구 결과가 배경입니다.",
+      "bodyEn": "Vanderbilt mandated cultural competency education after research showed improved treatment outcomes for diverse patient populations.",
+      "detail": "<h3>문화적 역량이란?</h3><p>문화적 역량(Cultural Competency)은 다양한 문화적 배경을 가진 환자와 효과적으로 소통하고, 그들의 문화적 신념과 가치를 존중하며 의료 서비스를 제공하는 능력입니다. 밴더빌트 간호대학은 2025년 4월부터 이를 필수 교육과정으로 지정했습니다.</p><div class=\"highlight\">연구에 따르면, 문화적 역량 교육을 받은 간호사가 돌보는 소수 문화권 환자들은 치료 순응도가 28% 높고, 임상 결과도 유의미하게 개선된 것으로 나타났습니다.</div><h3>왜 다문화 간호가 중요한가?</h3><p>미국 인구의 다양성이 지속적으로 증가하고 있습니다. 2045년에는 비히스패닉계 백인이 미국 인구의 절반 미만이 될 것으로 예측됩니다. 의료 현장에서 문화적 오해는 오진, 치료 거부, 건강 불평등으로 이어질 수 있습니다.</p><h3>유학생 간호사 지망자에게</h3><p>미국 보딩스쿨이나 대학에서 다양한 문화권 친구들과 생활하고 소통한 경험은 다문화 간호 역량의 실질적인 기반이 됩니다. 이 경험을 간호대 지원 에세이에 구체적으로 담는 것은 강력한 자기 서사가 될 수 있습니다.</p>",
+      "detailEn": "<h3>What is Cultural Competency?</h3><p>Cultural competency is the ability to effectively communicate with patients of diverse cultural backgrounds and deliver care that respects their cultural beliefs and values. Vanderbilt School of Nursing mandated this as required curriculum from April 2025.</p><div class=\"highlight\">Research shows patients from minority cultural backgrounds cared for by culturally competent nurses have 28% higher treatment adherence and significantly improved clinical outcomes.</div><h3>Why Multicultural Nursing Matters</h3><p>US population diversity continues to grow — by 2045, non-Hispanic whites are projected to be less than half the US population. Cultural misunderstandings in healthcare can lead to misdiagnosis, treatment refusal, and health inequities.</p><h3>For International Student Nursing Aspirants</h3><p>Living and communicating with diverse peers at an American boarding school or college provides a genuine foundation for multicultural nursing competency — a powerful narrative element in nursing school application essays.</p>",
+      "date": "2025.04",
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/pvyLGCBv/blob.png"
+    }
+  ],
+  "activities": [
+    {
+      "title": "EFR 응급처치 자격증 취득",
+      "titleEn": "EFR 응급처치 자격증 취득",
+      "date": "2024-03-15",
+      "content": "대부분 성인 전문가들로 구성된 과정에서 홀로 청소년으로 참여해 응급처치 자격증을 취득했습니다.",
+      "contentEn": "대부분 성인 전문가들로 구성된 과정에서 홀로 청소년으로 참여해 응급처치 자격증을 취득했습니다.",
+      "img": null
+    },
+    {
+      "title": "서울대 모의UN 참가 — 대한민국 대표",
+      "titleEn": "서울대 모의UN 참가 — 대한민국 대표",
+      "date": "2023-11-20",
+      "content": "고등학생 선배들과 함께 환경 주제로 2박 3일 모의 UN에 참가, 대한민국 대표로 발언했습니다.",
+      "contentEn": "고등학생 선배들과 함께 환경 주제로 2박 3일 모의 UN에 참가, 대한민국 대표로 발언했습니다.",
+      "img": null
+    },
+    {
+      "title": "Rutgers 아너컬리지 투어 & 캠퍼스 방문",
+      "titleEn": "Rutgers 아너컬리지 투어 & 캠퍼스 방문",
+      "date": "2025-04-10",
+      "content": "10학년 봄방학에 Rutgers 아너컬리지를 투어하며 예지 선배를 만나고 진로에 대한 큰 다짐을 세웠습니다.",
+      "contentEn": "10학년 봄방학에 Rutgers 아너컬리지를 투어하며 예지 선배를 만나고 진로에 대한 큰 다짐을 세웠습니다.",
+      "img": null
+    }
+  ],
+  "lifeDataKo": [
+    {
+      "num": "Chapter 1",
+      "title": "순수한 호기심의 시기",
+      "sub": "어린이집~초등 5학년 · ~2019년",
+      "eps": [
+        {
+          "t": "똥꼬발랄한 아이",
+          "b": "초등학교 1학년 때, 학교 가는 길이 놀러 가는 길이었다. 엄마와 함께 걸으며 매일 고양이를 구경하고, 꽃을 매만지느라 학교에 늦곤 했다. 학교가 놀이의 연장이었던, 순수하게 호기심이 많은 아이였다."
+        },
+        {
+          "t": "가방 없이 학교에 간 날",
+          "b": "아침에 학교 간다고 인사까지 하고 나가려는데, 어머니께서 물으셨다. \"너 어디 가니?\" \"저 학교 가는데요?\" \"학교 가는데 가방은 안 갖고 가니?\" 아 맞다, 하고 가방을 챙기며 박장대소한 웃픈 경험."
+        },
+        {
+          "t": "5초 만에 친구를 사귀는 아이",
+          "b": "5살, 6살 때 비행기에서 옆자리 미국 아주머니와 언어가 통하지 않는데도 간식을 나눠주며 친구가 되었다. 사교성은 언어의 장벽을 넘는다는 것을 몸으로 먼저 배웠다."
+        },
+        {
+          "t": "몬테소리 교육 — 자기주도성의 뿌리",
+          "b": "어린이집과 유치원에서 몬테소리 교육을 받았다. 자기주도적 학습 환경에서 자란 경험은 훗날 미국 유학이라는 선택으로 이어지는 가치관의 뿌리가 되었다."
+        },
+        {
+          "t": "춤과 노래, 활기찬 에너지",
+          "b": "어렸을 때부터 춤과 노래를 좋아하고, 밝은 미소와 활기찬 에너지가 넘치는 아이로 자랐다."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 2",
+      "title": "각성의 시기 — 코비드와 독서",
+      "sub": "초등 6학년 · 2019~2020년",
+      "eps": [
+        {
+          "t": "줌수업과 홈스쿨링의 시작",
+          "b": "6학년이 되어 갑자기 코비드 시기에 접어들며 학교에 갈 수 없게 되었다. 집에서 엄마와 홈스쿨링을 시작하면서, 난생 처음 열심히 공부를 해봤다. 국어·수학·영어 스케줄을 엄마와 함께 짜고, 무엇보다 그동안 읽지 못했던 책을 읽기 시작했다."
+        },
+        {
+          "t": "100권 독서 프로젝트",
+          "b": "도서관을 다니며 독서기록을 쓰면서 한국 고전, 세계 고전, 과학책, 소설책 등 다양한 책을 100권 넘게 읽었다. 위인들의 삶을 간접 경험하면서 지적 호기심이 생겼다."
+        },
+        {
+          "t": "정약용과의 만남",
+          "b": "정약용의 책을 읽으며 마음에 새긴 한 줄. \"최선을 다하라, 정직하라.\" 이 한 줄이 지금까지 유학을 오고, 마취과 간호사와 뇌신경과학자가 되기 위한 다짐의 밑거름이 되었다."
+        },
+        {
+          "t": "얼굴 하나하나 그려낸 졸업",
+          "b": "코비드 때문에 초등학교 졸업식을 제대로 할 수 없었다. 보고 싶은 친구 한 명 한 명의 얼굴을 직접 그림으로 그려서 마음을 표현했다."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 3",
+      "title": "성장과 도전 — 중학교",
+      "sub": "중1~중3 · 2021~2023년",
+      "eps": [
+        {
+          "t": "6년간의 낙선 그리고 6연속 반장",
+          "b": "초등학교 1학년부터 6학년까지 반장 선거에 매번 낙선했지만, 매번 공약을 적고 녹음하며 연습을 계속했다. 그 결과 중학교 1학년부터 3학년까지 1학기 반장으로 이어졌다. 꾸준함과 성실함, 도전의 성취감을 맛본 첫 경험."
+        },
+        {
+          "t": "수학 각성 — 첫 시험의 충격에서 A 100점까지",
+          "b": "중학교 2학년 첫 수학 시험의 낮은 점수에 충격을 받고 각성했다. 이후 1년 반 동안 피나는 노력 끝에 수학 A 100점에 가까운 점수를 달성했고, 외국어 고등학교(고양외고) 입시까지 성공했다."
+        },
+        {
+          "t": "경기도 영재교육원",
+          "b": "코로나 시기, 중학교 입학 후 학교에서 영재 선발 시험에 합격해 경기도 영재교육원을 1년간 다니고 수료증을 받았다. 줌수업과 오프라인 수업을 병행했고, 과학에 대한 흥미를 본격적으로 키운 계기."
+        },
+        {
+          "t": "서울대 모의UN — 대한민국 대표로",
+          "b": "중학교 3학년 때 서울대학교 모의UN에 2박 3일 일정으로 참여했다. 고등학생 선배들과 함께 환경 주제로 토론했고, 대한민국 대표로 참여해 발언했다."
+        },
+        {
+          "t": "혼자 떠난 캐나다",
+          "b": "겨울방학 2주, 혼자 비행기를 타고 캐나다로 이민 간 절친의 집에 다녀왔다. 이민 가족의 적응기를 가까이서 보며 느낀 것, 혼자 비행기를 탄 나 자신에 대한 용기의 재발견."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 4",
+      "title": "유학의 결단과 첫 도전 — 9학년",
+      "sub": "2023~2024년",
+      "eps": [
+        {
+          "t": "왜 미국 보딩스쿨을 선택했나",
+          "b": "국영수 중심의 획일적 한국 입시보다는, 다양한 경험을 바탕으로 성실함·꾸준함·용기·도전 정신을 인정받을 수 있는 미국 보딩스쿨의 교육 환경을 선택했다. 다양한 민족과 다양한 경험 속에서 내 자신의 부족함을 인지하고 성찰했다."
+        },
+        {
+          "t": "기숙사 생활 — 미국 친구와 룸메이트",
+          "b": "미국 친구와 방을 함께 쓰면서 협력하는 법, 지켜야 할 규율, 배려를 배웠다. 공동생활은 공부로 배울 수 없는 것을 가르쳤다."
+        },
+        {
+          "t": "홈스테이 — 다름은 편견이 아닌 확장",
+          "b": "홈스테이 부모님들로부터 미국 문화와 새로운 경험을 접했다. 여러 홈스테이를 거치며 \"다름\"을 편견이 아닌 \"세상을 알아가는 또 다른 방식\"으로 받아들이게 되었다."
+        },
+        {
+          "t": "EFR 응급처치 자격증",
+          "b": "간호학과를 목표로 한 첫 실질적 도전. 대부분 단체로 온 성인 전문가들 사이에서 혼자 청소년으로 참여했고, 실무에 능숙한 분들을 따라가며 느낀 것이 있었다."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 5",
+      "title": "정체성의 확립 — The Harvey School & 진로",
+      "sub": "10학년~현재 · 2025년~",
+      "eps": [
+        {
+          "t": "마취과 간호사 → 뇌신경과학자라는 비전",
+          "b": "엄마가 뇌과학과 명리를 공부하시며 나눠주신 인사이트가 계기가 되었다. 최종 목표를 마취과 간호사가 되어 뇌신경과학을 공부하는 것으로 정했다. 한국에서는 없던 이런 융합적 진로가, 미국에서는 자연스럽게 하나의 길로 그려졌다."
+        },
+        {
+          "t": "더 아카데믹한 The Harvey School로",
+          "b": "진로가 정해지자, 더 학문적 도전을 할 수 있는 Harvey School로 전학했다. 새 환경에서 영어 실력과 학과 공부를 꾸준히 끌어올렸고, 노력에 따른 성적 향상은 자신감으로 이어졌다."
+        },
+        {
+          "t": "H Biology의 시련과 극복 — C+에서 A로",
+          "b": "9학년을 마치고 한국에서 토플과 생물·화학 AP를 열심히 준비했지만, Honor Biology가 너무 어려워 C+로 시작했다. 포기하지 않고 나만의 방식으로 공부를 다시 설계해, 결국 A라는 성과로 이어졌다."
+        },
+        {
+          "t": "몰입캠프 — 뇌가소성과 도파민의 발견",
+          "b": "하루에도 할 일이 많은 환경에서 시간을 쪼개 공부하다가, 어려운 수학 문제 몇 개를 끊임없이 생각하는 \"몰입\"의 시간을 통해 문제를 풀어냈다. 공부가 어떻게 즐거움과 만족감으로 이어질 수 있는지의 방향성을 깨달았다."
+        },
+        {
+          "t": "링글틴즈 — 아이비리그 선배들과의 40회 대화",
+          "b": "40분 수업을 40회 정도 하며 아이비리그 선배들을 만났다. 내가 가고자 하는 학교·학과를 다니는 선배들의 고등학교 시절 활동, 현재 대학 생활에 대해 직접 들을 수 있었다."
+        },
+        {
+          "t": "Rutgers 아너컬리지 투어 & 예지 선배",
+          "b": "10학년 봄방학에 Rutgers 아너컬리지까지 투어했을 때 예지 선배를 만나 이야기를 나누고 메일을 주고받았다. 그 대화에서 이 학교에 가고 싶다는 보다 큰 다짐이 섰다."
+        },
+        {
+          "t": "팀 속의 나 — 오케스트라, 축구, 필드하키, 트랙",
+          "b": "오케스트라 4년, 연주회에 여러 번 참여하며 느낀 것. 축구·필드하키·트랙 대회에서 힘들었지만 은메달을 따냈을 때 팀에 기여한 순간."
+        },
+        {
+          "t": "DNA Learning Center 견학",
+          "b": "H Biology 수업의 일환으로 리제네론(Regeneron) DNA Learning Center를 견학했다. 관심 유전자를 도입하는 열쇼크(heat shock) 방식으로 복합 세균 변환 연구를 참관했고, 세균 성장 관찰 등 유전공학 관련 수업을 받았다."
+        },
+        {
+          "t": "취미와 표현 — 기타, 아트, 만화",
+          "b": "트랙 대신 아트 미술을 선택해 그림을 그리고 있다. 어렸을 때부터 그림에 대화를 넣어 만화책을 만들던 습관이 지금까지 이어진다. 그림은 스트레스를 풀고 환기하는 나만의 방법. 기타도 함께 즐기는 취미."
+        }
+      ]
+    }
+  ],
+  "lifeDataEn": [
+    {
+      "num": "Chapter 1",
+      "title": "The Age of Pure Curiosity",
+      "sub": "Kindergarten ~ 5th Grade · ~2019",
+      "eps": [
+        {
+          "t": "A Spirited Child",
+          "b": "In 1st grade, going to school felt like going out to play. Walking with mom, I'd stop to look at cats and touch flowers, often arriving late. School was an extension of play — I was a child overflowing with pure curiosity."
+        },
+        {
+          "t": "The Day I Forgot My Backpack",
+          "b": "I said goodbye and was walking out when Mom asked, \"Where are you going?\" \"To school?\" \"But where's your bag?\" I burst out laughing, grabbed it, and headed out — a hilariously embarrassing moment."
+        },
+        {
+          "t": "Making Friends in 5 Seconds",
+          "b": "At ages 5 and 6, I became friends with an American woman on a plane just by sharing snacks despite the language barrier. I learned with my whole body that friendliness transcends language."
+        },
+        {
+          "t": "Montessori Education — The Root of Self-Direction",
+          "b": "I attended Montessori kindergarten and preschool. Growing up in a self-directed learning environment became the foundation of values that eventually led to my decision to study in the US."
+        },
+        {
+          "t": "Dance, Song, and Vibrant Energy",
+          "b": "From early childhood I loved dancing and singing, growing up as a bright, energetic child with a big smile."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 2",
+      "title": "The Awakening — COVID & Reading",
+      "sub": "6th Grade · 2019~2020",
+      "eps": [
+        {
+          "t": "Zoom Classes & Homeschooling",
+          "b": "When COVID hit 6th grade, I began homeschooling with Mom — the first time I truly studied hard. We built a schedule for Korean, math, and English, and I started reading books I'd never had time for."
+        },
+        {
+          "t": "The 100-Book Project",
+          "b": "Visiting the library regularly, I read over 100 books — Korean classics, world literature, science books, and novels. Experiencing the lives of great people indirectly ignited my intellectual curiosity."
+        },
+        {
+          "t": "Meeting Jeong Yak-yong",
+          "b": "Reading Jeong Yak-yong, one line stayed with me: \"Do your best; be honest.\" This became the foundation of my commitment to study abroad and become a nurse anesthetist and neuroscientist."
+        },
+        {
+          "t": "Drawing Each Friend's Face for Graduation",
+          "b": "Because of COVID, we couldn't have a proper elementary school graduation. I expressed my feelings by drawing each friend's face one by one."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 3",
+      "title": "Growth & Challenge — Middle School",
+      "sub": "7th~9th Grade · 2021~2023",
+      "eps": [
+        {
+          "t": "6 Years of Losing, Then 6 Consecutive Class President Wins",
+          "b": "I lost every class president election from 1st through 6th grade, but kept practicing — writing speeches and recording myself. That persistence paid off: I was elected class president every 1st semester from 7th to 9th grade."
+        },
+        {
+          "t": "Math Awakening — From Shock to Near-Perfect Score",
+          "b": "A low score on my first 7th-grade math test was a wake-up call. After a year and a half of hard work, I achieved near-perfect scores and was accepted into a specialized foreign language high school."
+        },
+        {
+          "t": "Gyeonggi Gifted Education Institute",
+          "b": "After passing the gifted selection exam in middle school, I attended the Gyeonggi Gifted Education Institute for a year. It was the real beginning of my passion for science."
+        },
+        {
+          "t": "Seoul National Univ. Model UN — ROK Delegate",
+          "b": "In 9th grade I participated in a 3-day Model UN at Seoul National University with high school seniors, speaking as the South Korea delegate on environmental issues."
+        },
+        {
+          "t": "Solo Trip to Canada",
+          "b": "During winter break, I flew alone to visit my best friend who had immigrated to Canada — rediscovering my own courage, and feeling deep gratitude for a friendship that strong."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 4",
+      "title": "The Decision to Study Abroad — 9th Grade",
+      "sub": "2023~2024",
+      "eps": [
+        {
+          "t": "Why I Chose an American Boarding School",
+          "b": "Rather than Korea's test-focused system, I chose the American boarding school environment where diligence, perseverance, courage, and a spirit of challenge are recognized through diverse experiences."
+        },
+        {
+          "t": "Dorm Life — Roommates & American Friends",
+          "b": "Sharing a room with an American friend taught me how to collaborate, follow rules, and show consideration. Communal living taught things no classroom can."
+        },
+        {
+          "t": "Homestay — Difference as Expansion, Not Prejudice",
+          "b": "Through various homestay families I encountered American culture and new experiences. I came to see \"difference\" not as something wrong but as another way of knowing the world."
+        },
+        {
+          "t": "EFR First Aid Certification",
+          "b": "My first concrete step toward nursing. As the only teenager among adult professionals, I followed along and learned from people with real-world expertise."
+        }
+      ]
+    },
+    {
+      "num": "Chapter 5",
+      "title": "Establishing Identity — Harvey School & Career",
+      "sub": "10th Grade ~ Present · 2025~",
+      "eps": [
+        {
+          "t": "Vision: Nurse Anesthetist → Neuroscientist",
+          "b": "Insights my mom shared while studying brain science inspired my goal: to become a nurse anesthetist who studies neuroscience. In the US, this integrated career path has become a clear and natural vision."
+        },
+        {
+          "t": "Transferring to the More Academic Harvey School",
+          "b": "Once my career direction was set, I transferred to Harvey School for greater academic challenge. Steadily improving my English and academics in the new environment turned effort into confidence."
+        },
+        {
+          "t": "H Biology Struggles — From C+ to A",
+          "b": "Honor Biology started brutally with a C+. Without giving up, I redesigned my study approach and ultimately earned an A."
+        },
+        {
+          "t": "Immersion Camp — Discovering Neuroplasticity & Dopamine",
+          "b": "Through \"immersion\" — endlessly thinking through difficult math problems — I solved them and experienced a dopamine rush unlike anything before. I discovered how studying can become genuine joy."
+        },
+        {
+          "t": "Ringle Teens — 40 Conversations with Ivy League Mentors",
+          "b": "Through 40 sessions I met Ivy League students studying the majors and schools I aspire to. I heard firsthand about their high school activities and current college life."
+        },
+        {
+          "t": "Rutgers Honors College Tour & Senior Yeji",
+          "b": "Visiting Rutgers Honors College on spring break, I met senior Yeji and exchanged emails. That conversation deepened my resolve to attend this school."
+        },
+        {
+          "t": "Me on the Team — Orchestra, Soccer, Field Hockey, Track",
+          "b": "Four years of orchestra, multiple concerts. Silver medals in soccer, field hockey, and track despite the struggles — moments of contributing to the team."
+        },
+        {
+          "t": "DNA Learning Center Visit",
+          "b": "As part of H Biology, I visited the Regeneron DNA Learning Center and observed bacterial transformation research via heat shock, with lessons on genetic engineering and bacterial growth."
+        },
+        {
+          "t": "Hobbies & Expression — Guitar, Art, Comics",
+          "b": "I chose Art over Track. The habit of adding dialogue to drawings to make comics, which started when I was young, continues to this day. Art is my personal way of relieving stress. Guitar too."
+        }
+      ]
+    }
+  ],
+  "general": {
+    "eyeKo": "간호학 · 뇌신경학 · 성장의 여정",
+    "eyeEn": "Nursing · Neurology · A Journey of Growth",
+    "subKo": "돌봄의 과학과 뇌의 신비 사이에서, 나 김율하의 이야기가 펼쳐집니다.",
+    "subEn": "Between the science of care and the mysteries of the brain — Lisa Yulha Kim."
+  },
+  "connect": {
+    "email": "lisayulha@gmail.com",
+    "school": "The Harvey School",
+    "addr": "260 Jay Street, Katonah, NY 10536, USA",
+    "url": "https://www.harveyschool.org",
+    "majKo": "뇌신경과학 · 간호학 (마취과 간호사 CRNA)",
+    "majEn": "Neuroscience · Nursing (CRNA)"
+  },
+  "imgbbKey": "cb882beb4c103396d5df38dcea450c75"
+}
