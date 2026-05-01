@@ -829,7 +829,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
   <div class="admin-header">
     <div class="admin-header-inner">
       <div class="admin-title" data-ko="관리자 패널" data-en="Admin Panel">관리자 패널</div>
-      <button class="admin-logout" onclick="adminLogout()" data-ko="로그아웃" data-en="Logout">로그아웃</button>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-save" style="background:var(--accent3);font-size:12px;padding:9px 18px;" onclick="publishToGitHub()">
+          &#9650; 저장 &amp; 전체 기기 반영
+        </button>
+        <button class="admin-logout" onclick="adminLogout()" data-ko="로그아웃" data-en="Logout">로그아웃</button>
+      </div>
     </div>
   </div>
   <div class="admin-body">
@@ -843,6 +848,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
       <button class="admin-tab" onclick="switchAdminTab('pw-admin',this)" data-ko="비밀번호 변경" data-en="Change Password">비밀번호 변경</button>
     </div>
     <div id="tab-general" class="admin-panel active">
+      <div class="admin-section" style="background:rgba(137,212,184,0.07);border-color:rgba(137,212,184,0.3);">
+        <div class="admin-section-title" style="color:var(--accent3);">&#9650; 전체 기기 반영 설정 (GitHub)</div>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:14px;">
+          아래에 GitHub 정보를 <strong style="color:var(--text-primary);">최초 1회</strong> 입력하면,
+          이후 <strong style="color:var(--text-primary);">"저장 &amp; 전체 기기 반영"</strong> 버튼 하나로
+          PC·스마트폰 모두에 즉시 반영됩니다.<br>
+          <span style="color:var(--accent);font-size:12px;">index.html을 새 버전으로 교체해도 콘텐츠 데이터(data.json)는 유지됩니다.</span>
+        </p>
+        <div class="admin-field">
+          <label>GitHub Personal Access Token (PAT)
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=NeuralVerse" target="_blank"
+               style="color:var(--accent);font-size:11px;margin-left:8px;">→ 발급받기 (repo 권한 체크)</a>
+          </label>
+          <input id="gh-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        </div>
+        <div class="admin-field">
+          <label>GitHub 저장소 (owner/repo)</label>
+          <input id="gh-repo" type="text" placeholder="yulhakim/neuralverse" value="yulhakim/neuralverse">
+        </div>
+        <div style="display:flex;gap:10px;margin-top:4px;flex-wrap:wrap;">
+          <button class="btn-save" onclick="saveGitHubConfig()">설정 저장</button>
+          <button class="btn-save" style="background:var(--accent3);" onclick="publishToGitHub()">&#9650; 지금 전체 기기 반영</button>
+        </div>
+        <div id="gh-config-status" style="font-size:12.5px;margin-top:10px;"></div>
+      </div>
       <div class="admin-section">
         <div class="admin-section-title" data-ko="홈 화면 텍스트" data-en="Home Text">홈 화면 텍스트</div>
         <div class="admin-field"><label>상단 부제목 (KO) — 뇌신경학·간호학 줄</label><input id="ad-eyebrow-ko" value="뇌신경학 · 간호학 · 성장의 여정" placeholder="예: 뇌신경학 · 간호학 · 성장의 여정"></div>
@@ -2180,6 +2210,15 @@ function buildAdminPanels(){
   if(ki && savedKey) ki.value = savedKey;
   var ks = document.getElementById('imgbb-key-status');
   if(ks && savedKey){ ks.style.color='var(--accent3)'; ks.textContent='✓ API Key 저장됨'; }
+  /* GitHub 설정 복원 */
+  var ghToken = localStorage.getItem('lnv_gh_token') || '';
+  var ghRepo  = localStorage.getItem('lnv_gh_repo')  || 'yulhakim/neuralverse';
+  var ghT = document.getElementById('gh-token');
+  var ghR = document.getElementById('gh-repo');
+  if(ghT && ghToken) ghT.value = ghToken;
+  if(ghR && ghRepo)  ghR.value = ghRepo;
+  var ghSt = document.getElementById('gh-config-status');
+  if(ghSt && ghToken){ ghSt.style.color='var(--accent3)'; ghSt.textContent='✓ GitHub 설정 저장됨'; }
 }
 function buildNewsAdmin(elId,data){
   var el=document.getElementById(elId);
@@ -2546,10 +2585,199 @@ function closeLightbox(){
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeLightbox();
 });
+
+/* ══════════════════════════════════════════════════════
+   GITHUB 연동 — data.json 자동 업데이트
+   index.html(소스)과 data.json(데이터)을 분리 관리.
+   관리자가 수정 후 버튼 클릭 → data.json만 GitHub에 커밋.
+   index.html을 새 버전으로 교체해도 data.json은 유지됨.
+══════════════════════════════════════════════════════ */
+
+function saveGitHubConfig(){
+  var token = document.getElementById('gh-token').value.trim();
+  var repo  = document.getElementById('gh-repo').value.trim();
+  var st    = document.getElementById('gh-config-status');
+  if(!token){ st.style.color='#f08080'; st.textContent='PAT를 입력해주세요.'; return; }
+  if(!repo){  st.style.color='#f08080'; st.textContent='저장소를 입력해주세요.'; return; }
+  localStorage.setItem('lnv_gh_token', token);
+  localStorage.setItem('lnv_gh_repo',  repo);
+  st.style.color='var(--accent3)'; st.textContent='✓ 설정 저장 완료';
+}
+
+function getGitHubConfig(){
+  return {
+    token: localStorage.getItem('lnv_gh_token') || '',
+    repo:  localStorage.getItem('lnv_gh_repo')  || 'yulhakim/neuralverse'
+  };
+}
+
+/* data.json 구조 생성 */
+function buildDataJson(){
+  /* general/connect 설정 수집 */
+  var eyeEl = document.getElementById('home-eyebrow-el');
+  var subEl  = document.getElementById('home-sub-el');
+  var generalData = {
+    eyeKo: eyeEl ? eyeEl.getAttribute('data-ko') : '',
+    eyeEn: eyeEl ? eyeEl.getAttribute('data-en') : '',
+    subKo: subEl ? subEl.getAttribute('data-ko') : '',
+    subEn: subEl ? subEl.getAttribute('data-en') : ''
+  };
+  var connectData = {
+    email:  document.getElementById('con-email')     ? document.getElementById('con-email').value     : '',
+    school: document.getElementById('con-school')    ? document.getElementById('con-school').value    : '',
+    addr:   document.getElementById('con-addr')      ? document.getElementById('con-addr').value      : '',
+    url:    document.getElementById('con-url')       ? document.getElementById('con-url').value       : '',
+    majKo:  document.getElementById('con-major-ko')  ? document.getElementById('con-major-ko').value  : '',
+    majEn:  document.getElementById('con-major-en')  ? document.getElementById('con-major-en').value  : ''
+  };
+  return {
+    version:    Date.now(),
+    neuroNews:  neuroNews,
+    nursingNews:nursingNews,
+    activities: activities,
+    lifeDataKo: lifeDataKo,
+    lifeDataEn: lifeDataEn,
+    general:    generalData,
+    connect:    connectData,
+    imgbbKey:   getImgbbKey()
+  };
+}
+
+/* GitHub API: 파일의 현재 SHA 가져오기 */
+function getFileSha(token, repo, path, cb){
+  fetch('https://api.github.com/repos/' + repo + '/contents/' + path, {
+    headers: {
+      'Authorization': 'token ' + token,
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){ cb(d.sha || null, null); })
+  .catch(function(e){ cb(null, e); });
+}
+
+/* GitHub API: 파일 업로드/업데이트 */
+function putFile(token, repo, path, content, sha, message, cb){
+  var body = {
+    message: message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch:  'main'
+  };
+  if(sha) body.sha = sha;
+  fetch('https://api.github.com/repos/' + repo + '/contents/' + path, {
+    method:  'PUT',
+    headers: {
+      'Authorization': 'token ' + token,
+      'Accept':        'application/vnd.github.v3+json',
+      'Content-Type':  'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if(d.content) cb(true, null);
+    else cb(false, JSON.stringify(d));
+  })
+  .catch(function(e){ cb(false, e); });
+}
+
+/* 메인: data.json을 GitHub에 업로드 */
+function publishToGitHub(){
+  var cfg = getGitHubConfig();
+  if(!cfg.token){
+    alert('GitHub PAT가 설정되지 않았습니다.\n관리자 패널 → 기본 설정 → 전체 기기 반영 설정에서 입력해주세요.');
+    return;
+  }
+  var st = document.getElementById('gh-config-status');
+  if(st){ st.style.color='var(--accent)'; st.textContent='⏳ GitHub에 업로드 중...'; }
+
+  var dataJson = JSON.stringify(buildDataJson(), null, 2);
+
+  /* 기존 data.json SHA 조회 후 업로드 */
+  getFileSha(cfg.token, cfg.repo, 'data.json', function(sha, err){
+    var msg = 'Update data.json - ' + new Date().toISOString().slice(0,19).replace('T',' ');
+    putFile(cfg.token, cfg.repo, 'data.json', dataJson, sha, msg, function(ok, err2){
+      if(ok){
+        if(st){ st.style.color='var(--accent3)'; st.textContent='✓ 완료! 1~2분 후 모든 기기에 반영됩니다.'; }
+        setTimeout(function(){ if(st) st.textContent='✓ GitHub 설정 저장됨'; }, 5000);
+      } else {
+        if(st){ st.style.color='#f08080'; st.textContent='✗ 업로드 실패: ' + (err2||'알 수 없는 오류'); }
+        console.error('GitHub push error:', err2);
+      }
+    });
+  });
+}
 document.getElementById('admin-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-/* ── 앱 시작: localStorage에서 데이터 복원 (즉시 실행) ── */
-LNV.restore();
+/* ══════════════════════════════════════════════════════
+   앱 시작: data.json(GitHub) → localStorage → 기본값 순서로 복원
+══════════════════════════════════════════════════════ */
+(function initApp(){
+  /* data.json을 fetch — 성공하면 GitHub 데이터 우선 적용 */
+  fetch('data.json?v=' + Date.now())
+    .then(function(r){
+      if(!r.ok) throw new Error('no data.json');
+      return r.json();
+    })
+    .then(function(d){
+      /* GitHub 데이터 적용 */
+      if(d.neuroNews  && d.neuroNews.length)   neuroNews   = d.neuroNews;
+      if(d.nursingNews&& d.nursingNews.length) nursingNews = d.nursingNews;
+      if(d.activities)                          activities  = d.activities;
+      if(d.lifeDataKo && d.lifeDataKo.length)  lifeDataKo  = d.lifeDataKo;
+      if(d.lifeDataEn && d.lifeDataEn.length)  lifeDataEn  = d.lifeDataEn;
+      /* ImgBB key */
+      if(d.imgbbKey && !localStorage.getItem('lnv_imgbb_key')){
+        localStorage.setItem('lnv_imgbb_key', d.imgbbKey);
+      }
+      /* general/connect 복원 */
+      if(d.general) applyGeneral(d.general);
+      if(d.connect) applyConnect(d.connect);
+      /* localStorage도 최신화 (오프라인 대비) */
+      try{
+        localStorage.setItem('lnv_neuro',   JSON.stringify(neuroNews));
+        localStorage.setItem('lnv_nursing', JSON.stringify(nursingNews));
+        localStorage.setItem('lnv_activities', JSON.stringify(activities));
+        localStorage.setItem('lnv_lifeko',  JSON.stringify(lifeDataKo));
+        localStorage.setItem('lnv_lifeen',  JSON.stringify(lifeDataEn));
+      }catch(e){}
+      console.log('✓ data.json loaded from GitHub');
+    })
+    .catch(function(){
+      /* data.json 없음 → localStorage fallback */
+      console.log('data.json not found, using localStorage');
+    })
+    .finally(function(){
+      LNV.restore();
+    });
+})();
+
+/* general/connect 직접 적용 헬퍼 */
+function applyGeneral(g){
+  var eyeEl = document.getElementById('home-eyebrow-el');
+  var subEl  = document.getElementById('home-sub-el');
+  if(eyeEl && g.eyeKo){
+    eyeEl.setAttribute('data-ko', g.eyeKo);
+    eyeEl.setAttribute('data-en', g.eyeEn||g.eyeKo);
+    eyeEl.textContent = g.eyeKo;
+  }
+  if(subEl && g.subKo){
+    subEl.setAttribute('data-ko', g.subKo);
+    subEl.setAttribute('data-en', g.subEn||g.subKo);
+    subEl.textContent = g.subKo;
+  }
+}
+function applyConnect(c){
+  var el, dUrl;
+  el=document.getElementById('con-disp-email');
+  if(el&&c.email) el.innerHTML='<a href="mailto:'+c.email+'">'+c.email+'</a>';
+  el=document.getElementById('con-disp-school');
+  if(el) el.innerHTML='<strong>'+(c.school||'')+'</strong><br><span style="color:var(--text-secondary);font-size:13px;">'+(c.addr||'')+'</span>';
+  el=document.getElementById('con-disp-url');
+  if(el&&c.url){dUrl=c.url.replace(/^https?:\/\//,'');el.innerHTML='<a href="'+c.url+'" target="_blank">'+dUrl+'</a>';}
+  el=document.getElementById('con-disp-major');
+  if(el&&c.majKo){el.setAttribute('data-ko',c.majKo);el.setAttribute('data-en',c.majEn||c.majKo);el.textContent=c.majKo;}
+}
 /* ── BROWSER HISTORY (뒤로가기 지원) ── */
 window.addEventListener('popstate', function(e){
   var state = e.state;
