@@ -1,5 +1,5 @@
 {
-  "version": 1777989169253,
+  "version": 1777989319037,
   "neuroNews": [
     {
       "id": "n1",
@@ -12,7 +12,8 @@
       "detail": "<h3>기억의 메커니즘 — 해마와 시냅스</h3><p>MIT 피코워 학습&기억 연구소의 최신 연구에 따르면, 우리가 무언가를 기억할 때 뇌는 단순히 파일을 저장하는 것이 아닙니다. 뇌세포(뉴런)들이 서로 새롭게 연결되거나 기존 연결이 강화되는 물리적인 변화가 일어납니다.</p><div class=\"highlight\">시냅스(Synapse)는 뉴런과 뉴런 사이의 연결 지점입니다. 강렬한 경험을 할수록 더 많은 시냅스가 형성되고, 그 연결이 더 두터워집니다.</div><h3>장기 기억 vs 단기 기억</h3><p>뇌는 두 가지 종류의 기억을 다르게 처리합니다. 단기 기억은 주로 전전두엽(이마 뒤쪽)에서 일시적으로 처리되며, 수 초에서 수 분간 유지됩니다. 반면, 중요한 경험이나 반복 학습된 내용은 해마(Hippocampus)를 통해 장기 기억으로 전환됩니다.</p><h3>고등학생에게 주는 시사점</h3><p>이 연구 결과는 공부법에 직접적인 시사점을 제공합니다. 한 번에 모든 것을 외우려는 '벼락치기'보다 반복 학습(Spaced Repetition)이 더 강한 시냅스 연결을 만들어 낸다는 것이 과학적으로 증명되었습니다. 또한 수면 중에 해마가 낮에 받은 정보를 정리하고 장기 기억으로 통합하는 작업을 합니다.</p><p>MIT 연구팀은 2024년 11월 <em>Nature Neuroscience</em>에 이 연구 결과를 발표하며, 알츠하이머 치료 연구에도 중요한 단서를 제공했다고 밝혔습니다.</p>",
       "detailEn": "<h3>The Mechanism of Memory — Hippocampus & Synapses</h3><p>According to the latest research from MIT's Picower Institute, when we remember something, the brain doesn't simply save a file. Physical changes occur — neurons form new connections or strengthen existing ones.</p><div class=\"highlight\">A synapse is the connection point between neurons. The more intense the experience, the more synapses form and the stronger those connections become.</div><h3>Long-Term vs Short-Term Memory</h3><p>The brain processes two kinds of memory differently. Short-term memory is handled temporarily in the prefrontal cortex, lasting seconds to minutes. Important or repeated experiences are converted to long-term memory through the hippocampus.</p><h3>Implications for High Schoolers</h3><p>These findings directly inform study techniques. Science confirms that spaced repetition builds stronger synaptic connections than last-minute cramming. Also, the hippocampus consolidates daytime information into long-term memory during sleep.</p><p>The MIT team published these results in <em>Nature Neuroscience</em> in November 2024, noting important clues for Alzheimer's research.</p>",
       "date": "2024.11",
-      "color": "#7eb8d4"
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/dYmY1LD/blob.png"
     },
     {
       "id": "n2",
@@ -25,7 +26,8 @@
       "detail": "<h3>수면과 뇌 청소 시스템 — 글림파틱 시스템</h3><p>스탠퍼드 수면의학센터의 연구팀은 2025년 초 놀라운 사실을 발표했습니다. 뇌에는 '글림파틱 시스템(Glymphatic System)'이라는 자체 청소 시스템이 있으며, 이 시스템은 주로 수면 중에 활성화됩니다.</p><div class=\"highlight\">잠을 자는 동안 뇌세포들이 약 60% 수축하고, 그 공간으로 뇌척수액(CSF)이 밀려들어와 독성 노폐물을 씻어냅니다. 대표적인 노폐물이 알츠하이머와 관련된 아밀로이드-베타 단백질입니다.</div><h3>수면 부족이 위험한 이유</h3><p>잠이 부족하면 이 청소 시스템이 제대로 작동하지 못해 뇌에 독성 단백질이 쌓이기 시작합니다. 장기적으로 이는 치매, 특히 알츠하이머 위험을 높이는 원인이 됩니다. 또한 단기적으로는 집중력 저하, 감정 조절 어려움, 의사결정 능력 저하로 이어집니다.</p><h3>최적 수면 시간</h3><p>연구팀은 성인 기준 7~9시간, 10대 청소년은 8~10시간의 수면이 글림파틱 시스템을 최적으로 유지하는 데 필요하다고 밝혔습니다. 특히 깊은 수면(NREM 수면 3단계)에서 이 시스템이 가장 활발하게 작동합니다.</p>",
       "detailEn": "<h3>Sleep & the Brain's Cleaning System — Glymphatic System</h3><p>Stanford Sleep Medicine Center announced a remarkable finding in early 2025: the brain has a self-cleaning system called the glymphatic system, which activates primarily during sleep.</p><div class=\"highlight\">While sleeping, brain cells shrink by about 60%, allowing cerebrospinal fluid to flow in and flush out toxic waste—most notably amyloid-beta, the protein linked to Alzheimer's.</div><h3>Why Sleep Deprivation is Dangerous</h3><p>Without enough sleep, this cleaning system fails to work properly and toxic proteins accumulate. Long-term, this raises the risk of dementia. Short-term, it leads to reduced focus, poor emotional regulation, and impaired decision-making.</p><h3>Optimal Sleep Duration</h3><p>The team recommends 7–9 hours for adults and 8–10 hours for teenagers to keep the glymphatic system optimal. Deep sleep (NREM Stage 3) is when this system works hardest.</p>",
       "date": "2025.02",
-      "color": "#c9b6e0"
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/NnQmV2Fk/blob.png"
     },
     {
       "id": "n3",
@@ -38,7 +40,8 @@
       "detail": "<h3>신경가소성이란?</h3><p>오랫동안 과학자들은 뇌가 어린 시절에만 발달하고 성인이 되면 고정된다고 믿었습니다. 그러나 존스홉킨스대 신경과학부의 연구는 이 통념을 완전히 뒤집었습니다. 뇌는 나이에 상관없이 새로운 경험과 학습에 따라 계속해서 구조적, 기능적으로 변화합니다.</p><div class=\"highlight\">신경가소성(Neuroplasticity)은 뇌가 환경과 경험에 반응해 스스로 재조직하는 능력입니다. 새로운 시냅스가 형성되고, 기존 연결이 강화되거나 약화됩니다.</div><h3>실생활 적용 사례</h3><p>런던 택시 기사들을 대상으로 한 유명한 연구에서, 복잡한 런던 지도를 외워야 하는 택시 기사들의 해마가 일반인보다 유의미하게 크다는 것이 확인되었습니다. 반복적 학습과 경험이 뇌 구조 자체를 바꾼 것입니다.</p><h3>뇌가소성을 높이는 방법</h3><p>①새로운 언어나 악기 배우기 ②규칙적인 유산소 운동 ③충분한 수면 ④사회적 교류와 새로운 경험 ⑤마음챙김 명상. 존스홉킨스 연구팀은 특히 도전적인 인지 과제가 뇌가소성을 가장 효과적으로 높인다고 강조했습니다.</p>",
       "detailEn": "<h3>What is Neuroplasticity?</h3><p>Scientists long believed the brain only develops in childhood and becomes fixed in adulthood. Johns Hopkins research completely overturned this idea. The brain continues to change structurally and functionally at any age in response to new experiences and learning.</p><div class=\"highlight\">Neuroplasticity is the brain's ability to reorganize itself in response to environment and experience—forming new synapses and strengthening or weakening existing connections.</div><h3>Real-World Examples</h3><p>In a famous study of London cab drivers, who must memorize the complex street map, researchers found their hippocampi were significantly larger than average—proof that repeated learning physically changes brain structure.</p><h3>How to Boost Neuroplasticity</h3><p>① Learn a new language or instrument ② Regular aerobic exercise ③ Adequate sleep ④ Social interaction and novel experiences ⑤ Mindfulness meditation. The Johns Hopkins team emphasized that challenging cognitive tasks are most effective.</p>",
       "date": "2024.09",
-      "color": "#89d4b8"
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/jvQWQksb/blob.png"
     },
     {
       "id": "n4",
@@ -51,7 +54,8 @@
       "detail": "<h3>파킨슨병과 조기 진단의 중요성</h3><p>파킨슨병은 도파민을 생성하는 뇌세포가 서서히 손상되는 신경퇴행성 질환입니다. 현재까지 증상이 나타났을 때는 이미 뇌세포의 60~80%가 손상된 이후입니다. 하버드 의과대학 연구팀이 2025년 1월 발표한 연구는 이 문제의 돌파구를 열었습니다.</p><div class=\"highlight\">연구팀은 혈액 내 특정 단백질(α-시누클레인 응집체)을 검출하는 방법을 개발했으며, 이를 통해 증상 발현 최대 10년 전에 파킨슨병을 예측할 수 있음을 확인했습니다.</div><h3>연구 결과의 의미</h3><p>조기에 발견한다면 신경보호 치료를 통해 병의 진행을 늦추고 환자의 삶의 질을 크게 향상시킬 수 있습니다. 이 연구는 단순히 파킨슨병에만 그치지 않고, 알츠하이머·루게릭병 등 다른 신경퇴행성 질환의 조기 진단 연구에도 중요한 방법론적 기반이 됩니다.</p><h3>간호 및 의학적 의의</h3><p>간호학 관점에서 조기 진단 기술의 발전은 환자 관리의 패러다임을 '치료 중심'에서 '예방 및 조기 개입 중심'으로 전환하는 데 핵심 역할을 합니다. 특히 신경과 전문 간호사(NP)의 역할이 더욱 중요해질 것으로 예상됩니다.</p>",
       "detailEn": "<h3>Parkinson's Disease & the Importance of Early Detection</h3><p>Parkinson's is a neurodegenerative disease where dopamine-producing brain cells gradually degrade. By the time symptoms appear, 60–80% of those cells are already lost. Harvard Medical School's January 2025 study offers a breakthrough.</p><div class=\"highlight\">Researchers developed a method to detect specific proteins (α-synuclein aggregates) in blood, enabling Parkinson's prediction up to 10 years before symptoms emerge.</div><h3>Significance of the Findings</h3><p>Early detection enables neuroprotective treatments that slow progression and dramatically improve quality of life. The methodology also forms a foundation for early detection of other neurodegenerative diseases like Alzheimer's and ALS.</p><h3>Nursing & Medical Implications</h3><p>From a nursing perspective, advances in early diagnosis are key to shifting the care paradigm from treatment-focused to prevention and early-intervention-focused, making the role of neurology nurse practitioners increasingly vital.</p>",
       "date": "2025.01",
-      "color": "#7eb8d4"
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/HfnnHbdP/blob.png"
     },
     {
       "id": "n5",
@@ -64,7 +68,8 @@
       "detail": "<h3>청소년 뇌 발달의 비밀</h3><p>UC샌디에이고 발달신경과학팀이 2024년 12월 발표한 연구는 청소년기 뇌 발달에 관한 가장 포괄적인 지도를 완성했습니다. 이 연구는 10~25세 약 1만 명의 뇌 MRI 데이터를 분석해 이루어졌습니다.</p><div class=\"highlight\">전두엽(Prefrontal Cortex)은 충동 억제, 판단, 계획, 감정 조절을 담당하는 뇌의 '사령탑'입니다. 이 영역은 25세가 되어야 완전히 성숙합니다.</div><h3>청소년기 뇌의 특징</h3><p>청소년의 뇌는 감정과 보상을 처리하는 변연계(limbic system)가 이미 활발하게 활동하는 반면, 이를 조절하는 전두엽은 아직 완성 중입니다. 이것이 청소년이 종종 충동적이거나 위험을 과소평가하는 행동을 보이는 신경과학적 이유입니다.</p><h3>시사점</h3><p>이 연구는 청소년이 '의지 부족'이 아니라 '뇌 발달 단계' 때문에 자제력에 어려움을 겪을 수 있다는 것을 과학적으로 입증합니다. 부모와 교사, 의료진 모두 청소년을 이해할 때 이 맥락을 고려해야 합니다.</p>",
       "detailEn": "<h3>The Secrets of Adolescent Brain Development</h3><p>UC San Diego's developmental neuroscience team published the most comprehensive map of adolescent brain development in December 2024, analyzing MRI data from ~10,000 people aged 10–25.</p><div class=\"highlight\">The prefrontal cortex — the brain's command center for impulse control, judgment, planning, and emotional regulation — doesn't fully mature until age 25.</div><h3>Characteristics of the Teen Brain</h3><p>The teen brain's limbic system (emotions and reward) is already highly active while the prefrontal cortex is still maturing—the neuroscientific reason why adolescents often act impulsively or underestimate risks.</p><h3>Implications</h3><p>This research scientifically demonstrates that teens struggle with self-control due to brain development stage, not lack of willpower—important context for parents, teachers, and healthcare providers.</p>",
       "date": "2024.12",
-      "color": "#c9b6e0"
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/s9SccdF2/blob.png"
     },
     {
       "id": "n6",
@@ -77,7 +82,8 @@
       "detail": "<h3>음악과 언어의 공통 신경 기반</h3><p>컬럼비아대 음악신경과학 연구소가 2025년 3월 발표한 연구에서, 언어 처리와 음악 처리가 뇌의 동일한 핵심 영역인 '브로카 영역(Broca's area)'을 공유한다는 것이 fMRI 실험을 통해 명확히 밝혀졌습니다.</p><div class=\"highlight\">브로카 영역은 말을 이해하고 생성하는 데 핵심적인 역할을 합니다. 이 영역이 음악의 리듬과 화성 처리에도 동일하게 관여한다는 것이 이번 연구의 핵심 발견입니다.</div><h3>음악 교육의 신경과학적 근거</h3><p>이 발견은 음악 교육이 언어 능력을 향상시킨다는 수많은 교육학 연구에 신경과학적 근거를 제공합니다. 악기를 배우거나 노래를 하면 브로카 영역이 강화되고, 이것이 읽기, 어휘 습득, 외국어 학습 능력 향상으로 이어집니다.</p><h3>뇌졸중 재활에의 응용</h3><p>이 연구는 뇌졸중으로 언어 능력을 잃은 환자들의 재활에도 음악 치료(Music Therapy)가 효과적인 이유를 설명합니다. 실제로 음악을 통한 멜로딕 억양 치료(MIT, Melodic Intonation Therapy)는 언어 재활에서 주목받는 방법입니다.</p>",
       "detailEn": "<h3>The Common Neural Basis of Music and Language</h3><p>Columbia's Music and Neuroscience Lab confirmed through fMRI experiments in March 2025 that language and music processing share the same core brain region: Broca's area.</p><div class=\"highlight\">Broca's area plays a central role in understanding and producing speech. The key finding is that it is equally involved in processing musical rhythm and harmony.</div><h3>Neuroscientific Basis for Music Education</h3><p>This finding provides neuroscientific grounding for educational research showing music training improves language skills. Learning an instrument or singing strengthens Broca's area, improving reading, vocabulary, and foreign language learning.</p><h3>Application in Stroke Rehabilitation</h3><p>The research also explains why music therapy is effective for stroke patients who have lost language abilities. Melodic Intonation Therapy (MIT) is a notable music-based language rehabilitation method.</p>",
       "date": "2025.03",
-      "color": "#89d4b8"
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/KxvTnFN5/blob.png"
     },
     {
       "id": "n7",
@@ -90,7 +96,8 @@
       "detail": "<h3>도파민에 대한 오해와 진실</h3><p>도파민은 흔히 '행복 호르몬' 또는 '쾌감 물질'로 불립니다. 그러나 UCLA 신경과학자들의 2024년 10월 연구는 이 통념이 부정확하다는 것을 밝혔습니다. 도파민의 핵심 기능은 쾌감을 느끼게 하는 것이 아니라, 목표를 향해 행동하도록 '동기'를 부여하는 것입니다.</p><div class=\"highlight\">도파민 시스템은 '원함(wanting)'을 담당합니다. 좋아하는 음식을 먹을 때가 아니라, 그 음식을 먹고 싶다고 느낄 때 도파민이 분비됩니다. 즉, 도파민은 목표 추구 행동을 이끄는 신호입니다.</div><h3>공부와 도파민</h3><p>어려운 문제를 해결했을 때 느끼는 짜릿한 성취감이 바로 도파민 분비입니다. 이 경험이 반복될수록 '도전 → 해결 → 보상'의 회로가 강화되어, 공부 자체가 즐거워질 수 있습니다. 이것이 바로 몰입 학습이 장기적으로 강력한 효과를 내는 신경과학적 이유입니다.</p><h3>스마트폰과 도파민의 위험</h3><p>소셜미디어와 스마트폰 알람은 예측 불가능한 보상을 통해 도파민 시스템을 과도하게 자극합니다. 이는 도파민 수용체를 둔감화시켜 공부나 독서처럼 느린 보상이 오는 활동에서 만족감을 느끼기 어렵게 만들 수 있습니다.</p>",
       "detailEn": "<h3>Misconceptions and Truth About Dopamine</h3><p>Dopamine is often called the 'happiness hormone.' However, UCLA neuroscientists' October 2024 research revealed this is inaccurate. Dopamine's core function is not to create pleasure but to generate the motivation to act toward goals.</p><div class=\"highlight\">The dopamine system governs 'wanting.' Dopamine is released not when you eat something delicious, but when you want to eat it—it's the signal that drives goal-directed behavior.</div><h3>Studying and Dopamine</h3><p>The exhilarating satisfaction of solving a hard problem is dopamine release. The more this is repeated, the stronger the 'challenge → solve → reward' circuit becomes, making studying itself enjoyable—the neuroscientific reason immersion learning works powerfully long-term.</p><h3>The Danger of Smartphones and Dopamine</h3><p>Social media and phone notifications overstimulate the dopamine system with unpredictable rewards, desensitizing receptors and making it harder to find satisfaction in slow-reward activities like studying or reading.</p>",
       "date": "2024.10",
-      "color": "#7eb8d4"
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/SXcRDTdP/blob.png"
     },
     {
       "id": "n8",
@@ -103,7 +110,8 @@
       "detail": "<h3>명상과 뇌 구조 변화</h3><p>러트거스대 인지과학부가 2025년 1월 발표한 연구는 8주간의 마음챙김 명상(MBSR: Mindfulness-Based Stress Reduction) 프로그램이 뇌의 물리적 구조를 변화시킨다는 것을 MRI 영상으로 직접 확인했습니다.</p><div class=\"highlight\">연구 참가자들의 편도체(Amygdala) — 공포·불안·스트레스 반응의 중심 — 의 크기가 8주 후 유의미하게 감소했습니다. 동시에 자기 조절과 집중력을 담당하는 전전두엽 피질의 두께는 증가했습니다.</div><h3>명상의 구체적 효과</h3><p>연구 참가자들은 8주 후 스트레스 지수 23% 감소, 집중력 31% 향상, 수면 질 개선을 보고했습니다. 혈액 검사에서는 스트레스 호르몬인 코르티솔 수치도 유의미하게 낮아졌습니다.</p><h3>고등학생 수험생에게 주는 메시지</h3><p>하루 단 10~20분의 마음챙김 명상이 시험 스트레스를 실질적으로 줄이고 집중력을 높일 수 있습니다. 러트거스 연구팀은 특히 청소년 그룹에서 뇌 가소성이 더 높아 명상 효과가 성인보다 빠르게 나타날 수 있다고 강조했습니다.</p>",
       "detailEn": "<h3>Meditation and Brain Structural Changes</h3><p>Rutgers Cognitive Science's January 2025 study directly confirmed via MRI that an 8-week MBSR program physically changes brain structure.</p><div class=\"highlight\">The amygdala — the brain's fear, anxiety, and stress response center — significantly shrank in size after 8 weeks. Meanwhile, the prefrontal cortex responsible for self-regulation and focus increased in thickness.</div><h3>Specific Effects of Meditation</h3><p>After 8 weeks, participants reported 23% lower stress, 31% improved concentration, and better sleep quality. Blood tests also showed significantly reduced cortisol (stress hormone) levels.</p><h3>Message for High School Students</h3><p>Just 10–20 minutes of daily mindfulness meditation can meaningfully reduce exam stress and boost focus. The Rutgers team noted that adolescents show faster meditation effects than adults due to higher neuroplasticity.</p>",
       "date": "2025.01",
-      "color": "#c9b6e0"
+      "color": "#c9b6e0",
+      "img": "https://i.ibb.co/Fb3xsYC8/blob.png"
     },
     {
       "id": "n9",
@@ -116,7 +124,8 @@
       "detail": "<h3>알츠하이머 치료제 개발의 현재</h3><p>예일대학교와 주요 제약사가 공동 개발한 항체 치료제(Anti-amyloid antibody)가 2024년 8월 임상 3상(Phase III Clinical Trial) 결과를 발표하며 의료계의 주목을 받았습니다.</p><div class=\"highlight\">이 치료제는 알츠하이머의 핵심 원인 물질인 뇌 속 아밀로이드-베타 플라크를 표적으로 제거하는 방식으로 작동합니다. 임상 3상에서 치료를 받은 그룹은 대조군 대비 인지 기능 저하 속도가 27% 느려졌습니다.</div><h3>임상 3상이란?</h3><p>임상시험은 1상(안전성 확인) → 2상(효능 및 적정 용량 탐색) → 3상(대규모 효능 및 안전성 확인)으로 진행됩니다. 3상은 수천 명의 환자를 대상으로 하는 최종 검증 단계로, 이 단계를 통과해야 FDA 승인 신청이 가능합니다.</p><h3>간호학적 의의</h3><p>이 치료제가 FDA 승인을 받게 되면, 인지 기능 저하 조기 단계의 환자에게 정기적인 정맥 주사 투여가 필요합니다. 이는 신경과 전문 간호사와 치매 케어 간호사의 역할 수요를 크게 높일 것입니다.</p>",
       "detailEn": "<h3>The Current State of Alzheimer's Drug Development</h3><p>An anti-amyloid antibody co-developed by Yale and major pharmaceutical companies drew major attention when Phase III clinical trial results were published in August 2024.</p><div class=\"highlight\">The drug targets and removes amyloid-beta plaques — a core cause of Alzheimer's — from the brain. In the Phase III trial, the treated group showed 27% slower cognitive decline than the control group.</div><h3>What is Phase III?</h3><p>Clinical trials progress: Phase I (safety) → Phase II (efficacy/dosing) → Phase III (large-scale efficacy/safety verification). Phase III is the final validation involving thousands of patients before FDA approval can be sought.</p><h3>Nursing Implications</h3><p>If FDA-approved, the treatment will require regular IV infusions for patients in early cognitive decline stages, greatly increasing demand for neurology NPs and dementia care nurses.</p>",
       "date": "2024.08",
-      "color": "#89d4b8"
+      "color": "#89d4b8",
+      "img": "https://i.ibb.co/yFGj24c7/blob.png"
     },
     {
       "id": "n10",
@@ -129,7 +138,8 @@
       "detail": "<h3>BCI란 무엇인가?</h3><p>뇌-컴퓨터 인터페이스(Brain-Computer Interface, BCI)는 뇌의 신경 신호를 직접 읽어 컴퓨터나 외부 장치를 제어하는 기술입니다. 프린스턴 신경공학연구소는 2025년 4월 BCI 기술의 최신 현황과 임상 응용을 총망라한 리포트를 발표했습니다.</p><div class=\"highlight\">2024년 말 기준, 척수 손상으로 사지 마비가 된 환자가 BCI 임플란트를 통해 생각만으로 컴퓨터 커서를 조작하고 로봇 팔을 움직이는 데 성공한 사례가 복수 보고되었습니다.</div><h3>BCI 기술의 종류</h3><p>침습적 BCI(뇌에 직접 전극 삽입): 정밀도는 가장 높지만 수술 위험 수반. 비침습적 BCI(EEG 헤드셋 등): 수술 불필요, 정밀도 낮음. 반침습적 BCI(두개골 위 전극): 중간 수준의 정밀도와 안전성.</p><h3>미래 전망 및 윤리 문제</h3><p>BCI 기술은 루게릭병, 척수 손상, 뇌졸중 환자의 삶을 혁명적으로 바꿀 잠재력을 가집니다. 동시에 '뇌 정보 프라이버시', '신경 강화(neuro-enhancement)의 공정성' 등 복잡한 생명윤리 문제도 함께 제기하고 있습니다.</p>",
       "detailEn": "<h3>What is BCI?</h3><p>A Brain-Computer Interface (BCI) reads neural signals from the brain directly to control computers or external devices. Princeton's Neural Engineering Institute published a comprehensive report on BCI technology and clinical applications in April 2025.</p><div class=\"highlight\">As of late 2024, multiple patients with spinal cord-induced paralysis have successfully controlled computer cursors and robotic arms through thought alone using BCI implants.</div><h3>Types of BCI</h3><p>Invasive BCI (direct electrode implant): highest precision but surgical risk. Non-invasive BCI (EEG headset): no surgery, lower precision. Semi-invasive BCI (electrodes on skull): intermediate precision and safety.</p><h3>Future Prospects and Ethical Issues</h3><p>BCI technology has revolutionary potential for ALS, spinal cord injury, and stroke patients—while also raising complex bioethical questions around neural privacy and the fairness of neuro-enhancement.</p>",
       "date": "2025.04",
-      "color": "#7eb8d4"
+      "color": "#7eb8d4",
+      "img": "https://i.ibb.co/S7PsvFxL/blob.png"
     }
   ],
   "nursingNews": [
