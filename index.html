@@ -2575,12 +2575,19 @@ function openLightbox(src, caption){
   cap.textContent = caption || '';
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
+  /* 라이트박스 상태를 history에 push → Back으로 닫기 가능 */
+  history.pushState({page: 'lightbox', prevPage: _currentPageId()}, '', window.location.hash || '#');
 }
 function closeLightbox(){
   var ov = document.getElementById('lb-overlay');
+  if(!ov.classList.contains('open')) return;
   ov.classList.remove('open');
   document.getElementById('lb-img').src = '';
   document.body.style.overflow = '';
+}
+function _currentPageId(){
+  var active = document.querySelector('.page.active');
+  return active ? active.id.replace('page-','') : 'home';
 }
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeLightbox();
@@ -2781,13 +2788,39 @@ function applyConnect(c){
 /* ── BROWSER HISTORY (뒤로가기 지원) ── */
 window.addEventListener('popstate', function(e){
   var state = e.state;
+
+  /* ── 라이트박스가 열려있으면 닫기만 하고 종료 ── */
+  var lb = document.getElementById('lb-overlay');
+  if(lb && lb.classList.contains('open')){
+    closeLightbox();
+    return;
+  }
+
   if(!state){
-    /* 히스토리 스택의 맨 처음(홈) */
     _activatePage('home');
     return;
   }
+
+  /* ── 라이트박스 상태로 back이 들어온 경우 → 닫기 ── */
+  if(state.page === 'lightbox'){
+    closeLightbox();
+    return;
+  }
+
+  /* ── 관리자 페이지는 back으로 진입 불가 → 로그인 모달 표시 ── */
+  if(state.page === 'admin'){
+    /* admin 대신 이전 페이지(홈)를 보여주고 로그인 모달 오픈 */
+    _activatePage('home');
+    /* history 스택에서 admin을 건너뛰도록 한 칸 더 앞으로 */
+    history.replaceState({page:'home', articleSrc:null, articleId:null}, '', '#home');
+    /* 비밀번호 모달 표시 */
+    var stored = localStorage.getItem('lnv_pw');
+    if(stored) showLoginModal();
+    else showRegisterModal();
+    return;
+  }
+
   if(state.page === 'article' && state.articleSrc && state.articleId){
-    /* 기사 상세 페이지 복원 */
     var arr = state.articleSrc==='neuro' ? neuroNews : nursingNews;
     var item = null;
     for(var i=0;i<arr.length;i++){if(arr[i].id===state.articleId){item=arr[i];break;}}
