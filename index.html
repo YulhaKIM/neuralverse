@@ -1868,9 +1868,13 @@ function _activatePage(id){
   closeMobileDrawer();
 }
 function showPage(id){
-  /* history에 push한 뒤 페이지 전환 */
   var state={page:id, articleSrc:null, articleId:null};
-  history.pushState(state, '', '#'+id);
+  /* admin 페이지는 history 스택에 쌓지 않음 (back으로 재진입 방지) */
+  if(id === 'admin'){
+    history.replaceState(state, '', '#home');
+  } else {
+    history.pushState(state, '', '#'+id);
+  }
   _activatePage(id);
 }
 function toggleMobileDrawer(){
@@ -2189,7 +2193,11 @@ function doLogin(){
 }
 function closeModal(){document.getElementById('admin-modal').classList.remove('open');}
 function enterAdmin(){buildAdminPanels();showPage('admin');}
-function adminLogout(){showPage('home');}
+function adminLogout(){
+  /* 로그아웃은 home으로 replaceState (admin을 스택에 남기지 않음) */
+  _activatePage('home');
+  history.replaceState({page:'home', articleSrc:null, articleId:null}, '', '#home');
+}
 
 /* ── ADMIN PANEL ── */
 function switchAdminTab(name,btn){
@@ -2575,15 +2583,22 @@ function openLightbox(src, caption){
   cap.textContent = caption || '';
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
-  /* 라이트박스 상태를 history에 push → Back으로 닫기 가능 */
-  history.pushState({page: 'lightbox', prevPage: _currentPageId()}, '', window.location.hash || '#');
+  /* 현재 페이지 hash를 유지하면서 lightbox 상태를 스택에 push */
+  var prevPage = _currentPageId();
+  var currentHash = window.location.hash || ('#' + prevPage);
+  history.pushState({page:'lightbox', prevPage:prevPage, prevHash:currentHash}, '', currentHash);
 }
-function closeLightbox(){
+function closeLightbox(fromPopstate){
   var ov = document.getElementById('lb-overlay');
   if(!ov.classList.contains('open')) return;
   ov.classList.remove('open');
   document.getElementById('lb-img').src = '';
   document.body.style.overflow = '';
+  /* 버튼/ESC/클릭으로 닫는 경우(popstate가 아닌 경우)
+     history를 한 칸 back해서 lightbox state 제거 */
+  if(!fromPopstate){
+    history.back();
+  }
 }
 function _currentPageId(){
   var active = document.querySelector('.page.active');
@@ -2789,10 +2804,16 @@ function applyConnect(c){
 window.addEventListener('popstate', function(e){
   var state = e.state;
 
-  /* ── 라이트박스가 열려있으면 닫기만 하고 종료 ── */
+  /* ── 라이트박스 state로 back → 닫기 (fromPopstate=true) ── */
+  if(state && state.page === 'lightbox'){
+    closeLightbox(true);
+    return;
+  }
+
+  /* ── 라이트박스가 아직 열려있으면 (ESC 등 외부에서 이미 닫힌 후 back) ── */
   var lb = document.getElementById('lb-overlay');
   if(lb && lb.classList.contains('open')){
-    closeLightbox();
+    closeLightbox(true);
     return;
   }
 
@@ -2801,19 +2822,10 @@ window.addEventListener('popstate', function(e){
     return;
   }
 
-  /* ── 라이트박스 상태로 back이 들어온 경우 → 닫기 ── */
-  if(state.page === 'lightbox'){
-    closeLightbox();
-    return;
-  }
-
-  /* ── 관리자 페이지는 back으로 진입 불가 → 로그인 모달 표시 ── */
+  /* ── 관리자 페이지는 back으로 진입 불가 → 홈 + 로그인 모달 ── */
   if(state.page === 'admin'){
-    /* admin 대신 이전 페이지(홈)를 보여주고 로그인 모달 오픈 */
     _activatePage('home');
-    /* history 스택에서 admin을 건너뛰도록 한 칸 더 앞으로 */
     history.replaceState({page:'home', articleSrc:null, articleId:null}, '', '#home');
-    /* 비밀번호 모달 표시 */
     var stored = localStorage.getItem('lnv_pw');
     if(stored) showLoginModal();
     else showRegisterModal();
